@@ -1,12 +1,13 @@
 <li class="editable">
+  <i class="icon-briefcase"></i>
   {{ object }}
   <div class="btn-group controls">
     <a class="btn btn-mini edit-inline" 
-       href="{% url edit_service_json object.pk %}">
+       href="{% url edit_customer_json object.pk %}">
       <i class="icon-pencil"></i>
     </a>
-    <a class="rm-inline btn btn-mini btn-danger" 
-       href="{% url delete_service_json object.pk %}">
+    <a class="btn btn-mini btn-danger rm-inline" 
+       href="{% url delete_customer_json object.pk %}">
       <i class="icon-remove"></i>
     </a>
   </div>

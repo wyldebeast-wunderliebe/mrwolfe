@@ -1,34 +1,23 @@
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from pu_in_content.views.jsonbase import JSONCreateView, JSONUpdateView, \
+    JSONDeleteView
 from mrwolfe.models.mailqueue import MailQueue
 from mrwolfe.forms.mailqueue import MailQueueForm
 
 
-class MailQueueCreate(CreateView):
+class MailQueueJSONCreate(JSONCreateView):
 
     model = MailQueue
     form_class = MailQueueForm
-    template_name = "create_mailqueue.html"
-
-    def get_success_url(self):
-
-        return "/?message=MailQueue+aangemaakt&status=0"
+    success_template_name = "snippets/mailqueue.html"
 
 
-class MailQueueEdit(UpdateView):
+class MailQueueJSONEdit(JSONUpdateView):
 
     model = MailQueue
     form_class = MailQueueForm
-    template_name = "edit_mailqueue.html"
-
-    def get_success_url(self):
-
-        return "/?message=MailQueue+gewijzigd&status=0"
+    success_template_name = "snippets/mailqueue.html"
 
 
-class MailQueueDelete(DeleteView):
+class MailQueueJSONDelete(JSONDeleteView):
 
     model = MailQueue
-
-    def get_success_url(self):
-
-        return "/?message=MailQueue+verwijderd&status=0"

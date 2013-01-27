@@ -2,6 +2,7 @@ from django.views.generic import TemplateView
 from mrwolfe.models.sla import SLA
 from mrwolfe.models.customer import Customer
 from mrwolfe.models.issue import Issue
+from mrwolfe.models.operator import Operator
 
 
 class IndexView(TemplateView):
@@ -24,6 +25,11 @@ class IndexView(TemplateView):
 
         return Issue.objects.filter(assignee__isnull=True)
 
+        
+class AdminView(IndexView):
+
+    template_name = "admin.html"
+
     def list_slas(self):
 
         return SLA.objects.all()
@@ -32,7 +38,6 @@ class IndexView(TemplateView):
 
         return Customer.objects.all()
 
-        
-class AdminView(IndexView):
+    def list_operators(self):
 
-    template_name = "admin.html"
+        return Operator.objects.all()

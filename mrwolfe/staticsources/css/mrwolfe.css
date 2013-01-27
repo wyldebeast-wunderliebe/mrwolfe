@@ -32,7 +32,7 @@ dt {
     width: 150px;
 }
 
-.submission {
+.submission, #MyModal .btn-group {
     display: block;
 }
 
@@ -40,10 +40,28 @@ h2 {
     font-size: 20px !important;
 }
 
-li.editable {
-    width: 30%;
+.viewlet ul {
+    width: 60%;
 }
 
-li.editable a {
+li.editable .controls {
     float: right;
+    opacity: 0.2;
+}
+
+li.editable {
+    clear: both;
+    height: 30px;
+}
+
+li.editable:hover .controls {
+    opacity: 1.0;
+}
+
+li.editable:hover {
+    text-decoration: underline;
+}
+
+.controls .btn-danger {
+    color: #ffffff;
 }

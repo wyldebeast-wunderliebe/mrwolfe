@@ -7,6 +7,7 @@ class Customer(models.Model):
 
     class Meta:
         app_label = "mrwolfe"
+        ordering = ["name"]
 
     def __unicode__(self):
         return self.name

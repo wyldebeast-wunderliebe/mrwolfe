@@ -1,4 +1,6 @@
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from pu_in_content.views.jsonbase import JSONCreateView, JSONUpdateView, \
+    JSONDeleteView
 from mrwolfe.models.operator import Operator
 from mrwolfe.forms.operator import OperatorForm
 
@@ -14,6 +16,13 @@ class OperatorCreate(CreateView):
         return "/?message=Operator+aangemaakt&status=0"
 
 
+class OperatorJSONCreate(JSONCreateView):
+
+    model = Operator
+    form_class = OperatorForm
+    success_template_name = "snippets/operator.html"
+
+
 class OperatorEdit(UpdateView):
 
     model = Operator
@@ -25,6 +34,13 @@ class OperatorEdit(UpdateView):
         return "/?message=Operator+gewijzigd&status=0"
 
 
+class OperatorJSONEdit(JSONUpdateView):
+
+    model = Operator
+    form_class = OperatorForm
+    success_template_name = "snippets/operator.html"
+
+
 class OperatorDelete(DeleteView):
 
     model = Operator
@@ -32,3 +48,8 @@ class OperatorDelete(DeleteView):
     def get_success_url(self):
 
         return "/?message=Operator+Verwijderd&status=0"
+
+
+class OperatorJSONDelete(JSONDeleteView):
+
+    model = Operator

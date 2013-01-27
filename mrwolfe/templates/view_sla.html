@@ -3,13 +3,11 @@
 {% block tools %}
 <a class="btn btn-primary" 
    href="{% url create_issue %}?sla={{ sla.pk }}"><i class="icon-plus"></i> New issue</a>
-<!--a class="btn" 
-    href="{% url create_service %}?sla={{ sla.pk }}"><i class="icon-plus"></i> New service</a-->
 <div class="btn-group">
   <a class="btn"
-     href="{% url edit_sla sla.pk %}"><i class="icon-edit"></i> Edit</a>  
+     href="{% url edit_sla sla.pk %}"><i class="icon-pencil"></i> Edit</a>  
   <a class="btn btn-danger"
-     href="{% url delete_sla sla.pk %}"><i class="icon-trash"></i> Delete</a>
+     href="{% url delete_sla sla.pk %}"><i class="icon-remove"></i> Delete</a>
 </div>
 {% endblock %}
 
@@ -23,22 +21,21 @@
   <dt>End date</dt><dd>{{ object.end_date }}</dd>
 </dl>
 
-<div class="listing">
-  <h2>Services <a class="add-inline"
-                  target="#services"
-                  href="{% url create_service_json sla.pk %}"
-                  ><i class="icon-plus"></i></a></h2>
-
+<div class="viewlet well">
+  <h2>Services 
+    <a class="add-inline btn btn-success btn-mini"
+       target="#services"
+       href="{% url create_service_json sla.pk %}"
+       ><i class="icon-plus"></i></a>
+  </h2>
+  
   {% if not view.list_services %}
   <div class="alert warning">No services defined yet!</div>
   {% endif %}
-
+  
   <ul id="services">
     {% for service in view.list_services %}
-    <li class="service editable">{{ service }}
-      <a class="edit-inline "href="{% url edit_service_json service.pk %}"><i class="icon-edit"></i></a>
-      <a class="rm-inline" href="{% url delete_service_json service.pk %}"><i class="icon-trash"></i></a>
-    </li>
+    {% include "snippets/service.html" with object=service %}
     {% endfor %}
   </ul>
 </div>

@@ -1,0 +1,49 @@
+#tools {
+    clear: both;
+    margin-bottom: 20px;
+}
+
+.issue.normal {
+}
+
+.issue.high {
+    color: #ff0000;
+}
+
+.viewlet ul {
+    list-style: none;
+}
+
+.viewlet ul a {
+    color: inherit !important;
+}
+
+.status {
+    font-weight: bold;
+}
+
+.comment {
+    font-style: italic;
+}
+
+dt {
+    float: left;
+    clear: both;
+    width: 150px;
+}
+
+.submission {
+    display: block;
+}
+
+h2 {
+    font-size: 20px !important;
+}
+
+li.editable {
+    width: 30%;
+}
+
+li.editable a {
+    float: right;
+}

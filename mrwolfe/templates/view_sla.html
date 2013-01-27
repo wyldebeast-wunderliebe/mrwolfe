@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block tools %}
+<a class="btn btn-primary" 
+   href="{% url create_issue %}?sla={{ sla.pk }}"><i class="icon-plus"></i> New issue</a>
+<!--a class="btn" 
+    href="{% url create_service %}?sla={{ sla.pk }}"><i class="icon-plus"></i> New service</a-->
+<div class="btn-group">
+  <a class="btn"
+     href="{% url edit_sla sla.pk %}"><i class="icon-edit"></i> Edit</a>  
+  <a class="btn btn-danger"
+     href="{% url delete_sla sla.pk %}"><i class="icon-trash"></i> Delete</a>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<h2>{{ object }}</h2>
+
+<dl>
+  <dt>Customer</dt><dd>{{ object.customer }}</dd>
+  <dt>Start date</dt><dd>{{ object.start_date }}</dd>
+  <dt>End date</dt><dd>{{ object.end_date }}</dd>
+</dl>
+
+<div class="listing">
+  <h2>Services <a class="add-inline"
+                  target="#services"
+                  href="{% url create_service_json sla.pk %}"
+                  ><i class="icon-plus"></i></a></h2>
+
+  {% if not view.list_services %}
+  <div class="alert warning">No services defined yet!</div>
+  {% endif %}
+
+  <ul id="services">
+    {% for service in view.list_services %}
+    <li class="service editable">{{ service }}
+      <a class="edit-inline "href="{% url edit_service_json service.pk %}"><i class="icon-edit"></i></a>
+      <a class="rm-inline" href="{% url delete_service_json service.pk %}"><i class="icon-trash"></i></a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+
+<div class="viewlet well">
+  <h2>Open tickets</h2>
+  <ul>
+    {% for issue in view.list_open_issues %}
+    <li><a href="#">{{ issue }}</a></li>
+    {% endfor %}
+  </ul>
+</div>
+
+<div class="viewlet well">
+  <h2>Your tickets</h2>
+  <ul>
+    {% for issue in view.list_my_issues %}
+    <li><a href="#">{{ issue }}</a></li>
+    {% endfor %}
+  </ul>
+</div>
+
+{% endblock %}

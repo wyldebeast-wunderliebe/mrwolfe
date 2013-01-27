@@ -1,0 +1,42 @@
+w20e support system
+===================
+
+This system works with the assumption that issues may be posted only,
+if there is an SLA for the sender. Issues are sent over email, or
+added ttw by authenticated users that are valid contacts for a given
+customer, that by itself has one or more SLA's in the system. No SLA,
+no issue. Simple as that.
+
+
+Issues
+------
+
+An issue can be mailed to the dedicated mailqueue for an SLA, or to a
+generic mailqueue. This mailqueue needs to be configured for the
+SLA. The system will poll on the queue, fetch emails and dispatch to
+the proper SLA. When the issue has been accepted by the system, a
+notification is sent back to the sender, with the acknowledgement and
+the issue id.
+
+
+Resolving issues to an SLA
+--------------------------
+
+Issues are reported by email in general, so it is the system's
+responsibility to attach incoming issues to the proper SLA. Resolving
+this is done as per the followig algorithm:
+
+1. if the mailqueue the issue was popped from is only used by one SLA,
+this SLA is chosen
+2. else, if the sender is in the contacts list and it is the contact for only 
+one SLA, this SLA is chosen
+3. else, if the name of the SLA (project) is found in the subject line or mail
+body, this SLA is used
+4. else the issue is considered an orphan
+
+SLA
+---
+
+A Service Level Agreement consists of a number of services that have
+been agreed upon. A service as basically a tuple of 'priority,
+reaction time, solution time'.

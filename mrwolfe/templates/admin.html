@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block tools %}
+<div id="tools" class="btn-group">
+  <a class="btn" 
+     href="{% url create_sla %}"><i class="icon-plus"></i> New SLA</a>
+  <a class="btn" 
+     href="{% url create_customer %}"><i class="icon-plus"></i> New Customer</a>
+  <a class="btn" 
+     href="{% url create_operator %}"><i class="icon-plus"></i> New Operator</a>
+  <a class="btn" 
+     href="{% url create_mailqueue %}"><i class="icon-plus"></i> New MailQueue</a>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<div class="viewlet well">
+  <h2>Service Level Agreements</h2>
+  <ul>
+    {% for sla in view.list_slas %}
+    <li>
+      <i class="icon-umbrella"></i> 
+      <a href="{% url view_sla sla.pk %}">{{ sla }}</a></li>
+    {% endfor %}
+  </ul>
+</div>
+
+{% endblock %}

@@ -1,0 +1,91 @@
+{% load compress %}
+
+<!DOCTYPE html>
+
+<html lang="nl">
+<head>
+
+    <meta charset="utf-8">
+
+    <title>Wyldebeast &amp; Wunderliebe TTS</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% compress css %}
+    <link rel="stylesheet" href="{{STATIC_URL}}css/mrwolfe.css" type="text/css">
+    <link rel="stylesheet" href="{{STATIC_URL}}bootstrap/css/bootstrap.min.css" 
+          type="text/css">
+    <link rel="stylesheet" href="{{STATIC_URL}}font-awesome/css/font-awesome.css" 
+          type="text/css">
+    {% endcompress %}
+
+    <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" 
+            src="{{STATIC_URL}}bootstrap/js/bootstrap.min.js">
+    </script> 
+    {% compress js %}
+    <script src="{{STATIC_URL}}js/mrwolfe.js"></script>    
+    <script src="{{STATIC_URL}}js/pu_in_core.js" 
+            defer="defer"></script>
+    <script src="{{STATIC_URL}}js/pu_in_content.js" 
+            defer="defer"></script>
+    {% endcompress %}
+</head>
+
+<body>
+
+  <div class="alert 
+              {% if request.GET.status == "0" %}alert-success{% endif %}
+              {% if request.GET.status == "-1" %}alert-error{% endif %}
+              {% if not request.GET.message %}hide{% endif %}
+              " id="message">
+    <button class="close" data-dismiss="alert">×</button>
+    {{ request.GET.message }}
+  </div>
+
+  <div class="container">
+
+    <div class="navbar navbar-inverse">
+      <div class="navbar-inner">
+        <a class="brand" href="/">Mr.Wolfe</a>
+        <ul class="nav">
+          <li><a href="/"><i class="icon-tasks"></i> Dashboard</a></li>
+          <li><a href=""><i class="icon-user-md"></i> {{request.user.get_full_name}}</a></li>
+          <li><a href="/logout"><i class="icon-signout"></i> Afmelden</a></li>
+          <li><a href="/config"><i class="icon-wrench"></i> Admin</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="btn-toolbar" id="tools">
+    {% block tools %}
+    {% endblock %}
+    </div>
+
+    <div id="main">
+      {% block content %}
+      
+      {% endblock %}
+    </div>
+    
+    <div id="footer">
+    </div>
+    
+  </div>
+
+  <div class="modal hide fade" id="MyModal">
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal">x Close</a>
+      <h3></h3>
+    </div>
+    <div class="modal-body">
+      <img src="/static/img/loading.gif">
+      <p>Laden...</p>
+    </div>
+    <div class="modal-footer">
+    </div>
+  </div>
+  
+</body>
+
+</html>

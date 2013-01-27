@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>New Customer</h2>
+
+{% if form.errors %}
+<div class="alert alert-error">
+  {{ form.errors }}
+</div>
+{% endif %}
+
+<form action="" method="POST">
+  {% csrf_token %}
+  {{ form }}
+
+  <div class="btn-group">
+    <input name="submit" class="btn btn-primary" type="submit" value="Save" />
+    <input name="submit" class="btn" type="submit" value="Cancel" />
+  </div>
+</form>
+
+{% endblock %}

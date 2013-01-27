@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block tools %}
+<div id="tools" class="btn-group">
+  <a class="btn btn-primary" 
+     href="{% url create_issue %}"><i class="icon-plus"></i> New issue</a>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<div class="viewlet well">
+  <h2>Unassigned tickets</h2>
+  <ul>
+    {% for issue in view.list_unassigned_issues %}
+    <li>
+      <a href="{% url view_issue issue.pk %}">
+        <span class="issue {{ issue.priority.priority }}">
+          <i class="icon-bell-alt"></i> {{ issue }}</span>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+
+<div class="viewlet well">
+  <h2>Your tickets</h2>
+  <ul>
+    {% for issue in view.list_my_issues %}
+    <li>
+      <a href="{% url view_issue issue.pk %}">
+        <span class="issue {{ issue.priority.priority }}">
+          <i class="icon-bell-alt"></i> {{ issue }}</span>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% if fieldtype == "hiddeninput" %}
+    {% if show_label and field.label %}<label class="control-label">{{ field.label }}</label>{% endif %}
+    {{ field }}
+    {% if show_label and field.help_text %}<p class="help-block">{{ field.help_text|safe }}</p>{% endif %}
+{% else %}
+<div class="control-group {% if field.errors %}error{% endif %} {{ extra_classes }}">
+  {% if show_label and not use_placeholder %}
+  {% if field.label %}<label class="control-label" for="{{ field.name }}">{{ field.label }}</label>{% endif %}
+  {% endif %} 
+  <div class="controls">
+    {% if fieldtype == "checkboxinput" or fieldtype == "integercheckboxwidget" %}
+    <label class="checkbox">{{ field }} {{ field.label }}</label>
+    {% else %}
+    {{ field }}
+    {% endif %}
+    <p class="help-block">{{ field.help_text|safe }}</p>
+  </div>
+</div>
+{% endif %}

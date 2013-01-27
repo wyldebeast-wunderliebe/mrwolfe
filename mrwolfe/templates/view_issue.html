@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block tools %}
+<div id="tools" class="btn-toolbar">
+
+  {% include "status_control.html" %}
+  {% include "assignee_control.html" %}
+  <a href="{% url edit_issue object.pk %}" class="btn"><i class="icon-edit"></i> Edit</a>
+
+</div>
+{% endblock %}
+
+{% block content %}
+
+<h2>{{ object.title }}</h2>
+
+<dl>
+  <dt>Created</dt><dd>{{ object.created }}</dd>
+  {% if object.is_open %}
+  <dt>Deadline</dt><dd>{{ object.deadline|default:"-" }}</dd>
+  <dt>Time to resolve</dt><dd>{{ object.time_to_resolve|default:"-" }}</dd>
+  {% else %}
+  <dt>Closed</dt><dd>{{ object.dateclosed|default:"-" }}</dd>
+  {% endif %}
+  <dt>Contact</dt><dd>{{ object.contact }}</dd>
+</dl>
+
+<div class="viewlet well">
+  <h2>History</h2>
+  {% for status in view.status_history %}
+  <div class="statusupdate">
+    <span class="status">{{ status.name }}</span> - <span>{{ status.date }}</span>
+    <div class="comment">
+      {{ status.comment }}
+    </div>
+  </div>
+  {% endfor %}  
+</div>
+
+{% endblock %}

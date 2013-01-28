@@ -21,21 +21,6 @@
 </div>
 
 <div class="viewlet well">
-  <h2>Customers 
-    <a href="{% url create_customer_json %}" 
-       target="#customers"
-       class="btn btn-mini btn-success add-inline">
-      <i class="icon-plus"></i> 
-    </a>
-  </h2>
-  <ul id="customers">
-    {% for customer in view.list_customers %}
-    {% include "snippets/customer.html" with object=customer %}
-    {% endfor %}
-  </ul>
-</div>
-
-<div class="viewlet well">
   <h2>Operators
     <a href="{% url create_operator_json %}" 
        target="#operators"
@@ -46,6 +31,21 @@
   <ul id="operators">
     {% for operator in view.list_operators %}
     {% include "snippets/operator.html" with object=operator %}    
+    {% endfor %}
+  </ul>
+</div>
+
+<div class="viewlet well">
+  <h2>Contacts
+    <a href="{% url create_contact_json %}" 
+       target="#contacts"
+       class="btn btn-mini btn-success add-inline">
+      <i class="icon-plus"></i> 
+    </a>
+  </h2>
+  <ul id="contacts">
+    {% for contact in view.list_contacts %}
+    {% include "snippets/contact.html" with object=contact %}    
     {% endfor %}
   </ul>
 </div>

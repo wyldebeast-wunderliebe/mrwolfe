@@ -25,4 +25,10 @@ $(document).ready(function() {
           xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
         } 
       });
+
+    $(document).on("click", "#MyModal .cancel", function(e) {
+        $('#MyModal').modal('hide');
+        e.preventDefault();
+        e.stopPropagation();
+      })
   });

@@ -13,12 +13,7 @@
   <h2>Unassigned tickets</h2>
   <ul>
     {% for issue in view.list_unassigned_issues %}
-    <li>
-      <a href="{% url view_issue issue.pk %}">
-        <span class="issue {{ issue.priority.priority }}">
-          <i class="icon-bell-alt"></i> {{ issue }}</span>
-      </a>
-    </li>
+    {% include "snippets/issue.html" with object=issue %}
     {% endfor %}
   </ul>
 </div>
@@ -27,12 +22,7 @@
   <h2>Your tickets</h2>
   <ul>
     {% for issue in view.list_my_issues %}
-    <li>
-      <a href="{% url view_issue issue.pk %}">
-        <span class="issue {{ issue.priority.priority }}">
-          <i class="icon-bell-alt"></i> {{ issue }}</span>
-      </a>
-    </li>
+    {% include "snippets/issue.html" with object=issue %}
     {% endfor %}
   </ul>
 </div>

@@ -22,6 +22,10 @@ DATABASES = {
     }
 }
 
+if os.environ.get("DJANGO_TEST", "") == "1":
+    DATABASES['default']['ENGINE'] = "django.db.backends.sqlite3"
+    DATABASES['default']['NAME'] = "test"
+
 PROJECT_ROOT = os.path.realpath(os.path.dirname(__file__))
 
 # Local time zone for this installation. Choices can be found here:
@@ -183,7 +187,7 @@ ENV_HEADER_MSG = ""
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
 #
-LOGFILE="/tmp/mrwolfe.log"
+LOGFILE="mrwolfe.log"
 
 LOGGING = {
     'version': 1,
@@ -213,6 +217,11 @@ LOGGING = {
             'propagate': False
         },
         'utils': {
+            'handlers': ['default'],
+            'level': 'DEBUG',
+            'propagate': True
+        },
+        'mrwolfe': {
             'handlers': ['default'],
             'level': 'DEBUG',
             'propagate': True
@@ -260,3 +269,8 @@ ISSUE_STATUS_DEFAULT = ISSUE_STATUS_OPEN
 
 # Do we allow incoming messages from non contacts?
 ALLOW_NON_CONTACTS = False
+
+MESSAGE_FIELDS = (("subject", "Subject"),
+                  ("from", "From"),
+                  ("to", "To"),
+                  ("text", "Message body"))

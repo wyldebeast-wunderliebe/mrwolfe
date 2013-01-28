@@ -2,9 +2,11 @@
 
 {% block content %}
 
+<h2>
 {% block title %}
-<h2>Edit thing</h2>
+Edit thing
 {% endblock %}
+</h2>
 
 {% if form.errors %}
 <div class="alert alert-error">
@@ -18,7 +20,7 @@
   {% block form %}
   {% endblock %}
 
-  <div class="btn-group">
+  <div class="btn-group submission">
     <input name="submit" class="btn btn-primary" type="submit" value="Save" />
     <input name="submit" class="btn" type="submit" value="Cancel" />
   </div>

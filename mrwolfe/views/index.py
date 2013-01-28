@@ -1,8 +1,9 @@
 from django.views.generic import TemplateView
 from mrwolfe.models.sla import SLA
-from mrwolfe.models.customer import Customer
+from mrwolfe.models.mailqueue import MailQueue
 from mrwolfe.models.issue import Issue
 from mrwolfe.models.operator import Operator
+from mrwolfe.models.contact import Contact
 
 
 class IndexView(TemplateView):
@@ -34,10 +35,14 @@ class AdminView(IndexView):
 
         return SLA.objects.all()
 
-    def list_customers(self):
+    def list_mailqueues(self):
 
-        return Customer.objects.all()
+        return MailQueue.objects.all()
 
     def list_operators(self):
 
         return Operator.objects.all()
+
+    def list_contacts(self):
+
+        return Contact.objects.all()

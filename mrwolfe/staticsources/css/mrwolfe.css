@@ -33,7 +33,7 @@ dt {
 }
 
 .submission, #MyModal .btn-group {
-    display: block;
+    display: block !important;
 }
 
 h2 {
@@ -63,5 +63,13 @@ li.editable:hover {
 }
 
 .controls .btn-danger {
-    color: #ffffff;
+    color: #ffffff !important;
+}
+
+.critical {
+    color: #ff0000;
+}
+
+.warning {
+    color: #f89406;
 }

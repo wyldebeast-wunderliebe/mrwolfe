@@ -3,6 +3,7 @@ from django.views.generic.detail import DetailView
 from pu_in_content.views.jsonbase import JSONCreateView, JSONUpdateView, \
     JSONDeleteView
 from mrwolfe.models.sla import SLA
+from mrwolfe.models.rule import Rule
 from mrwolfe.models.service import Service
 from mrwolfe.forms.sla import SLAForm
 from mrwolfe.models.issue import Issue
@@ -24,6 +25,10 @@ class SLAView(DetailView):
     def list_services(self):
 
         return Service.objects.filter(sla=self.object)
+
+    def list_rules(self):
+
+        return Rule.objects.filter(sla=self.object)
 
     def list_my_issues(self):
 

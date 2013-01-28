@@ -1,16 +1,11 @@
 import poplib
 import logging
-import re
 from email import parser
-from django.conf import settings
 from django.core.management.base import NoArgsCommand
-from mrwolfe.models.sla import SLA
 from mrwolfe.models.mailqueue import MailQueue
-from mrwolfe.models.issue import Issue
-from mrwolfe.utils import determine_sla
+from mrwolfe.utils import handle_message
 
 
-ISSUE_SUBJECT_MATCH = re.compile('#([0-9]{8})')
 LOGGER = logging.getLogger("mrwolfe")
 
 
@@ -25,13 +20,13 @@ class Command(NoArgsCommand):
         for queue in MailQueue.objects.all():
             self.handle_queue(queue)
 
-    def handle_sla(self, mailqueue):
+    def handle_queue(self, mailqueue):
         
-        pop_conn = poplib.POP3_SSL(mailqueue.host, mailqueue.port or 110)
+        pop_conn = poplib.POP3_SSL(mailqueue.host, int(mailqueue.port or 995))
         pop_conn.user(mailqueue.usr)
         pop_conn.pass_(mailqueue.pwd)
 
-        LOGGER.info("Handling queue %" % mailqueue)
+        LOGGER.info("Handling queue %s" % mailqueue)
 
         nr_of_messages = len(pop_conn.list()[1])
 
@@ -42,34 +37,14 @@ class Command(NoArgsCommand):
             
             message = parser.Parser().parsestr(message)
 
+            # TODO: handle complex messages, with attachments and the likes...
+            #
             try:
-                if mailqueue.sla_set.all().count() == 1:
-                    sla = mailqueue.sla_set.all()[0]
-                else:
-                    sla = determine_sla(message)
+                handled = handle_message(message)
 
-                sender = Contact.objects.filter(
-                    "user__email"=message['sender'])[0]
-
-                if sla.is_contact(sender) or settings.ALLOW_NON_CONTACTS:
-                    
-                    match = ISSUE_SUBJECT_MATCH.search(message['subject'])
-
-                    if match:
-                        issue_id = int(match.groups()[0])
-                        issue = Issue.objects.get(pk=issue_id)
-
-                        issue.add_comment(message.get_payload())
-                    else:
-                        issue = Issue(title=message['subject'],
-                                      contact=sender,
-                                      text=message.get_payload(),
-                                      sla=sla)
-                    issue.save()
+                if not handled:
+                    LOGGER.warning("Unhandled message!")
             except:
-
-                # bounce!
-
-                pass
+                LOGGER.warning("Exception in handling message!")
 
         pop_conn.quit()

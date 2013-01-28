@@ -6,14 +6,14 @@ from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from views.index import IndexView, AdminView
 from views.issue import IssueCreate, IssueEdit, IssueView, IssueAssigneeJSONEdit
-from views.service import ServiceJSONCreate, ServiceJSONEdit, \
-    ServiceJSONDelete
+from views.service import ServiceJSONCreate, ServiceJSONEdit, ServiceJSONDelete
+from views.rule import RuleJSONCreate, RuleJSONEdit, RuleJSONDelete
 from views.sla import SLAView, SLAJSONCreate, SLAJSONEdit, SLAJSONDelete, \
     SLADelete, SLAEdit
-from views.customer import CustomerJSONCreate, CustomerJSONEdit, \
-    CustomerJSONDelete
 from views.operator import OperatorJSONCreate, OperatorJSONEdit, \
     OperatorJSONDelete
+from views.contact import ContactJSONCreate, ContactJSONEdit, \
+    ContactJSONDelete
 from views.mailqueue import MailQueueJSONCreate, MailQueueJSONEdit, \
     MailQueueJSONDelete
 from views.status import StatusJSONCreate
@@ -28,6 +28,9 @@ urlpatterns = patterns('',
                        (r'^(new/)?openid/', include('django_openid_auth.urls')),
                        (r'^logout/$', 'django.contrib.auth.views.logout'),
                        (r'^admin/', include(admin.site.urls)),
+
+                       # Issue
+                       #
                        url(r'^create_issue/', 
                            IssueCreate.as_view(),
                            name="create_issue"),
@@ -39,7 +42,7 @@ urlpatterns = patterns('',
                            name="view_issue"),
                        url(r'^change_status/(?P<issue_pk>[\d]+)$', 
                            StatusJSONCreate.as_view(),
-                           name="change_status/"),
+                           name="change_status"),
                        url(r'^change_assignee/(?P<pk>[\d]+)$', 
                            IssueAssigneeJSONEdit.as_view(),
                            name="change_assignee"),
@@ -55,6 +58,18 @@ urlpatterns = patterns('',
                        url(r'^delete_service_json/(?P<pk>[\d]+)$', 
                            ServiceJSONDelete.as_view(),
                            name="delete_service_json"),
+
+                       # Rule
+                       #
+                       url(r'^create_rule_json/(?P<sla_pk>[\d]+)$', 
+                           RuleJSONCreate.as_view(),
+                           name="create_rule_json"),
+                       url(r'^edit_rule_json/(?P<pk>[\d]+)$', 
+                           RuleJSONEdit.as_view(),
+                           name="edit_rule_json"),
+                       url(r'^delete_rule_json/(?P<pk>[\d]+)$', 
+                           RuleJSONDelete.as_view(),
+                           name="delete_rule_json"),
 
                        # SLA
                        # 
@@ -77,18 +92,6 @@ urlpatterns = patterns('',
                            SLADelete.as_view(),
                            name="delete_sla"),
                        
-                       # Customer
-                       #
-                       url(r'^create_customer_json/', 
-                           CustomerJSONCreate.as_view(),
-                           name="create_customer_json"),
-                       url(r'^edit_customer_json/(?P<pk>[\d]+)$', 
-                           CustomerJSONEdit.as_view(),
-                           name="edit_customer_json"),
-                       url(r'^delete_customer_json/(?P<pk>[\d]+)$', 
-                           CustomerJSONDelete.as_view(),
-                           name="delete_customer_json"),
-
                        # Operator
                        #
                        url(r'^create_operator_json/', 
@@ -100,6 +103,18 @@ urlpatterns = patterns('',
                        url(r'^delete_operator_json/(?P<pk>[\d]+)$', 
                            OperatorJSONDelete.as_view(),
                            name="delete_operator_json"),
+
+                       # Contact
+                       #
+                       url(r'^create_contact_json/', 
+                           ContactJSONCreate.as_view(),
+                           name="create_contact_json"),
+                       url(r'^edit_contact_json/(?P<pk>[\d]+)$', 
+                           ContactJSONEdit.as_view(),
+                           name="edit_contact_json"),
+                       url(r'^delete_contact_json/(?P<pk>[\d]+)$', 
+                           ContactJSONDelete.as_view(),
+                           name="delete_contact_json"),
 
                        # MailQueue
                        #

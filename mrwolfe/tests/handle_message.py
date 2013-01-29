@@ -4,20 +4,11 @@ from mrwolfe.models.sla import SLA
 from mrwolfe.models.rule import Rule
 from mrwolfe.models.service import Service
 from mrwolfe.models.contact import Contact
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
-
-class TestMessage(dict):
-
-    def __init__(self, text, **kwargs):
-
-        self.text = text
-
-        for key in kwargs.keys():
-            self[key.lower()] = kwargs[key]
-
-    def get_payload(self):
-
-        return self.text
+TO = "support@evilempire.com"
+FROM = "dokter@evilempire.com"
 
 
 class HandleMessageTest(TestCase):
@@ -34,27 +25,37 @@ class HandleMessageTest(TestCase):
                                    regexp="dokter",
                                    sla=self.sla)
 
-        contact = Contact.objects.create(email="dokter@w20e.com")
+        contact = Contact.objects.create(email="dokter@evilempire.com")
         
         contact.save()
         contact.sla.add(self.sla)
 
+        # Create message container - the correct MIME type is
+        # multipart/alternative.
+        self.multipartmsg = MIMEMultipart('alternative')
+        self.simplemsg = MIMEText("It's broken", 'plain')
+
+        self.multipartmsg['Subject'] = self.simplemsg['Subject'] = "Issue"
+        self.multipartmsg['From'] = self.simplemsg['From'] = FROM
+        self.multipartmsg['To'] = self.simplemsg['To'] = TO
+
+        # Record the MIME types of both parts - text/plain and text/html.
+        part1 = MIMEText("It's broken", 'plain')
+        part2 = MIMEText("<blink>Really!</blink>", 'html')
+
+        self.multipartmsg.attach(part1)
+        self.multipartmsg.attach(part2)
 
     def test_handle_message(self):
 
-        message = TestMessage("lala", From='dokter@w20e.com', Subject='lala')
-
-        handle_message(message)
+        handle_message(self.simplemsg)
 
         self.assertEquals(1, self.sla.issue_set.all().count())
 
 
     def test_handle_message_with_extended_from(self):
 
-        message = TestMessage("lala", From='Duco Dokter <dokter@w20e.com>', 
-                              Subject='lala')
-
-        handle_message(message)
+        handle_message(self.simplemsg)
 
         self.assertEquals(1, self.sla.issue_set.all().count())
 
@@ -66,11 +67,18 @@ class HandleMessageTest(TestCase):
         self.sla.default_service = service
         self.sla.save()
 
-        message = TestMessage("lala", From='Duco Dokter <dokter@w20e.com>', 
-                              Subject='lala')
-
-        handle_message(message)
+        handle_message(self.simplemsg)
 
         self.assertEquals(1, self.sla.issue_set.all().count())
 
         self.assertEquals(service, self.sla.issue_set.all()[0].service)
+
+    def test_handle_message_with_attachments(self):
+
+        handle_message(self.multipartmsg)
+
+        self.assertEquals(1, self.sla.issue_set.all().count())
+
+        issue = self.sla.issue_set.all()[0]
+
+        self.assertEquals(1, issue.attachment_set.all().count())

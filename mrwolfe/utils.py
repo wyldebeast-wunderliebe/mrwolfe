@@ -1,5 +1,8 @@
 import re
+import mimetypes
 from django.conf import settings
+from django.core.files.base import ContentFile
+from mrwolfe.models.attachment import Attachment
 from mrwolfe.models.contact import Contact
 from mrwolfe.models.sla import SLA
 from mrwolfe.models.issue import Issue
@@ -48,20 +51,59 @@ def handle_message(message):
     #
     match = ISSUE_SUBJECT_MATCH.search(message['subject'])
 
+    # Parse message payload
+    #
+    body = []
+    attachments = []
+    counter = 0
+
+    for part in message.walk():
+
+        # multipart/* are just containers
+        if part.get_content_maintype() == 'multipart':
+            continue
+
+        # Applications should really sanitize the given filename so that an
+        # email message can't be used to overwrite important files
+        #
+        if part.get_content_type() == "text/plain":
+            body.append(part.get_payload(decode=True))
+        else:
+            filename = part.get_filename()
+            if not filename:
+                ext = mimetypes.guess_extension(part.get_content_type())
+                if not ext:
+                    # Use a generic bag-of-bits extension
+                    ext = '.bin'
+                filename = 'part-%03d%s' % (counter, ext)
+            counter += 1
+
+            att = Attachment()
+            att._file = ContentFile(part.get_payload(decode=True))
+            att._file.name = filename
+            att.mimetype = part.get_content_type()
+            attachments.append(att)
+
+    body = "\n\n".join(body)
+
     if match:
         issue_id = int(match.groups()[0])
         issue = Issue.objects.get(pk=issue_id)
         
-        self.comment_set.create(comment=message.get_payload())
+        self.comment_set.create(comment=body)
     else:
         issue = Issue(title=message['subject'],
         contact=sender,
-        text=message.get_payload(),
+        text=body,
         sla=sla)
 
     if sla and sla.default_service:
         issue.service = sla.default_service
 
     issue.save()
+
+    for att in attachments:
+        att.issue = issue
+        att.save()
 
     return True

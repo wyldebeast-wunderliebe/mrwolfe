@@ -27,6 +27,21 @@
   <dt>Contact</dt><dd>{{ object.contact }}</dd>
 </dl>
 
+{% if object.attachment_set.count %}
+<div class="viewlet well">
+  <h2>Attachments</h2>
+  <ul>
+    {% for attachment in object.attachment_set.all %}
+    <li>
+      <a href="{{ attachment.download_url }}">
+        {{ attachment.filename }} [{{ attachment.mimetype }}]
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
+
 <div class="viewlet well">
   <h2>History</h2>
   {% for status in view.status_history %}

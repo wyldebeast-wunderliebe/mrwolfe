@@ -6,7 +6,8 @@ from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from views.index import IndexView, AdminView
 from views.issue import IssueCreate, IssueEdit, IssueView, IssueAssigneeJSONEdit
-from views.service import ServiceJSONCreate, ServiceJSONEdit, ServiceJSONDelete
+from views.service import ServiceJSONCreate, ServiceJSONEdit, \
+    ServiceJSONDelete, ServiceJSONSetDefault
 from views.rule import RuleJSONCreate, RuleJSONEdit, RuleJSONDelete
 from views.sla import SLAView, SLAJSONCreate, SLAJSONEdit, SLAJSONDelete, \
     SLADelete, SLAEdit
@@ -25,7 +26,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
                        (r'^$', login_required(IndexView.as_view())),
                        (r'^config$', login_required(AdminView.as_view())),
-                       (r'^(new/)?openid/', include('django_openid_auth.urls')),
+                       (r'^openid/', include('django_openid_auth.urls')),
                        (r'^logout/$', 'django.contrib.auth.views.logout'),
                        (r'^admin/', include(admin.site.urls)),
 
@@ -58,6 +59,9 @@ urlpatterns = patterns('',
                        url(r'^delete_service_json/(?P<pk>[\d]+)$', 
                            ServiceJSONDelete.as_view(),
                            name="delete_service_json"),
+                       url(r'^set_default_service/(?P<pk>[\d]+)$',
+                           ServiceJSONSetDefault.as_view(),
+                           name="set_default_service"),
 
                        # Rule
                        #

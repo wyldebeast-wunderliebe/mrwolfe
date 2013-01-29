@@ -71,7 +71,7 @@ STATIC_ROOT = PROJECT_ROOT + '/statics/'
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = '/new/static/'
+STATIC_URL = '/static/'
 
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
@@ -158,7 +158,7 @@ AUTHENTICATION_BACKENDS = (
 
 
 # Should users be created when new OpenIDs are used to log in?
-OPENID_CREATE_USERS = False
+OPENID_CREATE_USERS = True
 
 # When logging in again, should we overwrite user details based on
 # data received via Simple Registration?
@@ -175,6 +175,8 @@ ALLOWED_EXTERNAL_OPENID_REDIRECT_DOMAINS = []
 
 # Should django_auth_openid be used to sign into the admin interface?
 OPENID_USE_AS_ADMIN_LOGIN = False
+
+OPENID_USE_EMAIL_FOR_USERNAME = True
 
 ## END OpenID settings
 

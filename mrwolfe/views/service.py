@@ -1,7 +1,7 @@
 from django import forms
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from pu_in_content.views.jsonbase import JSONCreateView, JSONUpdateView, \
-    JSONDeleteView
+    JSONDeleteView, JSONDetailView
 from mrwolfe.models.service import Service
 from mrwolfe.forms.service import ServiceForm
 
@@ -27,3 +27,18 @@ class ServiceJSONEdit(JSONUpdateView):
 class ServiceJSONDelete(JSONDeleteView):
 
     model = Service
+
+
+class ServiceJSONSetDefault(JSONDetailView):
+
+    model = Service
+    template_name = "snippets/service.html"
+
+    def get(self, request, *args, **kwargs):
+
+        self.object = self.get_object()
+
+        self.object.sla.default_service = self.object
+        self.object.sla.save()
+
+        return super(ServiceJSONSetDefault, self).get(request, *args, **kwargs)

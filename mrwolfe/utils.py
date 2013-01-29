@@ -58,6 +58,10 @@ def handle_message(message):
         contact=sender,
         text=message.get_payload(),
         sla=sla)
+
+    if sla and sla.default_service:
+        issue.service = sla.default_service
+
     issue.save()
 
     return True

@@ -6,3 +6,4 @@ class SLAForm(forms.ModelForm):
 
     class Meta:
         model = SLA
+        

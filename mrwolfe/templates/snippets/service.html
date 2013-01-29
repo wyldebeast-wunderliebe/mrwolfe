@@ -1,4 +1,4 @@
-<li class="editable">
+<li class="editable {% if object.is_default %}default{% endif %}">
   <i class="icon-cog"></i>
   {{ object }}
   <div class="btn-group controls">
@@ -10,5 +10,15 @@
        href="{% url delete_service_json object.pk %}">
       <i class="icon-remove"></i>
     </a>
+    {% if not object.is_default %}
+    <a class="action-inline btn btn-mini" 
+       href="{% url set_default_service object.pk %}"
+       target="parents('li')"
+       title="Set as default"
+       rel="tooltip"
+       data-pu_targetbehavior="replace">
+      <i class="icon-star"></i>
+    </a>
+    {% endif %}
   </div>
 </li>

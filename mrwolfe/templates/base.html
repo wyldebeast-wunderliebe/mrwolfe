@@ -34,6 +34,8 @@
 
 <body>
 
+  {% csrf_token %}
+
   <div class="alert 
               {% if request.GET.status == "0" %}alert-success{% endif %}
               {% if request.GET.status == "-1" %}alert-error{% endif %}

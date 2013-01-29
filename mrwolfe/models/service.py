@@ -15,3 +15,8 @@ class Service(models.Model):
     def __unicode__(self):
 
         return "%s: %s hours" % (self.priority, self.response_time)
+
+    @property
+    def is_default(self):
+
+        return self == self.sla.default_service

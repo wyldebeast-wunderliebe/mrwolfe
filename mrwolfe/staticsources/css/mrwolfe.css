@@ -73,3 +73,7 @@ li.editable:hover {
 .warning {
     color: #f89406;
 }
+
+.default {
+    text-decoration: underline;
+}

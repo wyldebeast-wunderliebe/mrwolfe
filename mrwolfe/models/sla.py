@@ -7,7 +7,7 @@ class SLA(models.Model):
     name = models.CharField(unique=True, max_length=100)    
     start_date = models.DateField()
     end_date = models.DateField()
-    default_service = models.ForeignKey("Service", null=True, blank=True,
+    default_service = models.ForeignKey("Service", null=True, blank=True,s
                                         related_name="defaultservice")
 
     class Meta:

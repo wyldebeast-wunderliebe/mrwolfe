@@ -85,3 +85,48 @@ li.editable:hover {
 .label-normal {
     background-color: #3A87AD !important;
 }
+
+.issue {
+    color: #303030;
+}
+
+time {
+    font-style: italic;
+    font-size: 90%;
+    display: block;
+    color: #909090;
+}
+
+.issue time {
+    margin-left: 50px;
+}
+
+.viewlet h2 {
+    position: relative;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.viewlet h2 .toggle {
+    padding: 10px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    line-height: 0px;
+    cursor: pointer;
+    color: #303030;
+    text-decoration: none;
+}
+
+.viewlet h2 .toggle.collapse {
+    display: none;
+}
+
+.viewlet.expanded .toggle.collapse {
+    display: block;
+}
+
+.viewlet.expanded h2 .toggle.expand {
+    display: none;
+}
+

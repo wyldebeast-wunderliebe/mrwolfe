@@ -47,6 +47,21 @@
 </div>
 {% endif %}
 
+{% if object.comments.count %}
+<div class="viewlet well expanded">
+  <h2>Comments
+    <a class="toggle expand" href="#">▼</a>
+    <a class="toggle collapse" href="#">▲</a>
+  </h2>
+  {% for comment in object.comments.all %}
+  <div class="comment">
+    {{ comment.comment }}
+    <time>{{ comment.date }}</time>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
 {% include "snippets/history.html" %}
 
 {% endblock %}

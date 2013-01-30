@@ -29,8 +29,7 @@ class Issue(models.Model):
 
     def __unicode__(self):
 
-        return "%s: %s - %s - %s" % (self.issue_id,
-                                     self.status, self.created, self.text[:50])
+        return "%s - %s" % (self.issue_id, self.text[:50])
 
     @property
     def issue_id(self):

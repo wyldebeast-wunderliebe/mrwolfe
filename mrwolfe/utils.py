@@ -91,7 +91,7 @@ def handle_message(message):
         issue_id = int(match.groups()[0])
         issue = Issue.objects.get(pk=issue_id)
         
-        self.comment_set.create(comment=body)
+        issue.comments.create(comment=body)
     else:
         issue = Issue(title=message['subject'],
         contact=sender,

@@ -82,3 +82,19 @@ class HandleMessageTest(TestCase):
         issue = self.sla.issue_set.all()[0]
 
         self.assertEquals(1, issue.attachment_set.all().count())
+
+    def test_handle_message_with_existing_issue(self):
+
+        handle_message(self.simplemsg)
+
+        self.assertEquals(1, self.sla.issue_set.all().count())
+
+        issue = self.sla.issue_set.all()[0]
+
+        self.simplemsg.replace_header('subject', "Re: %s" % issue.issue_id)
+
+        handle_message(self.simplemsg)
+
+        self.assertEquals(1, self.sla.issue_set.all().count())
+
+        self.assertEquals(1, issue.comments.all().count())

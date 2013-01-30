@@ -41,4 +41,11 @@ $(document).ready(function() {
         e.preventDefault();
         e.stopPropagation();
       })
+
+      $("body").on("click", ".toggle", function(e) {
+          $(e.target).parents(".viewlet").toggleClass("expanded");
+          $(e.target).parents("h2").nextAll().toggle("slow");
+
+          e.preventDefault();
+        });
   });

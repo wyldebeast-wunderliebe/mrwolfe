@@ -1,5 +1,8 @@
-<div class="viewlet well" id="history">
-  <h2>History</h2>
+<div class="viewlet well expanded" id="history">
+  <h2>History
+    <a class="toggle expand" href="#">▼</a>
+    <a class="toggle collapse" href="#">▲</a>
+  </h2>
   {% for status in view.status_history %}
   <div class="statusupdate">
     <span class="status">{{ status.name }}</span> - <span>{{ status.date }}</span>

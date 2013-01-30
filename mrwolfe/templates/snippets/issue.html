@@ -3,4 +3,5 @@
   <a href="{% url view_issue object.pk %}">
     {{ issue }}
   </a>
+  <time>{{ issue.created }} | status: {{ issue.status }} | resolve within: {{ issue.time_to_resolve }}</time>
 </li>

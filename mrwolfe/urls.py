@@ -5,7 +5,8 @@ from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from views.index import IndexView, AdminView
-from views.issue import IssueCreate, IssueEdit, IssueView, IssueAssigneeJSONEdit
+from views.issue import IssueCreate, IssueEdit, IssueView, \
+    IssueAssigneeJSONEdit, IssueHistoryView
 from views.service import ServiceJSONCreate, ServiceJSONEdit, \
     ServiceJSONDelete, ServiceJSONSetDefault
 from views.rule import RuleJSONCreate, RuleJSONEdit, RuleJSONDelete
@@ -47,6 +48,9 @@ urlpatterns = patterns('',
                        url(r'^change_assignee/(?P<pk>[\d]+)$', 
                            IssueAssigneeJSONEdit.as_view(),
                            name="change_assignee"),
+                       url(r'^issue_history/(?P<pk>[\d]+)$', 
+                           IssueHistoryView.as_view(),
+                           name="issue_history"),
 
                        # Service
                        #

@@ -67,7 +67,7 @@ li.editable:hover {
 }
 
 .critical {
-    color: #ff0000;
+    color: #B94A48;
 }
 
 .warning {
@@ -76,4 +76,12 @@ li.editable:hover {
 
 .default {
     text-decoration: underline;
+}
+
+.label-critical {
+    background-color: #B94A48 !important;
+}
+
+.label-normal {
+    background-color: #3A87AD !important;
 }

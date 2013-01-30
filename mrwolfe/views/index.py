@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.views.generic import TemplateView
 from mrwolfe.models.sla import SLA
 from mrwolfe.models.mailqueue import MailQueue
@@ -20,12 +21,13 @@ class IndexView(TemplateView):
 
     def list_my_issues(self):
 
-        return Issue.objects.filter(assignee=self.request.user)
+        return Issue.objects.filter(assignee=self.request.user). \
+            exclude(status=settings.ISSUE_STATUS_CLOSED)
 
     def list_unassigned_issues(self):
 
-        return Issue.objects.filter(assignee__isnull=True)
-
+        return Issue.objects.filter(assignee__isnull=True). \
+            exclude(status=settings.ISSUE_STATUS_CLOSED)
         
 class AdminView(IndexView):
 

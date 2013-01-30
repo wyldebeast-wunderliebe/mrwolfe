@@ -3,22 +3,27 @@
 {% block tools %}
 <div id="tools" class="btn-toolbar">
 
-  {% include "status_control.html" %}
-  {% include "assignee_control.html" %}
-  <a href="{% url edit_issue object.pk %}" class="btn"><i class="icon-edit"></i> Edit</a>
+  {% include "controls/status_control.html" %}
+  {% include "controls/assignee_control.html" %}
+  <a href="{% url edit_issue object.pk %}" class="btn">
+    <i class="icon-edit"></i> Edit
+  </a>
 
 </div>
 {% endblock %}
 
 {% block content %}
 
-<h2>{{ object.title }}</h2>
+<h2>
+  <span class="label label-{{ issue.urgency }}">{{ issue.urgency }}</span>
+  {{ object.title }}
+</h2>
 
 <dl>
   <dt>SLA</dt><dd>{{ object.sla }}</dd>
   <dt>Service</dt><dd>{{ object.service }}</dd>
   <dt>Created</dt><dd>{{ object.created }}</dd>
-  {% if object.is_open %}
+  {% if not object.dateclosed %}
   <dt>Deadline</dt><dd>{{ object.deadline|default:"-" }}</dd>
   <dt>Time to resolve</dt><dd>{{ object.time_to_resolve|default:"-" }}</dd>
   {% else %}
@@ -42,16 +47,6 @@
 </div>
 {% endif %}
 
-<div class="viewlet well">
-  <h2>History</h2>
-  {% for status in view.status_history %}
-  <div class="statusupdate">
-    <span class="status">{{ status.name }}</span> - <span>{{ status.date }}</span>
-    <div class="comment">
-      {{ status.comment }}
-    </div>
-  </div>
-  {% endfor %}  
-</div>
+{% include "snippets/history.html" %}
 
 {% endblock %}

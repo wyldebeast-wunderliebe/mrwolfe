@@ -22,13 +22,15 @@ class Issue(models.Model):
         default=settings.ISSUE_STATUS_DEFAULT,
         choices=settings.ISSUE_STATUS_CHOICES)
     created = models.DateTimeField(auto_now_add=True)
+    email_from = models.EmailField(blank=True, null=True)
 
     class Meta:
         app_label = "mrwolfe"
 
     def __unicode__(self):
 
-        return "%s - %s - %s" % (self.status, self.created, self.text[:50])
+        return "%s: %s - %s - %s" % (self.issue_id,
+                                     self.status, self.created, self.text[:50])
 
     @property
     def issue_id(self):
@@ -40,16 +42,31 @@ class Issue(models.Model):
 
         """ (created + hours of service) - now """
         
+        now = datetime.now()
+
         if self.deadline:
-            return time.strftime("%H:%M", 
-                                 time.gmtime((self.deadline - \
-                                                  datetime.now()).seconds))
+
+            if self.deadline < now:
+
+                return time.strftime("%H:%M late", 
+                                     time.gmtime((now - self.deadline).seconds))
+            else:
+                return time.strftime("%H:%M", 
+                                     time.gmtime((self.deadline - now).seconds))
         else:
             return None
 
     @property
     def raw_time_to_resolve(self):
-        return (self.deadline - datetime.now()).seconds / 3600.0
+
+        now = datetime.now()
+
+        tts = (self.deadline - now).seconds / 3600.0
+
+        if now > self.deadline:
+            tts = -tts
+            
+        return tts
 
     @property
     def deadline(self):
@@ -79,8 +96,6 @@ class Issue(models.Model):
         
         """ How urgent is it..? """
 
-        #import pdb; pdb.set_trace()
-
         tts = self.raw_time_to_resolve
         defcon = "normal"
 
@@ -88,8 +103,6 @@ class Issue(models.Model):
             defcon = "critical"
         elif tts < 2:
             defcon = "warning"
-        elif tts < 4:
-            defcon = "urgent"
 
         return defcon
 

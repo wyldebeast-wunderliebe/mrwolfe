@@ -10,6 +10,7 @@
            target="#status"
            data-toggle="modal"
            data-target="#MyModal"
+           data-pu_callback="mrwolfe.refreshHistory:{{ object.pk }}"
            data-pu_targetbehavior="replace">{{ opt.1 }}</a></li>
     {% endfor %}
   </ul>

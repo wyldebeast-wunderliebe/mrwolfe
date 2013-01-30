@@ -1,5 +1,6 @@
-<li class="issue {{ object.urgency }}">
+<li class="issue">
+  <span class="label label-{{ object.urgency }}">{{ object.urgency }}</span>
   <a href="{% url view_issue object.pk %}">
-    <i class="icon-bell-alt"></i> {{ issue }}
+    {{ issue }}
   </a>
 </li>

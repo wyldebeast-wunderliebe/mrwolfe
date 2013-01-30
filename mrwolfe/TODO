@@ -1,4 +1,4 @@
 * for a given SLA you should be able to add percentages for fixes on services:
   for example: 80% of the issues for service X should be fixed within Y hours.
 * issue state: critical, warning,  normal
-* default service for SLA
+* Fix download URL for attachment to relect date path

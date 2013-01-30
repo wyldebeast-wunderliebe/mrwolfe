@@ -6,6 +6,7 @@ from mrwolfe.models.attachment import Attachment
 from mrwolfe.models.contact import Contact
 from mrwolfe.models.sla import SLA
 from mrwolfe.models.issue import Issue
+from notification import notify
 
 
 ISSUE_SUBJECT_MATCH = re.compile('#([0-9]{8})')
@@ -33,7 +34,7 @@ def handle_message(message):
     from_addr = message['from']
 
     if re.search('<[^>]*>', from_addr):
-        from_addr = re.search('<([^>]*)>', 'Dok <dokter@w20e.com>').groups(0)[0]
+        from_addr = re.search('<([^>]*)>', from_addr).groups(0)[0]
 
     if not Contact.objects.filter(email=from_addr).exists():
         if settings.ALLOW_NON_CONTACTS:
@@ -106,4 +107,11 @@ def handle_message(message):
         att.issue = issue
         att.save()
 
+    notify("issue_received", 
+           {"issue": issue}, 
+           settings.DEFAULT_FROM_ADDR,
+           from_addr)
+
     return True
+
+

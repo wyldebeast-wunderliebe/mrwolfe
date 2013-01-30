@@ -9,7 +9,7 @@ class StatusJSONCreate(JSONCreateView):
 
     model = Status
     form_class = StatusForm
-    success_template_name = "status_control.html"
+    success_template_name = "controls/status_control.html"
 
     def get_context_data(self, **kwargs):
         

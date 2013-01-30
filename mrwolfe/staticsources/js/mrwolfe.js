@@ -1,4 +1,14 @@
-/* TTS js */
+/* Mr.Wolfe JS lib */
+
+var mrwolfe = {};
+
+mrwolfe.refreshHistory = function(issue_id) {
+
+  $.get("/issue_history/" + issue_id,
+        function(data) {
+          $("#history").replaceWith(data);
+        });
+};
 
 
 $(document).ready(function() {

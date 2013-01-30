@@ -27,6 +27,16 @@ class IssueView(BaseView):
         return Operator.objects.all().exclude(user=self.object.assignee)
 
 
+class IssueHistoryView(BaseView):
+
+    model = Issue
+    template_name = "snippets/history.html"
+
+    def status_history(self):
+
+        return Status.objects.filter(issue=self.object)
+
+
 class IssueCreate(CreateView):
 
     model = Issue
@@ -61,7 +71,7 @@ class IssueAssigneeJSONEdit(JSONUpdateView):
 
     model = Issue
     form_class = IssueForm
-    success_template_name = "assignee_control.html"
+    success_template_name = "controls/assignee_control.html"
 
     def get_context_data(self, **kwargs):
         

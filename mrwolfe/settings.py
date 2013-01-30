@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 import os
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-# ('Your Name', 'your_email@example.com'),
+    ('Bob Dobalina', 'bob@evilempire.com'),
 )
 
 MANAGERS = ADMINS
@@ -21,10 +21,6 @@ DATABASES = {
         'PORT': '', # Set to empty string for default. Not used with sqlite3.
     }
 }
-
-if os.environ.get("DJANGO_TEST", "") == "1":
-    DATABASES['default']['ENGINE'] = "django.db.backends.sqlite3"
-    DATABASES['default']['NAME'] = "test"
 
 PROJECT_ROOT = os.path.realpath(os.path.dirname(__file__))
 
@@ -141,13 +137,7 @@ INSTALLED_APPS = (
     'mrwolfe'
 )
 
-# Unit tests
-#TEST_RUNNER = ""
-
 TEST_APPS = ("mrwolfe")
-
-LOCAL_INSTALLED_APPS = ()
-
 
 # Add our own role based backend...
 #
@@ -182,12 +172,7 @@ OPENID_USE_EMAIL_FOR_USERNAME = True
 
 APPEND_SLASH=False
 
-ENV_HEADER_MSG = ""
-
-#FILEUPLOAD_TEMP_DIR = "/var/tmp/fileupload"
-
-# See http://docs.djangoproject.com/en/dev/topics/logging for
-# more details on how to customize your logging configuration.
+# BEGIN logging
 #
 LOGFILE="mrwolfe.log"
 
@@ -236,26 +221,14 @@ LOGGING = {
         }
 }
 
-INSTALLED_APPS = INSTALLED_APPS + LOCAL_INSTALLED_APPS
-
-TINYMCE_JS_URL = STATIC_URL + 'js/tiny_mce/tiny_mce.js'
-TINYMCE_DEFAULT_CONFIG = {'theme': "advanced",
-                          'relative_urls': False,
-                          'theme_advanced_toolbar_location': "top",
-                          'theme_advanced_toolbar_align': "left",
-                          'cleanup_on_startup': True,
-                          'cleanup': True,
-                          'theme_advanced_buttons1': "bold,italic,underline,strikethrough,|,sub,sup,|,justifyleft,justifycenter,justifyright,justifyfull,|,bullist,numlist,|,cleanup,code",
-                          'theme_advanced_buttons2': "",
-                          'theme_advanced_buttons3': "",
-                          'theme_advanced_buttons4': "",
-}
+#
+# END logging
 
 # compressor
 #COMPRESS_ENABLED = True
 
 
-# Mr.Wolfe settings
+# BEGIN Mr.Wolfe settings
 #
 ISSUE_STATUS_CHOICES = (
     ('open', 'Open'),
@@ -276,3 +249,23 @@ MESSAGE_FIELDS = (("subject", "Subject"),
                   ("from", "From"),
                   ("to", "To"),
                   ("text", "Message body"))
+
+NOTIFICATION_MAP = {
+    'issue_received': 'notification/issue_received.html',
+    'issue_closed': 'notification/issue_closed.html',
+}
+
+DEFAULT_FROM_ADDR = "support@evilempire.com"
+
+#
+# END Mr.Wolfe settings
+
+# BEGIN Email settings
+#
+EMAIL_HOST = "smtp.evilempire.com"
+EMAIL_PORT = 25
+EMAIL_HOST_USER = "bobdobalina"
+EMAIL_HOST_PASSWORD = "verySekret" 
+EMAIL_USE_TLS = True
+#
+# END Email settings

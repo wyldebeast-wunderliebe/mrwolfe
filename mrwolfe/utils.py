@@ -94,9 +94,10 @@ def handle_message(message):
         issue.comments.create(comment=body)
     else:
         issue = Issue(title=message['subject'],
-        contact=sender,
-        text=body,
-        sla=sla)
+                      contact=sender,
+                      text=body,
+                      email_from=message['to'],
+                      sla=sla)
 
     if sla and sla.default_service:
         issue.service = sla.default_service
@@ -109,7 +110,7 @@ def handle_message(message):
 
     notify("issue_received", 
            {"issue": issue}, 
-           settings.DEFAULT_FROM_ADDR,
+           issue.email_from,
            from_addr)
 
     return True

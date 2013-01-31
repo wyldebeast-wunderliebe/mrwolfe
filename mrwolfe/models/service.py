@@ -14,7 +14,8 @@ class Service(models.Model):
 
     def __unicode__(self):
 
-        return "%s: %s hours" % (self.priority, self.response_time)
+        return "%s: respond < %s hours, resolve < %s hours" % \
+            (self.priority, self.response_time, self.solution_time)
 
     @property
     def is_default(self):

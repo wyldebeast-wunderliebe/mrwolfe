@@ -19,4 +19,5 @@ class Attachment(models.Model):
 
     @property
     def download_url(self):
-        return os.path.join(settings.MEDIA_URL, self.filename)
+
+        return os.path.join(settings.MEDIA_URL, self._file.name)

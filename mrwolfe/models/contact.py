@@ -1,17 +1,16 @@
 from django.db import models
 from mrwolfe.models.sla import SLA
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User as BaseUser
+from user import User
 
 
-class Contact(models.Model):
+class Contact(User):
 
     """ Represent the customer side of things. Doesn't HAVE to be
-    a vaild user """
+    a valid user for Django """
 
-    user = models.OneToOneField(User, null=True, blank=True)
+    user = models.OneToOneField(BaseUser, null=True, blank=True)
     sla = models.ManyToManyField(SLA)
-    phone = models.CharField(max_length=15, blank=True)
-    email = models.EmailField()
 
     class Meta:
         app_label = "mrwolfe"

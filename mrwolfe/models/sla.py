@@ -14,7 +14,9 @@ class SLA(models.Model):
         app_label = "mrwolfe"
 
     def __unicode__(self):
-        return "%s (%s / %s)" % (self.name, self.start_date, self.end_date)
+        return "%s (%s / %s)" % (self.name, 
+                                 self.start_date.strftime("%d-%m-%Y"),
+                                 self.end_date.strftime("%d-%m-%Y"))
 
     def is_contact(self, contact):
 

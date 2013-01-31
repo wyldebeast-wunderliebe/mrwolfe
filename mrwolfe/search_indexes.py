@@ -3,7 +3,7 @@ from haystack import indexes, site
 from mrwolfe.models import Issue
 
 
-class IssueIndex(indexes.SearchIndex):
+class IssueIndex(indexes.RealTimeSearchIndex):
 
     text = indexes.CharField(document=True, use_template=True,
                              template_name="search/indexes/issue_index.txt")

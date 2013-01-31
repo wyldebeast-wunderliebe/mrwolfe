@@ -27,7 +27,7 @@ def notify(notification_id, context, from_addr, to_addr):
             send_mail(email_message['subject'], 
                       email_message.get_payload(), 
                       email_message['from'],
-                      [email_message['to']],
+                      email_message['to'].split(","),
                       fail_silently=False)
         except:
             LOGGER.exception("Couldn't render template")

@@ -19,6 +19,8 @@ from views.contact import ContactJSONCreate, ContactJSONEdit, \
 from views.mailqueue import MailQueueJSONCreate, MailQueueJSONEdit, \
     MailQueueJSONDelete
 from views.status import StatusJSONCreate
+from haystack.views import SearchView
+from forms.search import SearchForm
 
 
 admin.autodiscover()
@@ -30,8 +32,16 @@ urlpatterns = patterns('',
                        (r'^openid/', include('django_openid_auth.urls')),
                        (r'^logout/$', 'django.contrib.auth.views.logout'),
                        (r'^admin/', include(admin.site.urls)),
-                       (r'^search/', include('haystack.urls')),
 
+                       url(r'^media/(?P<path>.*)$', 
+                           'django.views.static.serve', 
+                           {'document_root': settings.MEDIA_ROOT}),
+
+                       url(r'^search/', 
+                           SearchView(
+                             form_class=SearchForm
+                             ), name='search'),
+                       
                        # Issue
                        #
                        url(r'^create_issue/', 

@@ -1,18 +1,20 @@
 <div class="btn-group" id="assignee">
   <a class="btn dropdown-toggle btn-info" data-toggle="dropdown" href="#">
-    Assignee: <span class="status">{{ object.assignee.get_full_name }}</span> 
+    Assignee: <span class="status">{{ object.assignee|default:"-" }}</span> 
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu">
-    {% for operator in view.list_operators %}
-    <a class="action-inline" 
-       href="{% url change_assignee object.pk %}"
+    {% for user in view.list_users %}
+    <li>
+      <a class="action-inline" 
+       <a href="{% url change_assignee object.pk %}"
        data-pu_actionmethod="POST"
-       data-pu_actiondata="assignee={{ operator.user.pk }}"
+       data-pu_actiondata="assignee={{ user.pk }}"
        target="#assignee"
        data-pu_targetbehavior="replace">
-      {{ operator }}
-    </a>
+        {{ user }}
+      </a>
+    </li>
     {% endfor %}
   </ul>
 </div>

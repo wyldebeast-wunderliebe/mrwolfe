@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 import time
 from django.db import models
-from django.contrib.auth.models import User
+from user import User
 from django.conf import settings
 from sla import SLA
 from service import Service
@@ -29,7 +29,7 @@ class Issue(models.Model):
 
     def __unicode__(self):
 
-        return "%s - %s" % (self.issue_id, self.text[:50])
+        return "%s - %s" % (self.issue_id, self.title[:50])
 
     @property
     def issue_id(self):

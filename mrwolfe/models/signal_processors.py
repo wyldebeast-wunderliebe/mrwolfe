@@ -4,13 +4,20 @@ from django.conf import settings
 from django.core.mail import send_mail
 from issue import Issue
 from status import Status
+from operator import Operator
 from mrwolfe.notification import notify
 
 
 @receiver(post_save, sender=Issue)
 def issue_post_save(sender, instance, **kwargs):
 
-    pass
+    operators = [op.email for op in Operator.objects.all()]
+
+    notify("issue_created", 
+           {"issue": instance},
+           settings.DEFAULT_FROM_ADDR,
+           ",".join(operators))
+
 
 @receiver(post_save, sender=Status)
 def status_post_save(sender, instance, **kwargs):
@@ -22,6 +29,6 @@ def status_post_save(sender, instance, **kwargs):
 
         notify("issue_closed", 
                {"issue": instance.issue, "comment": instance.comment},
-               settings.DEFAULT_FROM_ADDR, 
+               instance.issue.email_from or settings.DEFAULT_FROM_ADDR,
                instance.issue.contact.email)
         

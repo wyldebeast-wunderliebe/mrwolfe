@@ -32,6 +32,11 @@
   <dt>Contact</dt><dd>{{ object.contact }}</dd>
 </dl>
 
+<div class="viewlet well">
+  <h2>Description</h2>
+  {{ object.text }}
+</div>
+
 {% if object.attachment_set.count %}
 <div class="viewlet well">
   <h2>Attachments</h2>

@@ -1,11 +1,11 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User as BaseUser
+from user import User
 
 
-class Operator(models.Model):
+class Operator(User):
 
-    user = models.OneToOneField(User)
-    phone = models.CharField(max_length=15, blank=True)
+    user = models.OneToOneField(BaseUser)
 
     class Meta:
         app_label = "mrwolfe"

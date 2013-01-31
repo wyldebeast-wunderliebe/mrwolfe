@@ -6,6 +6,7 @@ from mrwolfe.models.issue import Issue
 from mrwolfe.models.status import Status
 from mrwolfe.models.sla import SLA
 from mrwolfe.models.operator import Operator
+from mrwolfe.models.user import User
 from mrwolfe.forms.issue import IssueForm
 from base import BaseView
 
@@ -23,9 +24,14 @@ class IssueView(BaseView):
         return (opt for opt in settings.ISSUE_STATUS_CHOICES \
                     if opt[0] != self.object.status)
 
-    def list_operators(self):
+    def list_users(self):
 
-        return Operator.objects.all().exclude(user=self.object.assignee)
+        users = User.objects.all()
+
+        if self.object.assignee:
+            users = users.exclude(id=self.object.assignee.id)
+
+        return users
 
 
 class IssueHistoryView(BaseView):
@@ -89,9 +95,14 @@ class IssueAssigneeJSONEdit(JSONUpdateView):
         
         return ctx    
 
-    def list_operators(self):
+    def list_users(self):
 
-        return Operator.objects.all().exclude(user=self.object.assignee)
+        users = User.objects.all()
+
+        if self.object.assignee:
+            users = users.exclude(id=self.object.assignee.id)
+
+        return users
 
 
 class IssueEdit(UpdateView):

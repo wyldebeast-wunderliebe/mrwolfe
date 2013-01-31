@@ -28,7 +28,12 @@ class IndexView(TemplateView):
 
         return Issue.objects.filter(assignee__isnull=True). \
             exclude(status=settings.ISSUE_STATUS_CLOSED)
+
+    def list_unclosed_issues(self):
+
+        return Issue.objects.all().exclude(status=settings.ISSUE_STATUS_CLOSED)
         
+
 class AdminView(IndexView):
 
     template_name = "admin.html"

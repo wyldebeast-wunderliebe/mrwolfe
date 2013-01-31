@@ -5,13 +5,15 @@
 
 {% block content %}
 
-<div class="viewlet well">
+<div class="viewlet well expanded">
   <h2>Service Level Agreements
     <a href="{% url create_sla_json %}" 
        target="#slas"
        class="btn btn-mini btn-success add-inline">
       <i class="icon-plus"></i> 
     </a>
+    <a class="toggle expand" href="#">▼</a>
+    <a class="toggle collapse" href="#">▲</a>
   </h2>
   <ul id="slas">
     {% for sla in view.list_slas %}
@@ -27,8 +29,10 @@
        class="btn btn-mini btn-success add-inline">
       <i class="icon-plus"></i> 
     </a>
+    <a class="toggle expand" href="#">▼</a>
+    <a class="toggle collapse" href="#">▲</a>
   </h2>
-  <ul id="operators">
+  <ul id="operators" class="hide">
     {% for operator in view.list_operators %}
     {% include "snippets/operator.html" with object=operator %}    
     {% endfor %}
@@ -42,8 +46,10 @@
        class="btn btn-mini btn-success add-inline">
       <i class="icon-plus"></i> 
     </a>
+    <a class="toggle expand" href="#">▼</a>
+    <a class="toggle collapse" href="#">▲</a>
   </h2>
-  <ul id="contacts">
+  <ul id="contacts" class="hide">
     {% for contact in view.list_contacts %}
     {% include "snippets/contact.html" with object=contact %}    
     {% endfor %}
@@ -57,8 +63,10 @@
        class="btn btn-mini btn-success add-inline">
       <i class="icon-plus"></i> 
     </a>
+    <a class="toggle expand" href="#">▼</a>
+    <a class="toggle collapse" href="#">▲</a>
   </h2>
-  <ul id="mailqueues">
+  <ul id="mailqueues" class="hide">
     {% for queue in view.list_mailqueues %}
     {% include "snippets/mailqueue.html" with object=queue %}    
     {% endfor %}

@@ -27,4 +27,16 @@
   </ul>
 </div>
 
+<div class="viewlet well">
+  <h2>All unclosed tickets
+    <a class="toggle expand" href="#">▼</a>
+    <a class="toggle collapse" href="#">▲</a>
+  </h2>
+  <ul class="hide">
+    {% for issue in view.list_unclosed_issues %}
+    {% include "snippets/issue.html" with object=issue %}
+    {% endfor %}
+  </ul>
+</div>
+
 {% endblock %}

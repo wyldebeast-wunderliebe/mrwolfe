@@ -1,5 +1,6 @@
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.conf import settings
+from django.http import HttpResponseRedirect
 from pu_in_content.views.jsonbase import JSONUpdateView
 from mrwolfe.models.issue import Issue
 from mrwolfe.models.status import Status
@@ -45,16 +46,23 @@ class IssueCreate(CreateView):
 
     def get_initial(self):
 
-        initial = super(CreateView, self).get_initial()
+        initial = super(IssueCreate, self).get_initial()
 
         if "sla" in self.request.GET:
             initial["sla"] = self.request.GET["sla"]
 
         return initial
 
+    def post(self, request, *args, **kwargs):
+
+        if self.request.POST.get('submit', '') == "Cancel":
+            return HttpResponseRedirect("/")    
+        else:            
+            return super(IssueCreate, self).post(request, *args, **kwargs)
+
     def get_form(self, form_class):
         
-        form = super(CreateView, self).get_form(form_class)
+        form = super(IssueCreate, self).get_form(form_class)
 
         if "sla" in self.request.GET:
 
@@ -96,6 +104,12 @@ class IssueEdit(UpdateView):
 
         return "/?message=Issue+gewijzigd&status=0"
 
+    def post(self, request, *args, **kwargs):
+
+        if self.request.POST.get('submit', '') == "Cancel":
+            return HttpResponseRedirect("/")    
+        else:            
+            return super(IssueCreate, self).post(request, *args, **kwargs)
 
 class IssueDelete(DeleteView):
 

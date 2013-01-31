@@ -48,4 +48,14 @@ $(document).ready(function() {
 
           e.preventDefault();
         });
+
+    // Set calendar defaults
+    $.datepicker.setDefaults({dateFormat: "dd-mm-yy"});
+
+    $("input.date").datepicker();
+    
+    // init datepickers in modal
+    $(document).on("show", "#MyModal", function(e) {
+        $("#MyModal").find("input.date").datepicker();
+      });
   });

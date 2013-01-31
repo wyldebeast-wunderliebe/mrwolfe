@@ -30,6 +30,7 @@ urlpatterns = patterns('',
                        (r'^openid/', include('django_openid_auth.urls')),
                        (r'^logout/$', 'django.contrib.auth.views.logout'),
                        (r'^admin/', include(admin.site.urls)),
+                       (r'^search/', include('haystack.urls')),
 
                        # Issue
                        #

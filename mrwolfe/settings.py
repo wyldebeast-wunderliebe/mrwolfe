@@ -132,6 +132,7 @@ INSTALLED_APPS = (
     'django_openid_auth',
     'django_extensions',
     'compressor',
+    'haystack',
     'pu_in_core',
     'pu_in_content',
     'mrwolfe'
@@ -269,3 +270,13 @@ EMAIL_HOST_PASSWORD = "verySekret"
 EMAIL_USE_TLS = True
 #
 # END Email settings
+
+
+# BEGIN search (Haystack)
+#
+HAYSTACK_SITECONF = "mrwolfe.init_haystack"
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 15
+HAYSTACK_SEARCH_ENGINE = 'whoosh'
+HAYSTACK_WHOOSH_PATH = os.path.join(os.path.dirname(__file__), 'whoosh_index')
+#
+# END search

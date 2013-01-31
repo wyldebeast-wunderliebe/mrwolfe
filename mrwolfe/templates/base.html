@@ -13,17 +13,22 @@
 
     {% compress css %}
     <link rel="stylesheet" href="{{STATIC_URL}}css/mrwolfe.css" type="text/css">
+    <link rel="stylesheet" 
+          href="{{STATIC_URL}}jquery/css/jquery-ui-1.10.0.custom.css" 
+          type="text/css">
     <link rel="stylesheet" href="{{STATIC_URL}}bootstrap/css/bootstrap.min.css" 
           type="text/css">
-    <link rel="stylesheet" href="{{STATIC_URL}}font-awesome/css/font-awesome.css" 
+    <link rel="stylesheet" 
+          href="{{STATIC_URL}}font-awesome/css/font-awesome.css" 
           type="text/css">
     {% endcompress %}
 
-    <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+    {% compress js %}
+    <script src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
+    <script src="{{STATIC_URL}}jquery/js/jquery-ui-1.10.0.custom.js"></script>
     <script type="text/javascript" 
             src="{{STATIC_URL}}bootstrap/js/bootstrap.min.js">
     </script> 
-    {% compress js %}
     <script src="{{STATIC_URL}}js/mrwolfe.js"></script>    
     <script src="{{STATIC_URL}}js/pu_in_core.js" 
             defer="defer"></script>
@@ -56,10 +61,15 @@
           <li><a href="/logout"><i class="icon-signout"></i> Afmelden</a></li>
           <li><a href="/config"><i class="icon-wrench"></i> Admin</a></li>
         </ul>
-        <form class="navbar-form pull-left" action="search">
-          <input type="text" name="qry" class="span2" 
+        <form class="navbar-form pull-left" action="/search/"
+              method="GET">
+          {% csrf_token %}
+          <input type="text" name="q" class="span2" 
                  placeholder="Search issues">
-          <button type="submit" class="btn">Search</button>
+          <input type="hidden" name="models" value="mrwolfe.issue"/>
+          <button type="submit" class="btn">
+            <i class="icon-search"></i>
+          </button>
         </form>
       </div>
     </div>

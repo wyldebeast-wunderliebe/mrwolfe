@@ -50,6 +50,7 @@
     {{ request.GET.message }}
   </div>
 
+  {% block container %}
   <div class="container">
 
     <div class="navbar navbar-inverse">
@@ -89,6 +90,7 @@
     </div>
     
   </div>
+  {% endblock %}
 
   <div class="modal hide fade" id="MyModal">
     <div class="modal-header">

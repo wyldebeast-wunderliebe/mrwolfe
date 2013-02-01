@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block container %}
+
+<div class="well center">
+  <form action="/login" method="POST">
+    {% csrf_token %}
+  
+    {{ form.as_p }}
+  
+    <input class="btn" type="submit" name="change" value="Login"/>
+  </form>
+</div>  
+
+{% endblock %}
+

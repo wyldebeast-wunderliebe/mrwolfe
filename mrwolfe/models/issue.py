@@ -95,7 +95,11 @@ class Issue(models.Model):
         
         """ How urgent is it..? """
 
-        tts = self.raw_time_to_resolve
+        try:
+            tts = self.raw_time_to_resolve
+        except:
+            tts = 666
+
         defcon = "normal"
 
         if tts < 1:

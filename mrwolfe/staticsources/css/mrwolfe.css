@@ -58,6 +58,10 @@ li.editable:hover .controls {
     opacity: 1.0;
 }
 
+.controls {
+    margin-left: 40px;
+}
+
 li.editable:hover {
     text-decoration: underline;
 }

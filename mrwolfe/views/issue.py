@@ -72,7 +72,7 @@ class IssueCreate(CreateView):
 
         if "sla" in self.request.GET:
 
-            form.fields["priority"].queryset = SLA.objects.get(pk=self.request.GET["sla"]).service_set.all()
+            form.fields["service"].queryset = SLA.objects.get(pk=self.request.GET["sla"]).service_set.all()
 
         return form
 
@@ -120,7 +120,7 @@ class IssueEdit(UpdateView):
         if self.request.POST.get('submit', '') == "Cancel":
             return HttpResponseRedirect("/")    
         else:            
-            return super(IssueCreate, self).post(request, *args, **kwargs)
+            return super(IssueEdit, self).post(request, *args, **kwargs)
 
 class IssueDelete(DeleteView):
 

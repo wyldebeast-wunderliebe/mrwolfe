@@ -30,14 +30,18 @@ class SLAView(DetailView):
 
         return Rule.objects.filter(sla=self.object)
 
-    def nr_of_issues_in_time(self):
+    def nr_of_issues(self):
 
-        return len([i for i in self.object.issue_set where i.in_time])
+        return self.object.issue_set.count()
 
-    def perc_of_issues_in_time(self):
+    def nr_of_issues_late(self):
 
-        return (len([i for i in self.object.issue_set where i.in_time]) / \
-                    self.object.issue_set.count()) * 100
+        return len([i for i in self.object.issue_set.all() if not i.in_time])
+
+    def perc_of_issues_late(self):
+
+        return "%.1f" % ((self.nr_of_issues_late() / \
+                             float(self.object.issue_set.count())) * 100)
 
 
 class SLACreate(CreateView):

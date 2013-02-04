@@ -16,25 +16,18 @@
   </div>
 </h2>
 
-<dl>
-  <dt>Start date</dt><dd>{{ object.start_date }}</dd>
-  <dt>End date</dt><dd>{{ object.end_date }}</dd>
-</dl>
-
-<div class="summary-report well">
-  <table>
-    <thead>
-      <th># Issues</th>
-      <th># Issues resolved in time</th>
-      <th>% Issues resolved in time</th>
-    </thead>
-    <tbody>
-      <td>{{ object.issue_set }}</td>
-      <td>{{ view.nr_of_issues_on_time }}</td>
-      <td>{{ view.perc_of_issues_on_time }}</td>
-    </tbody>
-  </table>
-</div>
+<table class="table well">
+  <thead>
+    <th># Issues</th>
+    <th># Issues late</th>
+    <th>% Issues late</th>
+  </thead>
+  <tbody>
+    <td>{{ view.nr_of_issues }}</td>
+    <td>{{ view.nr_of_issues_late }}</td>
+    <td>{{ view.perc_of_issues_late }}%</td>
+  </tbody>
+</table>
 
 <div class="viewlet well">
   <h2>Services 

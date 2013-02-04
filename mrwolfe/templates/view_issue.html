@@ -20,7 +20,7 @@
 </h2>
 
 <dl>
-  <dt>SLA</dt><dd>{{ object.sla }}</dd>
+  <dt>SLA</dt><dd><a href="{% url view_sla object.sla.pk %}">{{ object.sla }}</a></dd>
   <dt>Service</dt><dd>{{ object.service }}</dd>
   <dt>Created</dt><dd>{{ object.created }}</dd>
   {% if not object.dateclosed %}

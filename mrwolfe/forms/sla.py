@@ -14,6 +14,3 @@ class SLAForm(forms.ModelForm):
                 attrs={'class': 'date'},
                 format="%d-%m-%Y"
                 )}
-
-
-        

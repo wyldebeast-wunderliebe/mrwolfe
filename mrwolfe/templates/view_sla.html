@@ -21,6 +21,21 @@
   <dt>End date</dt><dd>{{ object.end_date }}</dd>
 </dl>
 
+<div class="summary-report well">
+  <table>
+    <thead>
+      <th># Issues</th>
+      <th># Issues resolved in time</th>
+      <th>% Issues resolved in time</th>
+    </thead>
+    <tbody>
+      <td>{{ object.issue_set }}</td>
+      <td>{{ view.nr_of_issues_on_time }}</td>
+      <td>{{ view.perc_of_issues_on_time }}</td>
+    </tbody>
+  </table>
+</div>
+
 <div class="viewlet well">
   <h2>Services 
     <a class="add-inline btn btn-success btn-mini"

@@ -16,7 +16,7 @@ def issue_post_save(sender, instance, **kwargs):
     notify("issue_created", 
            {"issue": instance},
            settings.DEFAULT_FROM_ADDR,
-           ",".join(operators))
+           ", ".join(operators))
 
 
 @receiver(post_save, sender=Status)

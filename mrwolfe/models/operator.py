@@ -12,4 +12,4 @@ class Operator(User):
 
     def __unicode__(self):
         
-        return self.user.get_full_name()
+        return self.user.get_full_name() or self.email

@@ -105,3 +105,16 @@ class Issue(models.Model):
 
         return defcon
 
+    @property
+    def in_time(self):
+
+        _in_time = True
+
+        if self.deadline:
+            
+            compare_with = self.dateclosed or datetime.now()
+
+            if compare_with > self.deadline:
+                _in_time = False
+
+        return _in_time

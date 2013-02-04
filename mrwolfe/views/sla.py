@@ -30,13 +30,14 @@ class SLAView(DetailView):
 
         return Rule.objects.filter(sla=self.object)
 
-    def list_my_issues(self):
+    def nr_of_issues_in_time(self):
 
-        return Issue.objects.filter(sla=self.object)
+        return len([i for i in self.object.issue_set where i.in_time])
 
-    def list_open_issues(self):
+    def perc_of_issues_in_time(self):
 
-        return Issue.objects.filter(sla=self.object)
+        return (len([i for i in self.object.issue_set where i.in_time]) / \
+                    self.object.issue_set.count()) * 100
 
 
 class SLACreate(CreateView):
@@ -44,6 +45,14 @@ class SLACreate(CreateView):
     model = SLA
     form_class = SLAForm
     template_name = "create_sla.html"
+
+    def get_form(self, form_class):
+
+        form = super(SLAJSONEdit, self).get_form(form_class)
+
+        form.fields['default_service'].queryset = self.object.service_set
+
+        return form
 
     def get_success_url(self):
 
@@ -56,12 +65,28 @@ class SLAJSONCreate(JSONCreateView):
     form_class = SLAForm    
     success_template_name = "snippets/sla.html"
 
+    def get_form(self, form_class):
+
+        form = super(SLAJSONEdit, self).get_form(form_class)
+
+        form.fields['default_service'].queryset = self.object.service_set
+
+        return form
+
 
 class SLAEdit(UpdateView):
 
     model = SLA
     form_class = SLAForm
     template_name = "edit_sla.html"
+
+    def get_form(self, form_class):
+
+        form = super(SLAJSONEdit, self).get_form(form_class)
+
+        form.fields['default_service'].queryset = self.object.service_set
+
+        return form
 
     def get_success_url(self):
 
@@ -73,6 +98,14 @@ class SLAJSONEdit(JSONUpdateView):
     model = SLA
     form_class = SLAForm
     success_template_name = "snippets/sla.html"
+
+    def get_form(self, form_class):
+
+        form = super(SLAJSONEdit, self).get_form(form_class)
+
+        form.fields['default_service'].queryset = self.object.service_set
+
+        return form
 
 
 class SLADelete(DeleteView):

@@ -35,7 +35,7 @@ TIME_ZONE = 'Europe/Amsterdam'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-UK'
+LANGUAGE_CODE = 'nl-NL'
 
 DATE_FORMAT = 'j F Y'
 SYSTEM_DATE_FORMAT = 'd-m-Y'
@@ -125,12 +125,10 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'django.contrib.admin',
-    'django_openid_auth',
     'django_extensions',
     'compressor',
     'haystack',
@@ -232,6 +230,7 @@ MESSAGE_FIELDS = (("subject", "Subject"),
 NOTIFICATION_MAP = {
     'issue_received': 'notification/issue_received.html',
     'issue_closed': 'notification/issue_closed.html',
+    'issue_created': 'notification/issue_created.html',
 }
 
 DEFAULT_FROM_ADDR = "support@evilempire.com"

@@ -1,2 +1,4 @@
 * for a given SLA you should be able to add percentages for fixes on services:
   for example: 80% of the issues for service X should be fixed within Y hours.
+* get js datepicker format from settings, so as to keep in sync with 
+  formatter for incoming data

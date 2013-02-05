@@ -40,8 +40,11 @@ class SLAView(DetailView):
 
     def perc_of_issues_late(self):
 
-        return "%.1f" % ((self.nr_of_issues_late() / \
-                             float(self.object.issue_set.count())) * 100)
+        try:
+            return "%.1f" % ((self.nr_of_issues_late() / \
+                                  float(self.object.issue_set.count())) * 100)
+        except:
+            return "-"
 
 
 class SLACreate(CreateView):

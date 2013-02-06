@@ -12,6 +12,10 @@
      data-pu_actionmethod="POST" data-pu_protect="true">
     <i class="icon-copy"></i> Clone
   </a>
+  <a href="{% url create_comment_json object.pk %}" class="btn add-inline"
+     target="#comments">
+    <i class="icon-comment"></i> Add comment
+  </a>  
 </div>
 {% endblock %}
 
@@ -58,20 +62,15 @@
 </div>
 {% endif %}
 
-{% if object.comments.count %}
-<div class="viewlet well expanded">
+<div class="viewlet well expanded" id="comments">
   <h2>Comments
     <a class="toggle expand" href="#">▼</a>
     <a class="toggle collapse" href="#">▲</a>
   </h2>
   {% for comment in object.comments.all %}
-  <div class="comment">
-    {{ comment.comment }}
-    <time>{{ comment.date }}</time>
-  </div>
+  {% include "snippets/comment.html" with object=comment }%
   {% endfor %}
 </div>
-{% endif %}
 
 {% include "snippets/history.html" %}
 

@@ -1,6 +1,5 @@
 import os
 from markdown import markdown
-import pkg_resources
 from django.views.generic.base import TemplateView
 from django.conf import settings
 from django.utils.safestring import mark_safe

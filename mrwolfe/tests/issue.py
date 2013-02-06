@@ -3,9 +3,7 @@ from django.test.testcases import TestCase
 from django.conf import settings
 from mrwolfe.models.issue import Issue
 from mrwolfe.models.sla import SLA
-from mrwolfe.models.service import Service
 from mrwolfe.models.contact import Contact
-from mrwolfe.models.status import Status
 
 
 class IssueTest(TestCase):

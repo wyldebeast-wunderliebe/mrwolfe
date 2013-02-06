@@ -227,6 +227,8 @@ MESSAGE_FIELDS = (("subject", "Subject"),
                   ("to", "To"),
                   ("text", "Message body"))
 
+# Override notification templates if you wish
+#
 NOTIFICATION_MAP = {
     'issue_received': 'notification/issue_received.html',
     'issue_closed': 'notification/issue_closed.html',

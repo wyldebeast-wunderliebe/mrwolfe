@@ -7,7 +7,6 @@ from pu_in_content.views.jsonbase import JSONUpdateView, JSONDetailView
 from mrwolfe.models.issue import Issue
 from mrwolfe.models.status import Status
 from mrwolfe.models.sla import SLA
-from mrwolfe.models.operator import Operator
 from mrwolfe.models.user import User
 from mrwolfe.forms.issue import IssueForm
 from base import BaseView
@@ -143,11 +142,3 @@ class IssueEdit(UpdateView):
             return HttpResponseRedirect("/")    
         else:            
             return super(IssueEdit, self).post(request, *args, **kwargs)
-
-class IssueDelete(DeleteView):
-
-    model = Issue
-
-    def get_success_url(self):
-
-        return "/?message=Issue+verwijderd&status=0"

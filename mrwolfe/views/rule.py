@@ -1,4 +1,3 @@
-from django import forms
 from pu_in_content.views.jsonbase import JSONCreateView, JSONUpdateView, \
     JSONDeleteView
 from mrwolfe.models.rule import Rule

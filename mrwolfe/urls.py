@@ -16,6 +16,7 @@ from views.operator import OperatorJSONCreate, OperatorJSONEdit, \
     OperatorJSONDelete
 from views.contact import ContactJSONCreate, ContactJSONEdit, \
     ContactJSONDelete
+from views.comment import CommentJSONCreate
 from views.mailqueue import MailQueueJSONCreate, MailQueueJSONEdit, \
     MailQueueJSONDelete
 from views.status import StatusJSONCreate
@@ -156,6 +157,12 @@ urlpatterns = patterns('',
                        url(r'^delete_mailqueue_json/(?P<pk>[\d]+)$', 
                            login_required(MailQueueJSONDelete.as_view()),
                            name="delete_mailqueue_json"),
+
+                       # Comment
+                       #
+                       url(r'^create_comment/(?P<issue_pk>[\d]+)$', 
+                           login_required(CommentJSONCreate.as_view()),
+                           name="create_comment_json"),
 )
 
 urlpatterns += patterns('',

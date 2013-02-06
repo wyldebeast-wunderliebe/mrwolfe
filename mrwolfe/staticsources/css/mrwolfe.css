@@ -160,4 +160,5 @@ time {
     width: 90%;
     top: 50px;
     left: 20px;
+    z-index: 666;
 }

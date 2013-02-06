@@ -8,7 +8,8 @@ CHANGES = "None"
 VERSION = "1.0.0"
 
 REQUIRES = ['pu_in_core', 'pu_in_content', 'django-compressor',
-            'django-attachments', 'django-haystack', 'whoosh'
+            'django-attachments', 'django-haystack', 'whoosh',
+            'markdown'
             ]
 
 setup(name='mrwolfe',

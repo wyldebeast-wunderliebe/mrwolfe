@@ -1,11 +1,13 @@
 w20e support system
 ===================
 
-This system works with the assumption that issues may be posted only,
-if there is an SLA for the sender. Issues are sent over email, or
-added ttw by authenticated users that are valid contacts for a given
-customer, that by itself has one or more SLA's in the system. No SLA,
-no issue. Simple as that.
+Handling support issues is an art! Ehh, well, it's actually pretty
+simple. Mr. Wolfe is based on the asumption that you always have a
+Service Level Agreement with for a given application that you expect
+issues for, and a fixed number of people that can send issues for this
+SLA.  Issues are sent over email by valid contacts, or added ttw by
+authenticated users that are valid contacts. No SLA, no issue. Simple
+as that.
 
 
 Issues

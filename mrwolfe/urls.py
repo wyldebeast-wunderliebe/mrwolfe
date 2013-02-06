@@ -20,6 +20,7 @@ from views.mailqueue import MailQueueJSONCreate, MailQueueJSONEdit, \
     MailQueueJSONDelete
 from views.status import StatusJSONCreate
 from views.login import LoginView
+from views.help import HelpView
 from haystack.views import SearchView
 from forms.search import SearchForm
 
@@ -36,6 +37,7 @@ urlpatterns = patterns('',
 
                        (r'^$', login_required(IndexView.as_view())),
                        (r'^config$', login_required(AdminView.as_view())),
+                       (r'^help$', login_required(HelpView.as_view())),
                        (r'^admin/', include(admin.site.urls)),
 
                        url(r'^media/(?P<path>.*)$', 

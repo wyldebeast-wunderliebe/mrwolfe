@@ -18,6 +18,6 @@ class Contact(User):
     def __unicode__(self):
 
         try:
-            return self.user.get_full_name()
+            return self.user.get_full_name() or self.email
         except:
             return self.email

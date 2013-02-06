@@ -3,19 +3,20 @@ import os
 from setuptools import setup, find_packages
 
 here = os.path.abspath(os.path.dirname(__file__))
-README = "Nott'n"
+README = open(os.path.join(here, 'README.md')).read()
+
 CHANGES = "None"
 VERSION = "1.0.0"
 
 REQUIRES = ['pu_in_core', 'pu_in_content', 'django-compressor',
             'django-attachments', 'django-haystack', 'whoosh',
-            'markdown'
+            'markdown', 'html2text'
             ]
 
 setup(name='mrwolfe',
       version=VERSION,
       description='Django Issue tracker & support system',
-      long_description=README + '\n\n' +  CHANGES,
+      long_description=README,
       classifiers=[
         "Development Status :: 3 - Alpha",
         "Framework :: Django",

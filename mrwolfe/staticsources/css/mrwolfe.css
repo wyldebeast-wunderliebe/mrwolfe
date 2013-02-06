@@ -148,3 +148,16 @@ time {
 .btn.disabled {
     cursor: wait !important;
 }
+
+/* alerts */
+.container {
+    position: relative;
+}
+
+#alerts {
+    position: absolute;
+    min-height: 30px;
+    width: 90%;
+    top: 50px;
+    left: 20px;
+}

@@ -11,6 +11,17 @@ mrwolfe.refreshHistory = function(issue_id) {
 };
 
 
+/**
+ * Expand viewlet after add and remove any alerts.
+ * @param sender Originating element of action
+ */
+mrwolfe.afterAdd = function(sender) {
+
+  sender.parents(".viewlet").find(".toggle.expand").click();
+  sender.parents(".viewlet").find(".alert").hide();
+};
+
+
 $(document).ready(function() {
 
     // Setup AJAX calls for CSRF

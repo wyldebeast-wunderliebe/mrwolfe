@@ -1,3 +1,5 @@
+from markdown import markdown
+from django.utils.safestring import mark_safe
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.conf import settings
 from django.http import HttpResponseRedirect
@@ -32,6 +34,11 @@ class IssueView(BaseView):
             users = users.exclude(id=self.object.assignee.id)
 
         return users
+
+    @property
+    def text(self):
+        
+        return mark_safe(markdown(self.object.text))
 
 
 class IssueHistoryView(BaseView):

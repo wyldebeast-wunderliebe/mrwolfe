@@ -1,5 +1,6 @@
 import re
 import mimetypes
+from html2text import html2text
 from django.conf import settings
 from django.core.files.base import ContentFile
 from mrwolfe.models.attachment import Attachment
@@ -69,6 +70,8 @@ def handle_message(message):
         #
         if part.get_content_type() == "text/plain":
             body.append(part.get_payload(decode=True))
+        elif part.get_content_type() == "text/html":
+            body.append(html2text(part.get_payload(decode=True)))
         else:
             filename = part.get_filename()
             if not filename:

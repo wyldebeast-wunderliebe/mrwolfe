@@ -122,3 +122,18 @@ class Issue(models.Model):
                 _in_time = False
 
         return _in_time
+
+    def clone(self):
+
+        """ Clone into new issue """
+
+        return Issue.objects.create(
+            sla=self.sla,
+            service=self.service,
+            title=self.title + " [clone]",
+            text=self.text,
+            assignee=self.assignee,
+            contact=self.contact,
+            status=self.status,
+            email_from=self.email_from
+            )

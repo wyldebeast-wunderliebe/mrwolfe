@@ -1,7 +1,7 @@
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.conf import settings
 from django.http import HttpResponseRedirect
-from pu_in_content.views.jsonbase import JSONUpdateView
+from pu_in_content.views.jsonbase import JSONUpdateView, JSONDetailView
 from mrwolfe.models.issue import Issue
 from mrwolfe.models.status import Status
 from mrwolfe.models.sla import SLA
@@ -103,6 +103,21 @@ class IssueAssigneeJSONEdit(JSONUpdateView):
             users = users.exclude(id=self.object.assignee.id)
 
         return users
+
+
+class IssueJSONClone(JSONDetailView):
+
+    model = Issue
+    
+    def post(self, request, *args, **kwargs):
+
+        self.object = self.get_object()
+        clone = self.object.clone()
+
+        context = {"status": 0,
+                   "message": "Your issue has been cloned to %s" % clone.issue_id}
+
+        return self.render_to_response(context)
 
 
 class IssueEdit(UpdateView):

@@ -8,7 +8,10 @@
   <a href="{% url edit_issue object.pk %}" class="btn">
     <i class="icon-edit"></i> Edit
   </a>
-
+  <a href="{% url clone_issue object.pk %}" class="btn action-inline"
+     data-pu_actionmethod="POST" data-pu_protect="true">
+    <i class="icon-copy"></i> Clone
+  </a>
 </div>
 {% endblock %}
 
@@ -16,11 +19,14 @@
 
 <h2>
   <span class="label label-{{ issue.urgency }}">{{ issue.urgency }}</span>
-  {{ object.title }}
+  {{ object.issue_id }} {{ object.title }}
 </h2>
 
 <dl>
-  <dt>SLA</dt><dd><a href="{% url view_sla object.sla.pk %}">{{ object.sla }}</a></dd>
+  {% if object.sla %}
+  <dt>SLA</dt>
+  <dd><a href="{% url view_sla object.sla.pk %}">{{ object.sla }}</a></dd>
+  {% endif %}
   <dt>Service</dt><dd>{{ object.service }}</dd>
   <dt>Created</dt><dd>{{ object.created }}</dd>
   {% if not object.dateclosed %}

@@ -144,3 +144,7 @@ time {
 .modal-header {
     min-height: 20px;
 }
+
+.btn.disabled {
+    cursor: wait !important;
+}

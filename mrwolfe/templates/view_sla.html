@@ -30,6 +30,21 @@
 </table>
 
 <div class="viewlet well">
+  <h2>Contacts
+  </h2>
+  
+  {% if not view.list_contacts %}
+  <div class="alert warning">No contacts defined yet!</div>
+  {% endif %}
+  
+  <ul id="contacts">
+    {% for contact in view.list_contacts %}
+    {% include "snippets/contact.html" with object=contact %}
+    {% endfor %}
+  </ul>
+</div>
+
+<div class="viewlet well">
   <h2>Services 
     <a class="add-inline btn btn-success btn-mini"
        target="#services"

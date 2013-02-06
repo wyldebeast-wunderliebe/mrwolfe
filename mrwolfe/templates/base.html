@@ -41,15 +41,6 @@
 
   {% csrf_token %}
 
-  <div class="alert 
-              {% if request.GET.status == "0" %}alert-success{% endif %}
-              {% if request.GET.status == "-1" %}alert-error{% endif %}
-              {% if not request.GET.message %}hide{% endif %}
-              " id="message">
-    <button class="close" data-dismiss="alert">×</button>
-    {{ request.GET.message }}
-  </div>
-
   {% block container %}
   <div class="container">
 
@@ -74,6 +65,15 @@
           </button>
         </form>
       </div>
+    </div>
+
+    <div class="alert 
+                {% if request.GET.status == "0" %}alert-success{% endif %}
+                {% if request.GET.status == "-1" %}alert-error{% endif %}
+                {% if not request.GET.message %}hide{% endif %}
+              " id="alerts">
+      <button class="close" data-dismiss="alert">×</button>
+      <span class="alert-body">{{ request.GET.message }}</span>
     </div>
 
     <div class="btn-toolbar" id="tools">

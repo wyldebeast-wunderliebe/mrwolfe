@@ -12,11 +12,20 @@ def notify(notification_id, context, from_addr, to_addr):
 
     """ Send out notification. """
 
+    if not to_addr:
+        LOGGER.error("No 'to' address set; bye now")
+        return 
+
     template = settings.NOTIFICATION_MAP.get(notification_id, 
                                              "notification/%s.html" % \
                                                  notification_id)
 
-    context.update({"from": from_addr, "to": to_addr})
+    context.update({"from": from_addr or settings.DEFAULT_FROM_ADDR, 
+                    "to": to_addr})
+
+    if not template:
+        LOGGER.error("No template found for %s" % notification_id)
+        return
 
     try:
         message = render_to_string(template, context)

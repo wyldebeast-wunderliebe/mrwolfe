@@ -28,7 +28,7 @@ def notify(notification_id, context, from_addr, to_addr):
         return
 
     try:
-        message = render_to_string(template, context).decode("ascii")
+        message = str(render_to_string(template, context))
         
         email_message = Parser().parsestr(message)
 

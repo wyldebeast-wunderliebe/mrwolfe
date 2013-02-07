@@ -22,6 +22,9 @@ def notify(notification_id, context, from_addr, to_addr):
         message = render_to_string(template, context)
         
         email_message = Parser().parsestr(message)
+
+        LOGGER.debug("Sending out notification %s to %s" % \ 
+                     (notification_id, email_message['to']))
         
         send_mail(email_message['subject'], 
                   email_message.get_payload(), 

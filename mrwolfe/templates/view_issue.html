@@ -68,7 +68,7 @@
     <a class="toggle collapse" href="#">▲</a>
   </h2>
   {% for comment in object.comments.all %}
-  {% include "snippets/comment.html" with object=comment }%
+  {% include "snippets/comment.html" with object=comment %}
   {% endfor %}
 </div>
 

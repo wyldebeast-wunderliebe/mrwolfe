@@ -28,12 +28,11 @@ def notify(notification_id, context, from_addr, to_addr):
         return
 
     try:
-        message = render_to_string(template, context)
+        message = render_to_string(template, context).decode("ascii")
         
         email_message = Parser().parsestr(message)
 
-        LOGGER.debug("Sending out notification %s to %s" % \ 
-                     (notification_id, email_message['to']))
+        LOGGER.debug("Sending out notification %s to %s" % (notification_id, email_message['to']))
         
         send_mail(email_message['subject'], 
                   email_message.get_payload(), 

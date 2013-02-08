@@ -6,7 +6,7 @@ here = os.path.abspath(os.path.dirname(__file__))
 README = open(os.path.join(here, 'README.md')).read()
 
 CHANGES = "None"
-VERSION = "1.0.0"
+VERSION = "1.0.0a"
 
 REQUIRES = ['pu_in_core', 'pu_in_content', 'django-compressor',
             'django-attachments', 'django-haystack', 'whoosh',

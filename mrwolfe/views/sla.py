@@ -57,7 +57,7 @@ class SLACreate(CreateView):
 
     def get_form(self, form_class):
 
-        form = super(SLAJSONEdit, self).get_form(form_class)
+        form = super(SLACreate, self).get_form(form_class)
 
         form.fields['default_service'].queryset = self.object.service_set
 
@@ -76,7 +76,7 @@ class SLAJSONCreate(JSONCreateView):
 
     def get_form(self, form_class):
 
-        form = super(SLAJSONEdit, self).get_form(form_class)
+        form = super(SLAJSONCreate, self).get_form(form_class)
 
         form.fields['default_service'].queryset = self.object.service_set
 
@@ -91,7 +91,7 @@ class SLAEdit(UpdateView):
 
     def get_form(self, form_class):
 
-        form = super(SLAJSONEdit, self).get_form(form_class)
+        form = super(SLAEdit, self).get_form(form_class)
 
         form.fields['default_service'].queryset = self.object.service_set
 

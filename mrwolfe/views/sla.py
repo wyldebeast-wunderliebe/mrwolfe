@@ -3,6 +3,7 @@ from django.views.generic.detail import DetailView
 from pu_in_content.views.jsonbase import JSONCreateView, JSONUpdateView, \
     JSONDeleteView
 from mrwolfe.models.sla import SLA
+from mrwolfe.models.service import Service
 from mrwolfe.forms.sla import SLAForm
 from mrwolfe.models.issue import Issue
 
@@ -59,7 +60,7 @@ class SLACreate(CreateView):
 
         form = super(SLACreate, self).get_form(form_class)
 
-        form.fields['default_service'].queryset = self.object.service_set
+        form.fields['default_service'].queryset = Service.objects.none()
 
         return form
 
@@ -78,7 +79,7 @@ class SLAJSONCreate(JSONCreateView):
 
         form = super(SLAJSONCreate, self).get_form(form_class)
 
-        form.fields['default_service'].queryset = self.object.service_set
+        form.fields['default_service'].queryset = Service.objects.none()
 
         return form
 

@@ -24,3 +24,8 @@ The intended target audience of Mr.Wolfe is support teams and
 help desks; it is an alternative to the well known OTRS.
 
 See the docs directory in the package for further reading.
+
+If you like this application, you may donate us a beer as per the
+beer-ware licence. If you don't like it that much or find things that
+don't work, let us know and we may fix it. If you think it totally and
+utterly sucks, tough luck!

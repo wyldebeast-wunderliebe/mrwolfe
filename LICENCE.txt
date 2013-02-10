@@ -1,6 +1,6 @@
                      BEER-WARE LICENSE
 
-                   Version 666, July 2012
+                   Version 667, Februari 2013
 
 You can use this stuff and do whatever you like with it on the
 following condition:
@@ -8,5 +8,8 @@ following condition:
 0. Would you ever be in a situation where you are able to offer
    us, or one of us, a beer, or if unavailable, an alcoholic 
    beverage of your choice, you must do so.
+1. If you fear you'll never be in such a situation but want to
+   to offer us a beer anyway, you may do so. Contact us and we'll
+   find a solution.
 
    Wyldebeast & Wunderliebe

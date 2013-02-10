@@ -12,7 +12,8 @@ the instructions in that project.
 
 Otherwise, install this app like you install other Django apps. If you
 don't know how to do that, ask your smart cousin, or check out
-http://www.djangoproject.com/.
+http://www.djangoproject.com/. Make sure you install the dependencies
+as well. These you can find in the setup.py file.
 
 There is some settings you may wish to override. The mrwolfe_buildout
 project provides an easy way of doing so. Otherwise, read the

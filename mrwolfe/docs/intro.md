@@ -1,6 +1,15 @@
 Mr.Wolfe support system
 =======================
 
+Contents
+--------
+Introduction (this document)
+Installation [Installation](/install.md)
+Configuration [Configuration](/settings.md)
+
+Introduction
+------------
+
 Mr.Wolfe is an issue tracker for support issues. This is not the same
 as a system for software issues, like Bugzilla, Ira, etc. In the
 latter issues are related to software, and are tracked in terms of a

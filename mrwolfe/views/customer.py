@@ -13,7 +13,7 @@ class CustomerCreate(CreateView):
 
     def get_success_url(self):
 
-        return "/?message=Customer+aangemaakt&status=0"
+        return "/?message=Customer+created&status=0"
 
 
 class CustomerJSONCreate(JSONCreateView):
@@ -31,7 +31,7 @@ class CustomerEdit(UpdateView):
 
     def get_success_url(self):
 
-        return "/?message=Customer+gewijzigd&status=0"
+        return "/?message=Customer+updated&status=0"
 
 
 class CustomerJSONEdit(JSONUpdateView):
@@ -47,7 +47,7 @@ class CustomerDelete(DeleteView):
 
     def get_success_url(self):
 
-        return "/?message=Customer+Verwijderd&status=0"
+        return "/?message=Customer+removed&status=0"
 
 
 class CustomerJSONDelete(JSONDeleteView):

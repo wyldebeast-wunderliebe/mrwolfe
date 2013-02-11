@@ -1,6 +1,6 @@
 from markdown import markdown
 from django.utils.safestring import mark_safe
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import CreateView, UpdateView
 from django.conf import settings
 from django.http import HttpResponseRedirect
 from pu_in_content.views.jsonbase import JSONUpdateView, JSONDetailView

@@ -1,6 +1,5 @@
 from sla import SLA
 from issue import Issue
-#from customer import Customer
 from operator import Operator
 from contact import Contact
 from status import Status

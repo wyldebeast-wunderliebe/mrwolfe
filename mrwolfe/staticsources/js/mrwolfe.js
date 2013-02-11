@@ -17,7 +17,10 @@ mrwolfe.refreshHistory = function(issue_id) {
  */
 mrwolfe.afterAdd = function(sender) {
 
-  sender.parents(".viewlet").find(".toggle.expand").click();
+  if (!sender.parents(".viewlet").hasClass("expanded")) {
+    sender.parents(".viewlet").find(".toggle.expand").click();
+  }
+
   sender.parents(".viewlet").find(".alert").hide();
 };
 

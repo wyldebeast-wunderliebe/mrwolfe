@@ -21,7 +21,8 @@ class IndexView(TemplateView):
 
     def list_my_issues(self):
 
-        return Issue.objects.filter(assignee=self.request.user). \
+        return Issue.objects.filter(
+            assignee__operator__user=self.request.user). \
             exclude(status=settings.ISSUE_STATUS_CLOSED)
 
     def list_unassigned_issues(self):

@@ -1,3 +1,7 @@
+1.0.2a
+======
+* More reading material
+
 1.0.1a
 ======
 * Fixed SLA view

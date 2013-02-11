@@ -31,7 +31,7 @@ class SLAView(DetailView):
 
     def list_rules(self):
 
-        self.object.rule_set.all()
+        return self.object.rule_set.all()
 
     def nr_of_issues(self):
 
@@ -66,7 +66,7 @@ class SLACreate(CreateView):
 
     def get_success_url(self):
 
-        return "/config?message=SLA+aangemaakt&status=0"
+        return "/config?message=SLA+created&status=0"
 
 
 class SLAJSONCreate(JSONCreateView):
@@ -100,7 +100,7 @@ class SLAEdit(UpdateView):
 
     def get_success_url(self):
 
-        return "/config?message=SLA+gewijzigd&status=0"
+        return "/config?message=SLA+updated&status=0"
 
 
 class SLAJSONEdit(JSONUpdateView):
@@ -127,7 +127,7 @@ class SLADelete(DeleteView):
 
     def get_success_url(self):
 
-        return "/config?message=SLA+verwijderd&status=0"
+        return "/config?message=SLA+removed&status=0"
 
 class SLAJSONDelete(JSONDeleteView):
 

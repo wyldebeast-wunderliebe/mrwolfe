@@ -134,7 +134,7 @@ class IssueEdit(UpdateView):
 
     def get_success_url(self):
 
-        return "/?message=Issue+gewijzigd&status=0"
+        return "/?message=Issue+updated&status=0"
 
     def post(self, request, *args, **kwargs):
 

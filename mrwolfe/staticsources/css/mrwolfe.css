@@ -162,3 +162,7 @@ time {
     left: 20px;
     z-index: 666;
 }
+
+.helptext {
+    color: #3A87AD;
+}

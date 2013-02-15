@@ -21,7 +21,12 @@ class Rule(models.Model):
 
     def matches(self, message):
 
+        """ Message should be a email.Message object """
+
         try:
-            return re.search(self.regexp, message[self.field])
+            if self.field != "text":
+                return re.search(self.regexp, message[self.field])
+            else:
+                return re.search(self.regexp, message.as_string())
         except:
             return False

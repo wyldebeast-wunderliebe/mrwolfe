@@ -14,7 +14,7 @@ class Contact(User):
 
     class Meta:
         app_label = "mrwolfe"
-
+        
     def __unicode__(self):
 
         try:

@@ -220,7 +220,9 @@ ISSUE_STATUS_PROGRESS = ISSUE_STATUS_CHOICES[2][0]
 ISSUE_STATUS_DEFAULT = ISSUE_STATUS_OPEN
 
 # Do we allow incoming messages from non contacts?
-ALLOW_NON_CONTACTS = False
+# If so, the sender address is set into the Issue.submitter_address field
+#
+ALLOW_NON_CONTACTS = True
 
 MESSAGE_FIELDS = (("subject", "Subject"),
                   ("from", "From"),

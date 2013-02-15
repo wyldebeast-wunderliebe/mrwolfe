@@ -22,7 +22,6 @@ class Issue(models.Model):
         default=settings.ISSUE_STATUS_DEFAULT,
         choices=settings.ISSUE_STATUS_CHOICES)
     created = models.DateTimeField(auto_now_add=True)
-    email_from = models.EmailField(blank=True, null=True)
 
     class Meta:
         app_label = "mrwolfe"
@@ -134,6 +133,15 @@ class Issue(models.Model):
             text=self.text,
             assignee=self.assignee,
             contact=self.contact,
-            status=self.status,
-            email_from=self.email_from
+            status=self.status
             )
+
+    @property
+    def email_from(self):
+
+        _from = settings.DEFAULT_FROM_ADDR
+        
+        if self.sla and self.sla.email_from:
+            _from = self.sla.email_from
+
+        return _from

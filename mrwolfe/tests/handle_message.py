@@ -1,6 +1,8 @@
 from django.test.testcases import TestCase
+from mrwolfe.tests.utils import NotificationsBin
 from mrwolfe.utils import handle_message
 from mrwolfe.models.sla import SLA
+from mrwolfe.models.issue import Issue
 from mrwolfe.models.rule import Rule
 from mrwolfe.models.service import Service
 from mrwolfe.models.contact import Contact
@@ -41,16 +43,21 @@ class HandleMessageTest(TestCase):
 
         # Record the MIME types of both parts - text/plain and text/html.
         part1 = MIMEText("It's broken", 'plain')
-        part2 = MIMEText("<blink>Really!</blink>", 'html')
+        part2 = MIMEText("<blink>Really!</blink>", 'xml')
 
         self.multipartmsg.attach(part1)
         self.multipartmsg.attach(part2)
+
 
     def test_handle_message(self):
 
         handle_message(self.simplemsg)
 
         self.assertEquals(1, self.sla.issue_set.all().count())
+
+        notification = NotificationsBin.receive()
+
+        self.assertEquals([FROM], notification['to'])
 
 
     def test_handle_message_with_extended_from(self):
@@ -59,7 +66,12 @@ class HandleMessageTest(TestCase):
 
         self.assertEquals(1, self.sla.issue_set.all().count())
 
-    
+        notification = NotificationsBin.receive()
+
+        self.assertEquals([FROM], notification['to'])    
+        self.assertEquals(TO, notification['from'])
+
+
     def test_handle_message_sla_with_default_service(self):
 
         service = Service.objects.create(sla=self.sla, priority="laag")
@@ -73,6 +85,12 @@ class HandleMessageTest(TestCase):
 
         self.assertEquals(service, self.sla.issue_set.all()[0].service)
 
+        notification = NotificationsBin.receive()
+
+        self.assertEquals([FROM], notification['to'])    
+        self.assertEquals(TO, notification['from'])
+
+
     def test_handle_message_with_attachments(self):
 
         handle_message(self.multipartmsg)
@@ -82,6 +100,12 @@ class HandleMessageTest(TestCase):
         issue = self.sla.issue_set.all()[0]
 
         self.assertEquals(1, issue.attachment_set.all().count())
+
+        notification = NotificationsBin.receive()
+
+        self.assertEquals([FROM], notification['to'])    
+        self.assertEquals(TO, notification['from'])
+
 
     def test_handle_message_with_existing_issue(self):
 
@@ -98,3 +122,29 @@ class HandleMessageTest(TestCase):
         self.assertEquals(1, self.sla.issue_set.all().count())
 
         self.assertEquals(1, issue.comments.all().count())
+
+        notification = NotificationsBin.receive()
+
+        self.assertEquals([FROM], notification['to'])    
+        self.assertEquals(TO, notification['from'])
+
+
+    def test_handle_bouncing_issue(self):
+
+        msg = MIMEText("It's broken", 'plain')
+
+        msg['From'] = "dr.evil@undergroundlair.com"
+        msg['To'] = "support@evilempire.com"
+        msg['Subject'] = "help!"
+
+        import mrwolfe.utils as utils
+        utils.settings.ALLOW_NON_CONTACTS = False
+
+        handle_message(msg)
+
+        self.assertEquals(0, Issue.objects.all().count())
+
+        notification = NotificationsBin.receive()
+
+        self.assertEquals("Invalid contact for support", 
+                          notification['subject'])

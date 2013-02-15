@@ -16,6 +16,12 @@
     <a class="toggle expand" href="#">▼</a>
     <a class="toggle collapse" href="#">▲</a>
   </h2>
+  
+  <p class="text-info">
+    To add rules and contacts to an SLA, navigate to it using the
+    link.
+  </p>
+
   <ul id="slas">
     {% for sla in view.list_slas %}
     {% include "snippets/sla.html" with object=sla %}

@@ -33,6 +33,7 @@ def handle_message(message):
     sender = None
 
     from_addr = message['from']
+    send_from = settings.DEFAULT_FROM_ADDR
 
     if re.search('<[^>]*>', from_addr):
         from_addr = re.search('<([^>]*)>', from_addr).groups(0)[0]
@@ -41,12 +42,14 @@ def handle_message(message):
         if settings.ALLOW_NON_CONTACTS:
             sender = Contact.objects.create(email=from_addr)
         else:
+            notify("issue_bounced", {}, send_from, from_addr)
             return False
     else:
         sender = Contact.objects.filter(email=from_addr)[0]
 
     if sla and not sla.is_contact(sender) and not \
             settings.ALLOW_NON_CONTACTS:
+        notify("issue_bounced", {}, send_from, from_addr)
         return False
                 
     # Is this a reply to an existing issue?
@@ -99,7 +102,6 @@ def handle_message(message):
         issue = Issue(title=message['subject'],
                       contact=sender,
                       text=body,
-                      email_from=message['to'],
                       sla=sla)
 
     if sla and sla.default_service:
@@ -117,5 +119,3 @@ def handle_message(message):
            from_addr)
 
     return True
-
-

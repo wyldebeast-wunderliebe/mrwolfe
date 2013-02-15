@@ -74,7 +74,7 @@
   {% if not view.list_rules %}
   <div class="alert warning">No rules defined yet!</div>
   {% endif %}
-  
+
   <ul id="rules">
     {% for rule in view.list_rules %}
     {% include "snippets/rule.html" with object=rule %}

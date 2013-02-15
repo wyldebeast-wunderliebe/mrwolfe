@@ -9,6 +9,7 @@ class SLA(models.Model):
     end_date = models.DateField()
     default_service = models.ForeignKey("Service", null=True, blank=True,
                                         related_name="defaultservice")
+    email_from = models.EmailField(blank=True, null=True)
 
     class Meta:
         app_label = "mrwolfe"

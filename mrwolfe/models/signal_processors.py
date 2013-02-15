@@ -39,10 +39,10 @@ def status_post_save(sender, instance, **kwargs):
 
         notify("issue_closed", 
                {"issue": instance.issue, "comment": instance.comment},
-               instance.issue.email_from or settings.DEFAULT_FROM_ADDR,
+               instance.issue.email_from,
                instance.issue.contact.email)        
     else:
         notify("issue_status", 
                {"issue": instance.issue, "comment": instance.comment},
-               instance.issue.email_from or settings.DEFAULT_FROM_ADDR,
+               instance.issue.email_from,
                instance.issue.contact.email)

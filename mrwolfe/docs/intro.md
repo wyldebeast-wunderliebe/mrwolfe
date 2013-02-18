@@ -6,6 +6,7 @@ Contents
 Introduction (this document)
 Installation [Installation](/install.md)
 Configuration [Configuration](/settings.md)
+Look & Feel [Look & Feel](/skin.md)
 
 Introduction
 ------------

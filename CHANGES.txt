@@ -1,3 +1,10 @@
+1.0.3a
+======
+* Enabled skin plugin
+* set default to True for ALLOW_NON_CONTACTS
+* bounce mail when Mr.Wolfe doesn't accept
+* Added column email_from to SLA
+
 1.0.2a
 ======
 * More reading material

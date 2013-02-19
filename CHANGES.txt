@@ -1,9 +1,10 @@
 1.0.3a
 ======
-* Enabled skin plugin
+* Enabled skin plugin (read docs/skin.md)
 * set default to True for ALLOW_NON_CONTACTS
 * bounce mail when Mr.Wolfe doesn't accept
-* Added column email_from to SLA
+* Added column email_from to SLA:
+  ALTER TABLE mrwolfe_sla ADD COLUMN email_from VARCHAR(75);
 
 1.0.2a
 ======

@@ -5,7 +5,6 @@ from pu_in_content.views.jsonbase import JSONCreateView, JSONUpdateView, \
 from mrwolfe.models.sla import SLA
 from mrwolfe.models.service import Service
 from mrwolfe.forms.sla import SLAForm
-from mrwolfe.models.issue import Issue
 
 
 class SLAView(DetailView):

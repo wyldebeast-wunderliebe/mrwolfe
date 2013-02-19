@@ -1,5 +1,3 @@
-from django import forms
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from pu_in_content.views.jsonbase import JSONCreateView, JSONUpdateView, \
     JSONDeleteView, JSONDetailView
 from mrwolfe.models.service import Service

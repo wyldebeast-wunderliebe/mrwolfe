@@ -1,6 +1,5 @@
 import os
 from markdown import markdown
-import pkg_resources
 from django.views.generic.base import TemplateView
 from django.conf import settings
 from django.utils.safestring import mark_safe
@@ -24,4 +23,5 @@ class HelpView(TemplateView):
         """ Read the README..."""
 
         return mark_safe(markdown(
-                open(os.path.join(settings.PROJECT_ROOT, "docs", "intro.md")).read()))
+                open(os.path.join(settings.PROJECT_ROOT, 
+                                  "docs", "intro.md")).read()))

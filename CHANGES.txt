@@ -1,3 +1,7 @@
+1.0.4a
+======
+* Added 'on hold' status
+
 1.0.3a
 ======
 * Enabled skin plugin (read docs/skin.md)

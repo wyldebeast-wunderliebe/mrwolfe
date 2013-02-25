@@ -55,6 +55,21 @@ class Issue(models.Model):
             return None
 
     @property
+    def _time_on_hold(self):
+
+        _time = 0
+        _on_hold = 0
+
+        for status in self.status_history.all():
+            if status.name == settings.ISSUE_STATUS_HOLD:
+                _on_hold = status.date
+            elif _on_hold:
+                _time += (status.date - _on_hold).seconds
+                _on_hold = 0
+
+        return _time + _on_hold
+
+    @property
     def raw_time_to_resolve(self):
 
         now = datetime.now()
@@ -69,10 +84,15 @@ class Issue(models.Model):
     @property
     def deadline(self):
 
-        """ Deadline for this issue, or None if not applicable """
+        """ Deadline for this issue, or None if not applicable. The
+        deadline is calculated as follows: it is the creation time
+        plus the solution time the service demands minus the time spent
+        in 'on hold' status. """
 
         if self.service and self.service.solution_time:
-            return self.created + timedelta(hours=self.service.solution_time)
+            return self.created + \
+                timedelta(hours=self.service.solution_time) - \
+                timedelta(seconds=self._time_on_hold)
         else:
             return None
 

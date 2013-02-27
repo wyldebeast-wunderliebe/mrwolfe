@@ -47,3 +47,74 @@ class IssueTest(TestCase):
         status.save()
 
         self.assertTrue(issue.in_time)
+
+    def test_email_from(self):
+
+        sla = SLA.objects.create(name="RoadMap",
+                                 start_date="2012-01-01",
+                                 end_date="2012-12-31")
+        
+        service =sla.service_set.create(response_time=2,
+                                        solution_time=4,
+                                        priority="normal")
+
+        contact = Contact.objects.create(email="bob@dobalina.org")
+        contact.save()
+        contact.sla.add(sla)
+
+        issue = Issue(title="broken stuff",
+                      contact=contact,
+                      text="Well, it's broken")
+
+        issue.save()
+        
+        self.assertEquals(settings.DEFAULT_FROM_ADDR, issue.email_from)
+
+        issue.sla = sla
+
+        self.assertEquals(settings.DEFAULT_FROM_ADDR, issue.email_from)
+
+        sla.email_from = "bob@dobalina.org"
+
+        self.assertEquals("bob@dobalina.org", issue.email_from)
+
+    def test_time_on_hold(self):
+
+        contact = Contact.objects.create(email="bob@dobalina.org")
+        contact.save()
+
+        issue = Issue(title="broken stuff",
+                      contact=contact,
+                      text="Well, it's broken")
+
+        issue.save()
+
+        self.assertEquals(0, issue._time_on_hold)
+
+        status = issue.status_history.create(name=settings.ISSUE_STATUS_HOLD,
+                                             issue=issue,
+                                             comment="no comment")
+        status.date = datetime(2000, 1, 1, 16, 33)
+        status.save()
+
+        status = issue.status_history.create(name=settings.ISSUE_STATUS_OPEN,
+                                             issue=issue,
+                                             comment="no comment")
+
+        status.date = datetime(2000, 1, 1, 16, 37)
+        status.save()
+
+        status = issue.status_history.create(name=settings.ISSUE_STATUS_HOLD,
+                                             issue=issue,
+                                             comment="no comment")
+        status.date = datetime(2000, 1, 1, 17, 33)
+        status.save()
+
+        status = issue.status_history.create(name=settings.ISSUE_STATUS_OPEN,
+                                             issue=issue,
+                                             comment="no comment")
+
+        status.date = datetime(2000, 1, 1, 18, 37)
+        status.save()
+
+        self.assertEquals(60 * 68, issue._time_on_hold)

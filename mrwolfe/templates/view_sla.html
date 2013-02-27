@@ -70,6 +70,11 @@
        href="{% url create_rule_json sla.pk %}"
        ><i class="icon-plus"></i></a>
   </h2>
+
+  <p class="text-info">
+    Add matching rules for incoming mail. If a rule matches, this SLA
+    will be the one!
+  </p>
   
   {% if not view.list_rules %}
   <div class="alert warning">No rules defined yet!</div>

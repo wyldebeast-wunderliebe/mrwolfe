@@ -210,12 +210,14 @@ LOGGING = {
 ISSUE_STATUS_CHOICES = (
     ('open', 'Open'),
     ('closed', 'Closed'),
-    ('progress', 'In progress'),    
+    ('progress', 'In progress'),
+    ('hold', 'On hold')
     )
 
 ISSUE_STATUS_OPEN = ISSUE_STATUS_CHOICES[0][0]
 ISSUE_STATUS_CLOSED = ISSUE_STATUS_CHOICES[1][0]
 ISSUE_STATUS_PROGRESS = ISSUE_STATUS_CHOICES[2][0]
+ISSUE_STATUS_HOLD = ISSUE_STATUS_CHOICES[3][0]
 
 ISSUE_STATUS_DEFAULT = ISSUE_STATUS_OPEN
 

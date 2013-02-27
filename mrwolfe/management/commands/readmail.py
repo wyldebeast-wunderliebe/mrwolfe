@@ -45,6 +45,6 @@ class Command(NoArgsCommand):
                 if not handled:
                     LOGGER.warning("Unhandled message!")
             except:
-                LOGGER.warning("Exception in handling message!")
+                LOGGER.exception("Exception in handling message!")
 
         pop_conn.quit()

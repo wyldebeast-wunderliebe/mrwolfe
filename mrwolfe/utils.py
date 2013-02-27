@@ -72,7 +72,11 @@ def handle_message(message):
         # email message can't be used to overwrite important files
         #
         if part.get_content_type() == "text/plain":
-            body.append(part.get_payload(decode=True))
+            body.append(unicode(
+                    part.get_payload(decode=True),
+                    part.get_content_charset(),
+                    'replace'
+                    ).encode('utf8','replace'))            
         elif part.get_content_type() == "text/html":
             body.append(html2text(part.get_payload(decode=True)))
         else:

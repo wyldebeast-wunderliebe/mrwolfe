@@ -10,27 +10,36 @@ from mrwolfe.notification import notify
 
 
 @receiver(post_save, sender=Issue)
-def issue_post_save(sender, instance, **kwargs):
+def issue_post_save(sender, instance, created=False, **kwargs):
 
-    operators = [op.email for op in Operator.objects.all()]
+    if created:
 
-    notify("issue_created", 
-           {"issue": instance},
-           settings.DEFAULT_FROM_ADDR,
-           ", ".join(operators))
+        operators = [op.email for op in Operator.objects.all()]
+
+        if operators:
+
+            notify("issue_created", 
+                   {"issue": instance},
+                   settings.DEFAULT_FROM_ADDR,
+                   ", ".join(operators))
 
 
 @receiver(post_save, sender=Comment)
-def comment_post_save(sender, instance, **kwargs):
+def comment_post_save(sender, instance, created=False, **kwargs):
 
-    notify("comment_added", 
-           {"issue": instance.issue, "comment": instance},
-           settings.DEFAULT_FROM_ADDR,
-           instance.issue.contact.email
-           )
+    if created:
+
+        notify("comment_added", 
+               {"issue": instance.issue, "comment": instance},
+               settings.DEFAULT_FROM_ADDR,
+               instance.issue.contact.email
+               )
 
 @receiver(post_save, sender=Status)
-def status_post_save(sender, instance, **kwargs):
+def status_post_save(sender, instance, created=False, **kwargs):
+
+    if not created:
+        return
 
     instance.issue.status = instance.name
     instance.issue.save()

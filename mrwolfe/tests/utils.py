@@ -9,10 +9,14 @@ class NotificationsBin(object):
             {"subject": subject, "body": body, "from": _from, "to": to})
 
     @staticmethod
-    def receive():
+    def receive(index=-1):
 
-        return NotificationsBin._notifications[-1]
+        return NotificationsBin._notifications[index]
 
+    @staticmethod
+    def clear():
+
+        NotificationsBin._notifications = []
 
 print "Monkey patching send_mail"
 import mrwolfe.notification as notification

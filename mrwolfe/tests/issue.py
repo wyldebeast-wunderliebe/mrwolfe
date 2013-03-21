@@ -1,12 +1,20 @@
 from datetime import datetime
 from django.test.testcases import TestCase
 from django.conf import settings
+from django.core.urlresolvers import reverse
+from django.contrib.auth.models import User
 from mrwolfe.models.issue import Issue
 from mrwolfe.models.sla import SLA
 from mrwolfe.models.contact import Contact
+from mrwolfe.models.operator import Operator
+from mrwolfe.tests.utils import NotificationsBin
 
 
 class IssueTest(TestCase):
+
+    def setUp(self):
+
+        NotificationsBin.clear()
 
     def test_in_time(self):
         
@@ -118,3 +126,25 @@ class IssueTest(TestCase):
         status.save()
 
         self.assertEquals(60 * 68, issue._time_on_hold)
+
+    def test_notification(self):
+
+        contact = Contact.objects.create(email="bob@dobalina.org")
+        contact.save()
+
+        user = User.objects.create(username="dzjengis", is_superuser=False)
+
+        Operator.objects.create(user=user, email="dzjengis@khan.org")
+
+        issue = Issue.objects.create(title="broken stuff",
+                      contact=contact,
+                      text="Well, it's really broken")
+
+        issue.save()
+
+        notification = NotificationsBin.receive()
+
+        issue_url = reverse('view_issue', args=[], kwargs={'pk': issue.pk })
+
+        self.assertTrue(issue_url in notification["body"])
+        

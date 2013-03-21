@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 import time
 from django.db import models
+from django.core.urlresolvers import reverse
 from user import User
 from django.conf import settings
 from sla import SLA
@@ -29,6 +30,12 @@ class Issue(models.Model):
     def __unicode__(self):
 
         return "%s - %s" % (self.issue_id, self.title[:50])
+
+    def url(self):
+        
+        return "%s%s" % (settings.HOST_ADDRESS, 
+                         reverse('view_issue', args=[], 
+                                 kwargs={'pk': self.pk }))
 
     @property
     def issue_id(self):

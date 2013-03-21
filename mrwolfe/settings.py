@@ -239,6 +239,11 @@ NOTIFICATION_MAP = {
     'issue_created': 'notification/issue_created.html',
 }
 
+# This is the address of your actual site. Used for sending URL's of
+# issues to operators.
+#
+HOST_ADDRESS = "http://support.evilempire.com"
+
 DEFAULT_FROM_ADDR = "support@evilempire.com"
 
 #

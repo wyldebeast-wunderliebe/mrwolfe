@@ -148,3 +148,23 @@ class IssueTest(TestCase):
 
         self.assertTrue(issue_url in notification["body"])
         
+    def test_clone(self):
+
+        """ deep clone """
+
+        contact = Contact.objects.create(email="bob@dobalina.org")
+        contact.save()
+
+        issue = Issue.objects.create(title="broken stuff",
+                      contact=contact,
+                      text="Well, it's really broken")
+        
+        issue.comments.create(comment="Really?")
+        issue.comments.create(comment="Really, really?")
+
+        self.assertTrue(issue.can_clone)
+
+        clone = issue.clone()
+
+        self.assertEquals(issue.comments.all().count(), 
+                          clone.comments.all().count())

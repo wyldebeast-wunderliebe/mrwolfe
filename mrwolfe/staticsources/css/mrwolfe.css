@@ -40,6 +40,15 @@ h2 {
     font-size: 20px !important;
 }
 
+.viewlet h2 {
+    line-height: 26px;
+}
+
+.viewlet h2 .btn {
+    margin-right: 40px;
+    float: right;
+}
+
 .viewlet ul {
     width: 60%;
 }

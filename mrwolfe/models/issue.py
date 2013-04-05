@@ -107,6 +107,10 @@ class Issue(models.Model):
 
         return self.status == settings.ISSUE_STATUS_OPEN
 
+    def is_closed(self):
+
+        return self.status == settings.ISSUE_STATUS_CLOSED        
+
     @property
     def dateclosed(self):
         
@@ -149,11 +153,19 @@ class Issue(models.Model):
 
         return _in_time
 
+    @property
+    def can_clone(self):
+
+        return not self.is_closed()
+
     def clone(self):
 
         """ Clone into new issue """
 
-        return Issue.objects.create(
+        if not self.can_clone:
+            return
+
+        _clone = Issue.objects.create(
             sla=self.sla,
             service=self.service,
             title=self.title + " [clone]",
@@ -162,6 +174,13 @@ class Issue(models.Model):
             contact=self.contact,
             status=self.status
             )
+
+        for comment in self.comments.all():
+            comment_clone = _clone.comments.create(comment=comment.comment)
+            comment_clone.date = comment.date
+            comment_clone.save()
+
+        return _clone
 
     @property
     def email_from(self):

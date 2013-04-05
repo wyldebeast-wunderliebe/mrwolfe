@@ -8,10 +8,12 @@
   <a href="{% url edit_issue object.pk %}" class="btn">
     <i class="icon-edit"></i> Edit
   </a>
+  {% if issue.can_clone %}
   <a href="{% url clone_issue object.pk %}" class="btn action-inline"
      data-pu_actionmethod="POST" data-pu_protect="true">
     <i class="icon-copy"></i> Clone
   </a>
+  {% endif %}
   <a href="{% url create_comment_json object.pk %}" class="btn add-inline"
      target="#comments">
     <i class="icon-comment"></i> Add comment

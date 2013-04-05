@@ -59,6 +59,7 @@ def handle_message(message):
     # Parse message payload
     #
     body = []
+    html = []
     attachments = []
     counter = 0
 
@@ -78,7 +79,7 @@ def handle_message(message):
                 'replace'
             ).encode('utf8','replace'))
         elif part.get_content_type() == "text/html":
-            body.append(html2text(part.get_payload(decode=True)))
+            html.append(html2text(part.get_payload(decode=True)))
         else:
             filename = part.get_filename()
             if not filename:
@@ -95,7 +96,13 @@ def handle_message(message):
             att.mimetype = part.get_content_type()
             attachments.append(att)
 
-    body = "\n\n".join(body)
+    # Some emails contain both html and plain. We assume that in this case,
+    # we only need the html part.
+    #
+    if html:
+        body = "\n\n".join(html)
+    else:
+        body = "\n\n".join(body)
 
     if match:
         issue_id = int(match.groups()[0])

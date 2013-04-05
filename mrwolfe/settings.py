@@ -246,6 +246,12 @@ HOST_ADDRESS = "http://support.evilempire.com"
 
 DEFAULT_FROM_ADDR = "support@evilempire.com"
 
+# Blacklist for sending out notifications. Add any mailboxes that you
+# read here, so as to never send to the mailbox that you also read
+# mail off...
+#
+NOTIFICATION_BLACKLIST = []
+
 #
 # END Mr.Wolfe settings
 

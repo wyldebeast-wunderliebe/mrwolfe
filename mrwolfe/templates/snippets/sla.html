@@ -1,12 +1,16 @@
 <li class="editable">
   <a href="{% url view_sla object.pk %}">{{ object }}</a>
   <div class="btn-group controls">
-    <a class="btn btn-mini edit-inline" 
+    <a class="btn btn-mini edit-inline" title="Edit"
        href="{% url edit_sla_json object.pk %}">
       <i class="icon-pencil"></i>
     </a>
+    <a class="btn btn-mini" title="Settings" 
+       href="{% url view_sla object.pk %}">
+      <i class="icon-wrench"></i>
+    </a>
     <a class="btn btn-mini btn-danger rm-inline" 
-       data-pu_confirmdelete="true"
+       data-pu_confirmdelete="true" title="Remove"
        href="{% url delete_sla_json object.pk %}">
       <i class="icon-remove"></i>
     </a>

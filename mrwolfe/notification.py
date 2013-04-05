@@ -12,6 +12,12 @@ def notify(notification_id, context, from_addr, to_addr):
 
     """ Send out notification. """
 
+    # Check on to address, wheter it contains our onw mailbox. This is
+    # generally a bad idea (tm), as we found out some day.
+    to_addr = ", ".join(filter(
+            lambda x: x not in settings.NOTIFICATION_BLACKLIST,
+            to_addr.split(", ")))
+    
     if not to_addr:
         LOGGER.error("No 'to' address set; bye now")
         return 

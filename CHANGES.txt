@@ -1,6 +1,8 @@
 1.0.4a
 ======
 * Added 'on hold' status
+* notification enhancements
+* deep clone support
 
 1.0.3a
 ======

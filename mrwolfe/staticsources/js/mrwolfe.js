@@ -72,4 +72,11 @@ $(document).ready(function() {
     $(document).on("show", "#MyModal", function(e) {
         $("#MyModal").find("input.date").datepicker();
       });
+
+
+    // Make sure to clean up modal after use...
+    $('#MyModal').on('hide', function () {
+        $(this).removeData('modal');
+      });
+
   });

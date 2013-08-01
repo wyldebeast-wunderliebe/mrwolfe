@@ -75,10 +75,10 @@ def handle_message(message):
         #
         if part.get_content_type() == "text/plain":
             body.append(unicode(
-                    part.get_payload(decode=True),
-                    part.get_content_charset(),
-                    'replace'
-                    ).encode('utf8','replace'))            
+                part.get_payload(decode=True),
+                part.get_content_charset(),
+                'replace'
+            ).encode('utf8','replace'))
         elif part.get_content_type() == "text/html":
 
             if part.get_content_charset() is None:

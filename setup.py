@@ -10,7 +10,7 @@ VERSION = "1.0.4a"
 
 REQUIRES = ['pu_in_core', 'pu_in_content', 'django-compressor',
             'django-attachments', 'django-haystack', 'whoosh',
-            'markdown', 'html2text'
+            'markdown', 'html2text', 'chardet'
             ]
 
 setup(name='mrwolfe',

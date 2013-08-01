@@ -268,9 +268,15 @@ EMAIL_USE_TLS = True
 
 # BEGIN search (Haystack)
 #
-HAYSTACK_SITECONF = "mrwolfe.init_haystack"
-HAYSTACK_SEARCH_RESULTS_PER_PAGE = 15
-HAYSTACK_SEARCH_ENGINE = 'whoosh'
 HAYSTACK_WHOOSH_PATH = os.path.join(os.path.dirname(__file__), 'whoosh_index')
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'URL': 'http://127.0.0.1:7070/solr',
+        'PATH': HAYSTACK_WHOOSH_PATH
+    },
+}
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 27
 #
 # END search

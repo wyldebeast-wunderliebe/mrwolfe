@@ -1,24 +1,27 @@
 1.0.4a
 ======
-* Added 'on hold' status
-* notification enhancements
-* deep clone support
+ * Added 'on hold' status
+ * notification enhancements
+ * deep clone support
+ * charset detection for handling messages
+ * Moved to haystack 2.0
+ * Moved to Django 1.5
 
 1.0.3a
 ======
-* Enabled skin plugin (read docs/skin.md)
-* set default to True for ALLOW_NON_CONTACTS
-* bounce mail when Mr.Wolfe doesn't accept
-* Added column email_from to SLA:
-  ALTER TABLE mrwolfe_sla ADD COLUMN email_from VARCHAR(75);
+ * Enabled skin plugin (read docs/skin.md)
+ * set default to True for ALLOW_NON_CONTACTS
+ * bounce mail when Mr.Wolfe doesn't accept
+ * Added column email_from to SLA:
+   ALTER TABLE mrwolfe_sla ADD COLUMN email_from VARCHAR(75);
 
 1.0.2a
 ======
-* More reading material
+ * More reading material
 
 1.0.1a
 ======
-* Fixed SLA view
+ * Fixed SLA view
 
 1.0.0a
 ======

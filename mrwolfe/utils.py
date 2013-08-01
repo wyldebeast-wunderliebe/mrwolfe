@@ -1,5 +1,6 @@
 import re
 import mimetypes
+import chardet
 from html2text import html2text
 from django.conf import settings
 from django.core.files.base import ContentFile
@@ -79,7 +80,16 @@ def handle_message(message):
                     'replace'
                     ).encode('utf8','replace'))            
         elif part.get_content_type() == "text/html":
-            html.append(html2text(part.get_payload(decode=True)))
+
+            if part.get_content_charset() is None:
+                charset = chardet.detect(str(part))['encoding']
+            else:
+                charset = part.get_content_charset()
+
+            text = unicode(part.get_payload(decode=True), 
+                           str(charset), "ignore").encode('utf8','replace')
+
+            html.append(html2text(text))
         else:
             filename = part.get_filename()
             if not filename:

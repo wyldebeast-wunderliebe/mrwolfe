@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.test.testcases import TestCase
 from mrwolfe.tests.utils import NotificationsBin
 from mrwolfe.utils import handle_message
@@ -35,14 +37,14 @@ class HandleMessageTest(TestCase):
         # Create message container - the correct MIME type is
         # multipart/alternative.
         self.multipartmsg = MIMEMultipart('alternative')
-        self.simplemsg = MIMEText("It's broken", 'plain')
+        self.simplemsg = MIMEText("<p>It's broken. 天津元/月</p>", 'html')
 
         self.multipartmsg['Subject'] = self.simplemsg['Subject'] = "Issue"
         self.multipartmsg['From'] = self.simplemsg['From'] = FROM
         self.multipartmsg['To'] = self.simplemsg['To'] = TO
 
         # Record the MIME types of both parts - text/plain and text/html.
-        part1 = MIMEText("It's broken", 'plain')
+        part1 = MIMEText("It's broken, Hyvää huomenta. 天津元/月", 'plain')
         part2 = MIMEText("<blink>Really!</blink>", 'xml')
 
         self.multipartmsg.attach(part1)

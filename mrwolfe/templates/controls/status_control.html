@@ -6,7 +6,7 @@
   <ul class="dropdown-menu">
     {% for opt in view.list_status_options %}
     <li><a class="add-inline" 
-           href="{% url change_status object.pk %}?status={{ opt.0 }}"
+           href="{% url 'change_status' object.pk %}?status={{ opt.0 }}"
            target="#status"
            data-toggle="modal"
            data-target="#MyModal"

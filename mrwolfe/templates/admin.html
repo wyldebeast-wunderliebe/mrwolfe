@@ -7,7 +7,7 @@
 
 <div class="viewlet well expanded">
   <h2>Service Level Agreements
-    <a href="{% url create_sla_json %}" 
+    <a href="{% url 'create_sla_json' %}" 
        target="#slas"
        data-pu_callback="mrwolfe.afterAdd"
        class="btn btn-mini btn-success add-inline">
@@ -31,7 +31,7 @@
 
 <div class="viewlet well">
   <h2>Operators
-    <a href="{% url create_operator_json %}" 
+    <a href="{% url 'create_operator_json' %}" 
        target="#operators"
        data-pu_callback="mrwolfe.afterAdd"
        class="btn btn-mini btn-success add-inline">
@@ -49,7 +49,7 @@
 
 <div class="viewlet well">
   <h2>Contacts
-    <a href="{% url create_contact_json %}" 
+    <a href="{% url 'create_contact_json' %}" 
        target="#contacts"
        data-pu_callback="mrwolfe.afterAdd"
        class="btn btn-mini btn-success add-inline">
@@ -67,7 +67,7 @@
 
 <div class="viewlet well">
   <h2>Mail queues
-    <a href="{% url create_mailqueue_json %}" 
+    <a href="{% url 'create_mailqueue_json' %}" 
        target="#mailqueues"
        data-pu_callback="mrwolfe.afterAdd"
        class="btn btn-mini btn-success add-inline">

@@ -1,6 +1,6 @@
 <li class="issue">
   <span class="label label-{{ object.urgency|default:'normal' }}">{{ object.urgency }}</span>
-  <a href="{% url view_issue object.pk %}">
+  <a href="{% url 'view_issue' object.pk %}">
     {{ object }}
   </a>
   <time>{{ object.created }} | status: {{ object.status }} | resolve within: {{ object.time_to_resolve }}</time>

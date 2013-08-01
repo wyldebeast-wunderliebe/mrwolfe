@@ -10,7 +10,7 @@
 </div>
 {% endif %}
 
-<form action="{% url edit_target object.id %}" method="post">
+<form action="{% url 'edit_target' object.id %}" method="post">
   {% csrf_token %}
 
   <fieldset>

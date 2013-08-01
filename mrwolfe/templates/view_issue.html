@@ -5,16 +5,16 @@
 
   {% include "controls/status_control.html" %}
   {% include "controls/assignee_control.html" %}
-  <a href="{% url edit_issue object.pk %}" class="btn">
+  <a href="{% url 'edit_issue' object.pk %}" class="btn">
     <i class="icon-edit"></i> Edit
   </a>
   {% if issue.can_clone %}
-  <a href="{% url clone_issue object.pk %}" class="btn action-inline"
+  <a href="{% url 'clone_issue' object.pk %}" class="btn action-inline"
      data-pu_actionmethod="POST" data-pu_protect="true">
     <i class="icon-copy"></i> Clone
   </a>
   {% endif %}
-  <a href="{% url create_comment_json object.pk %}" class="btn add-inline"
+  <a href="{% url 'create_comment_json' object.pk %}" class="btn add-inline"
      target="#comments">
     <i class="icon-comment"></i> Add comment
   </a>  
@@ -31,7 +31,7 @@
 <dl>
   {% if object.sla %}
   <dt>SLA</dt>
-  <dd><a href="{% url view_sla object.sla.pk %}">{{ object.sla }}</a></dd>
+  <dd><a href="{% url 'view_sla' object.sla.pk %}">{{ object.sla }}</a></dd>
   {% endif %}
   <dt>Service</dt><dd>{{ object.service }}</dd>
   <dt>Created</dt><dd>{{ object.created }}</dd>
@@ -46,7 +46,7 @@
 
 <div class="viewlet well">
   <h2>Description</h2>
-  {{ view.text }}
+  {{ view.text|safe }}
 </div>
 
 {% if object.attachment_set.count %}
@@ -55,7 +55,10 @@
   <ul>
     {% for attachment in object.attachment_set.all %}
     <li>
-      <a href="{{ attachment.download_url }}">
+      <a href="{{ attachment.download_url }}" 
+         data-target="#MyModal"
+         data-toggle="modal"
+         >
         {{ attachment.filename }} [{{ attachment.mimetype }}]
       </a>
     </li>

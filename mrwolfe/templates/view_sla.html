@@ -2,7 +2,7 @@
 
 {% block tools %}
 <a class="btn btn-success" 
-   href="{% url create_issue %}?sla={{ sla.pk }}"><i class="icon-plus"></i> New issue</a>
+   href="{% url 'create_issue' %}?sla={{ sla.pk }}"><i class="icon-plus"></i> New issue</a>
 {% endblock %}
 
 {% block content %}
@@ -10,9 +10,9 @@
 <h2>{{ object }}
   <div class="btn-group controls">
     <a class="btn btn-mini"
-       href="{% url edit_sla sla.pk %}"><i class="icon-pencil"></i></a>  
+       href="{% url 'edit_sla' sla.pk %}"><i class="icon-pencil"></i></a>  
     <a class="btn btn-mini btn-danger"
-       href="{% url delete_sla sla.pk %}"><i class="icon-remove"></i></a>
+       href="{% url 'delete_sla' sla.pk %}"><i class="icon-remove"></i></a>
   </div>
 </h2>
 
@@ -48,7 +48,7 @@
   <h2>Services 
     <a class="add-inline btn btn-success btn-mini"
        target="#services"
-       href="{% url create_service_json sla.pk %}"
+       href="{% url 'create_service_json' sla.pk %}"
        ><i class="icon-plus"></i></a>
   </h2>
   
@@ -67,7 +67,7 @@
   <h2>Rules 
     <a class="add-inline btn btn-success btn-mini"
        target="#rules"
-       href="{% url create_rule_json sla.pk %}"
+       href="{% url 'create_rule_json' sla.pk %}"
        ><i class="icon-plus"></i></a>
   </h2>
 

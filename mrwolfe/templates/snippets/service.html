@@ -3,16 +3,16 @@
   {{ object }}
   <div class="btn-group controls">
     <a class="btn btn-mini edit-inline" 
-       href="{% url edit_service_json object.pk %}">
+       href="{% url 'edit_service_json' object.pk %}">
       <i class="icon-pencil"></i>
     </a>
     <a class="rm-inline btn btn-mini btn-danger" 
-       href="{% url delete_service_json object.pk %}">
+       href="{% url 'delete_service_json' object.pk %}">
       <i class="icon-remove"></i>
     </a>
     {% if not object.is_default %}
     <a class="action-inline btn btn-mini" 
-       href="{% url set_default_service object.pk %}"
+       href="{% url 'set_default_service' object.pk %}"
        target="parents('li')"
        title="Set as default"
        rel="tooltip"

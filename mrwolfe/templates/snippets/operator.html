@@ -3,11 +3,11 @@
   {{ object }}
   <div class="btn-group controls">
     <a class="btn btn-mini edit-inline" 
-       href="{% url edit_operator_json object.pk %}">
+       href="{% url 'edit_operator_json' object.pk %}">
       <i class="icon-pencil"></i>
     </a>
     <a class="btn btn-danger btn-mini rm-inline" 
-       href="{% url delete_operator_json object.pk %}">
+       href="{% url 'delete_operator_json' object.pk %}">
       <i class="icon-remove"></i>
     </a>
   </div>

@@ -41,7 +41,10 @@ urlpatterns = patterns(
     
     (r'^$', login_required(IndexView.as_view())),
     (r'^config$', login_required(AdminView.as_view())),
+
     (r'^help$', login_required(HelpView.as_view())),
+    (r'^[a-zA-Z0-9]*\.md$', login_required(HelpView.as_view())),
+
     (r'^admin/', include(admin.site.urls)),
 
     url(r'^media/(?P<path>.*)$', 

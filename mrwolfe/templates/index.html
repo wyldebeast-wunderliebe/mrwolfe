@@ -28,11 +28,18 @@
 </div>
 
 <div class="viewlet well">
-  <h2>All unclosed tickets
-    <a class="toggle expand" href="#">▼</a>
-    <a class="toggle collapse" href="#">▲</a>
-  </h2>
-  <ul class="hide">
+  <header class="clearfix">
+    <h2 class="pull-left">All unclosed tickets</h2>
+    <span class="controls pull-right">
+      <a class="btn btn-mini toggle expand" href="#unclosed" title="Expand">
+        <i class="icon-expand"></i>
+      </a>
+      <a class="btn btn-mini toggle collapse" href="#unclosed" title="Collapse">
+        <i class="icon-collapse"></i>
+      </a>
+    </span>    
+  </header>
+  <ul class="hide" id="unclosed">
     {% for issue in view.list_unclosed_issues %}
     {% include "snippets/issue.html" with object=issue %}
     {% endfor %}

@@ -119,20 +119,22 @@ time {
 }
 
 .viewlet h2 {
-    position: relative;
     margin-top: 0px;
     margin-bottom: 0px;
 }
 
+.viewlet .controls .btn {
+    float: left;
+    margin-right: 5px;
+}
+
 .viewlet .toggle {
-    padding: 10px;
-    position: absolute;
-    right: 0;
-    top: 0;
-    line-height: 0px;
     cursor: pointer;
-    color: #303030;
     text-decoration: none;
+}
+
+.toggle.expand, .toggle.collapse {
+    height: auto;
 }
 
 .viewlet .toggle.collapse {

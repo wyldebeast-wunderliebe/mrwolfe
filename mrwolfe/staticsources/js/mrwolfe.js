@@ -6,7 +6,7 @@ mrwolfe.refreshHistory = function(issue_id) {
 
   $.get("/issue_history/" + issue_id,
         function(data) {
-          $("#history").replaceWith(data);
+          $("#history-viewlet").replaceWith(data);
         });
 };
 
@@ -33,6 +33,7 @@ mrwolfe.init_fileuploader = function(options) {
   var defaults = {
     url: '/fileupload',
     dataType: 'json',
+    
     start: function(e) {
       $($(e.target).data("progress")).show();      
     },
@@ -93,8 +94,11 @@ $(document).ready(function() {
       })
 
       $("body").on("click", ".toggle", function(e) {
-          $(e.target).parents(".viewlet").toggleClass("expanded");
-          $(e.target).parents("h2").nextAll().toggle("slow");
+
+          var tgt = $(e.currentTarget);
+
+          tgt.parents(".viewlet").toggleClass("expanded");
+          $(tgt.attr("href")).toggle("slow");
 
           e.preventDefault();
         });

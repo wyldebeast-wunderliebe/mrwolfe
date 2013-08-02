@@ -44,10 +44,11 @@
   {{ view.text|safe }}
 </div>
 
-<div class="viewlet well">
+<div class="viewlet well expanded">
   <header class="clearfix">
     <h2 class="pull-left">Attachments</h2>
-    <div class="btn btn-mini fileinput-button pull-right">
+    <span class="controls pull-right">
+    <div class="btn btn-mini btn-success fileinput-button">
       <i class="icon-plus"></i>
       <input type="file"
              multiple="true"
@@ -56,6 +57,12 @@
              data-issueid="{{ object.id }}"
              data-target="#attachments" />
     </div>  
+    <a class="btn btn-mini toggle expand" href="#attachments" title="Expand">
+      <i class="icon-expand"></i>
+    </a>
+    <a class="btn btn-mini toggle collapse" href="#attachments" title="Collapse">
+      <i class="icon-collapse"></i>
+    </a>
   </header>
 
   <div id="progress_attachment" 
@@ -70,17 +77,21 @@
   </ul>
 </div>
 
-<div class="viewlet well expanded" id="comments">
+<div class="viewlet well expanded">
   <header>
     <h2 class="pull-left">Comments</h2>
     <span class="controls pull-right">
       <a href="{% url 'create_comment_json' object.pk %}" 
-         class="btn btn-mini add-inline"
+         class="btn btn-success btn-mini add-inline"
          target="#comments" title="Add comment">
         <i class="icon-plus"></i>
       </a>  
-      <a class="toggle expand" href="#">▼</a>
-      <a class="toggle collapse" href="#">▲</a>
+      <a class="btn btn-mini toggle expand" href="#comments" title="Expand">
+        <i class="icon-expand"></i>
+      </a>
+      <a class="btn btn-mini toggle collapse" href="#comments" title="Collapse">
+        <i class="icon-collapse"></i>
+      </a>
     </span>
   </header>
   {% for comment in object.comments.all %}

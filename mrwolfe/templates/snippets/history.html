@@ -1,14 +1,23 @@
-<div class="viewlet well expanded" id="history">
-  <h2>History
-    <a class="toggle expand" href="#">▼</a>
-    <a class="toggle collapse" href="#">▲</a>
-  </h2>
-  {% for status in view.status_history %}
-  <div class="statusupdate">
-    <span class="status">{{ status.name }}</span> - <span>{{ status.date }}</span>
-    <div class="comment">
-      {{ status.comment }}
+<div class="viewlet well expanded" id="history-viewlet">
+  <header>
+    <h2 class="pull-left">History</h2>
+    <span class="controls pull-right">
+      <a class="btn btn-mini toggle expand" href="#history" title="Expand">
+        <i class="icon-expand"></i>
+      </a>
+      <a class="btn btn-mini toggle collapse" href="#history" title="Collapse">
+        <i class="icon-collapse"></i>
+      </a>
+    </span>
+  </header>
+  <div id="history">
+    {% for status in view.status_history %}
+    <div class="statusupdate">
+      <span class="status">{{ status.name }}</span> - <span>{{ status.date }}</span>
+      <div class="comment">
+        {{ status.comment }}
+      </div>
     </div>
+    {% endfor %}  
   </div>
-  {% endfor %}  
 </div>

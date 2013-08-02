@@ -134,7 +134,8 @@ INSTALLED_APPS = (
     'haystack',
     'pu_in_core',
     'pu_in_content',
-    'mrwolfe'
+    'mrwolfe',
+    'bootstrapform'
 )
 
 TEST_APPS = ("mrwolfe")

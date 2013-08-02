@@ -22,6 +22,15 @@ class HelpView(TemplateView):
 
         """ Read the README..."""
 
-        return mark_safe(markdown(
-                open(os.path.join(settings.PROJECT_ROOT, 
-                                  "docs", "intro.md")).read()))
+        if self.request.path.endswith(".md"):
+
+            doc = self.request.path.split("/")[-1]
+            
+            text = open(os.path.join(settings.PROJECT_ROOT, 
+                                  "docs", doc)).read()
+        else:
+            text = open(os.path.join(settings.PROJECT_ROOT, 
+                                     "docs", "intro.md")).read()
+
+        return mark_safe(markdown(text))
+

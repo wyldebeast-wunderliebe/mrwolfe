@@ -3,10 +3,10 @@ Mr.Wolfe support system
 
 Contents
 --------
-Introduction (this document)
-Installation [Installation](/install.md)
-Configuration [Configuration](/settings.md)
-Look & Feel [Look & Feel](/skin.md)
+- Introduction (this document)
+- [Installation](/install.md)
+- [Configuration](/settings.md)
+- [Look & Feel](/skin.md)
 
 Introduction
 ------------

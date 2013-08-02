@@ -1,6 +1,8 @@
 Installation
 ============
 
+[index](/intro.md)
+
 We assume that you'll install Mr.Wolfe on a Linux (or Unix) based
 system. We strongly advise against using Windows systems for anything
 other than playing games or throwing off high buildings.

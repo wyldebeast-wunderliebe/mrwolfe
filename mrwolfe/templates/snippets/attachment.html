@@ -1,0 +1,15 @@
+<li>
+  {% if object.is_image %}
+  <a href="{% url 'view_image' object.pk %}" 
+     data-target="#MyModal"
+     data-toggle="modal"
+     >
+    {{ object.filename }} [{{ object.mimetype }}]
+  </a>
+  {% else %}
+  <a href="{{ object.download_url }}">
+    {{ object.filename }} [{{ object.mimetype }}]
+  </a>
+  {% endif %}
+</li>
+

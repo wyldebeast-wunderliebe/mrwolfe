@@ -18,6 +18,10 @@ class Attachment(models.Model):
         return os.path.split(self._file.name)[1]
 
     @property
+    def is_image(self):
+        return "image" in self.mimetype
+
+    @property
     def download_url(self):
 
         return os.path.join(settings.MEDIA_URL, self._file.name)

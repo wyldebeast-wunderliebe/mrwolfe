@@ -44,6 +44,10 @@ h2 {
     line-height: 26px;
 }
 
+.viewlet h2.pull-left {
+    margin-right: 20px;
+}
+
 .viewlet h2 .btn {
     margin-right: 40px;
     float: right;

@@ -49,23 +49,31 @@
   {{ view.text|safe }}
 </div>
 
-{% if object.attachment_set.count %}
 <div class="viewlet well">
-  <h2>Attachments</h2>
-  <ul>
+  <header class="clearfix">
+    <h2 class="pull-left">Attachments</h2>
+    <div class="btn fileinput-button">
+      <i class="icon-file"></i> Add attachment(s)
+      <input type="file"
+             mutiple="multiple"
+             name="attachment_upload"
+             data-progress="#progress_attachment"
+             data-issueid="{{ object.id }}"
+             data-target="#attachments" />
+    </div>  
+  </header>
+
+  <div id="progress_attachment" 
+     class="progress progress-info hide">
+    <div class="bar"></div>
+  </div>
+
+  <ul id="attachments">
     {% for attachment in object.attachment_set.all %}
-    <li>
-      <a href="{{ attachment.download_url }}" 
-         data-target="#MyModal"
-         data-toggle="modal"
-         >
-        {{ attachment.filename }} [{{ attachment.mimetype }}]
-      </a>
-    </li>
+    {% include "snippets/attachment.html" with object=attachment %}
     {% endfor %}
   </ul>
 </div>
-{% endif %}
 
 <div class="viewlet well expanded" id="comments">
   <h2>Comments

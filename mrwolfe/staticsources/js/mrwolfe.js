@@ -25,6 +25,42 @@ mrwolfe.afterAdd = function(sender) {
 };
 
 
+/**
+ * Initialize file uploader widget.
+ */
+mrwolfe.init_fileuploader = function(options) {
+
+  var defaults = {
+    url: '/fileupload',
+    dataType: 'json',
+    start: function(e) {
+      $($(e.target).data("progress")).show();      
+    },
+    done: function (e, data) {
+      
+      var tgt = $(e.target);
+      
+      $(tgt.data("target")).append(data.result.html);        
+      $(tgt.data("progress") + " .bar").css("width", "100%");
+      $(tgt.data("progress")).hide("slow");
+    },
+    progress: function (e, data) {
+      var progress = parseInt(data.loaded / data.total * 100, 10);
+      $($(e.target).data("progress") + " .bar").css("width", progress + "%");
+    }
+  };
+  
+  if (options) {
+    $.extend(defaults, options);
+  }
+  
+  $("input[type='file']").each(function() {
+      defaults['formData'] = {"issue_id": $(this).data("issueid")}; 
+      $(this).fileupload(defaults);
+    });
+};
+
+
 $(document).ready(function() {
 
     // Setup AJAX calls for CSRF
@@ -79,4 +115,8 @@ $(document).ready(function() {
         $(this).removeData('modal');
       });
 
+    mrwolfe.init_fileuploader();
   });
+
+
+

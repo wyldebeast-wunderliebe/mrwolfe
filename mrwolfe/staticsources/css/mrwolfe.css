@@ -124,7 +124,7 @@ time {
     margin-bottom: 0px;
 }
 
-.viewlet h2 .toggle {
+.viewlet .toggle {
     padding: 10px;
     position: absolute;
     right: 0;
@@ -135,7 +135,7 @@ time {
     text-decoration: none;
 }
 
-.viewlet h2 .toggle.collapse {
+.viewlet .toggle.collapse {
     display: none;
 }
 
@@ -143,7 +143,7 @@ time {
     display: block;
 }
 
-.viewlet.expanded h2 .toggle.expand {
+.viewlet.expanded .toggle.expand {
     display: none;
 }
 
@@ -178,4 +178,10 @@ time {
 
 .helptext {
     color: #3A87AD;
+}
+
+div.descr {
+    font-style: italic;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #c0c0c0;
 }

@@ -14,10 +14,6 @@
     <i class="icon-copy"></i> Clone
   </a>
   {% endif %}
-  <a href="{% url 'create_comment_json' object.pk %}" class="btn add-inline"
-     target="#comments">
-    <i class="icon-comment"></i> Add comment
-  </a>  
 </div>
 {% endblock %}
 
@@ -44,18 +40,17 @@
   <dt>Contact</dt><dd>{{ object.contact }}</dd>
 </dl>
 
-<div class="viewlet well">
-  <h2>Description</h2>
+<div class="descr">
   {{ view.text|safe }}
 </div>
 
 <div class="viewlet well">
   <header class="clearfix">
     <h2 class="pull-left">Attachments</h2>
-    <div class="btn fileinput-button">
-      <i class="icon-file"></i> Add attachment(s)
+    <div class="btn btn-mini fileinput-button pull-right">
+      <i class="icon-plus"></i>
       <input type="file"
-             mutiple="multiple"
+             multiple="true"
              name="attachment_upload"
              data-progress="#progress_attachment"
              data-issueid="{{ object.id }}"
@@ -76,10 +71,18 @@
 </div>
 
 <div class="viewlet well expanded" id="comments">
-  <h2>Comments
-    <a class="toggle expand" href="#">▼</a>
-    <a class="toggle collapse" href="#">▲</a>
-  </h2>
+  <header>
+    <h2 class="pull-left">Comments</h2>
+    <span class="controls pull-right">
+      <a href="{% url 'create_comment_json' object.pk %}" 
+         class="btn btn-mini add-inline"
+         target="#comments" title="Add comment">
+        <i class="icon-plus"></i>
+      </a>  
+      <a class="toggle expand" href="#">▼</a>
+      <a class="toggle collapse" href="#">▲</a>
+    </span>
+  </header>
   {% for comment in object.comments.all %}
   {% include "snippets/comment.html" with object=comment %}
   {% endfor %}

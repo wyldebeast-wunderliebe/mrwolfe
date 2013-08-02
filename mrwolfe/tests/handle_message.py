@@ -46,10 +46,17 @@ class HandleMessageTest(TestCase):
         # Record the MIME types of both parts - text/plain and text/html.
         part1 = MIMEText("It's broken, Hyvää huomenta. 天津元/月", 'plain')
         part2 = MIMEText("<blink>Really!</blink>", 'xml')
+        part3 = MIMEText(
+            "Hyvää huomenta".decode("utf-8").encode("iso-8859-1"),
+            'plain')
+        part4 = MIMEText(
+            "Hyvää huomenta".decode("utf-8").encode("iso-8859-1"),
+            'html')
 
         self.multipartmsg.attach(part1)
         self.multipartmsg.attach(part2)
-
+        self.multipartmsg.attach(part3)
+        self.multipartmsg.attach(part4)
 
     def test_handle_message(self):
 
@@ -60,7 +67,6 @@ class HandleMessageTest(TestCase):
         notification = NotificationsBin.receive()
 
         self.assertEquals([FROM], notification['to'])
-
 
     def test_handle_message_with_extended_from(self):
 

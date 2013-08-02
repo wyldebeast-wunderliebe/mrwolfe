@@ -87,7 +87,8 @@ def handle_message(message):
                 charset = part.get_content_charset()
 
             text = unicode(part.get_payload(decode=True), 
-                           str(charset), "ignore").encode('utf8','replace')
+                           str(charset), 
+                           "replace").encode('utf8','replace')
 
             html.append(html2text(text))
         else:

@@ -51,3 +51,6 @@ class NotificationTest(TestCase):
             notification = NotificationsBin.receive()
         except:
             self.fail("We should have mail!")
+
+        # reset...
+        settings.NOTIFICATION_BLACKLIST = []

@@ -4,3 +4,4 @@ from rule import RuleTest
 from issue import IssueTest
 from sla import SLATest
 from notification import NotificationTest
+from status import StatusTest

@@ -77,8 +77,8 @@ def handle_message(message):
             body.append(unicode(
                 part.get_payload(decode=True),
                 part.get_content_charset(),
-                'replace'
-            ).encode('utf8','replace'))
+                'ignore'
+            ).encode('utf8','ignore'))
         elif part.get_content_type() == "text/html":
 
             if part.get_content_charset() is None:
@@ -88,7 +88,7 @@ def handle_message(message):
 
             text = unicode(part.get_payload(decode=True), 
                            str(charset), 
-                           "replace").encode('utf8','replace')
+                           "ignore").encode('utf8','ignore')
 
             html.append(html2text(text))
         else:

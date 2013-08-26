@@ -163,7 +163,7 @@ class Issue(models.Model):
         """ Clone into new issue """
 
         if not self.can_clone:
-            return
+            return None
 
         _clone = Issue.objects.create(
             sla=self.sla,
@@ -179,6 +179,10 @@ class Issue(models.Model):
             comment_clone = _clone.comments.create(comment=comment.comment)
             comment_clone.date = comment.date
             comment_clone.save()
+
+        self.status_set.create(name=self.status,
+                               issue=_clone,
+                               comment="Cloned status")
 
         return _clone
 

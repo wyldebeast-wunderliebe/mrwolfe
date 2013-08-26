@@ -84,7 +84,7 @@ class IssueCreate(CreateView):
 
     def get_success_url(self):
 
-        return "/?message=Issue+aangemaakt&status=0"
+        return "/?message=Issue+created&status=0"
 
 
 class IssueAssigneeJSONEdit(JSONUpdateView):
@@ -120,8 +120,13 @@ class IssueJSONClone(JSONDetailView):
         self.object = self.get_object()
         clone = self.object.clone()
 
-        context = {"status": 0,
-                   "message": "Your issue has been cloned to %s" % clone.issue_id}
+        if clone:
+
+            context = {"status": 0,
+                       "message": "Your issue has been cloned to %s" % clone.issue_id}
+        else:
+            context = {"status": -1,
+                       "message": "Not cloned!"}
 
         return self.render_to_response(context)
 

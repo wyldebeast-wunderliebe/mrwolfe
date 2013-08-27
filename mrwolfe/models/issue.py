@@ -180,7 +180,7 @@ class Issue(models.Model):
             comment_clone.date = comment.date
             comment_clone.save()
 
-        self.status_set.create(name=self.status,
+        self.status_history.create(name=self.status,
                                issue=_clone,
                                comment="Cloned status")
 

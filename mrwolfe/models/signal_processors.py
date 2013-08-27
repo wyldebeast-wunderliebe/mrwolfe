@@ -35,6 +35,10 @@ def comment_post_save(sender, instance, created=False, **kwargs):
                instance.issue.contact.email
                )
 
+    # trigger save on issue, to reindex
+    instance.issue.save()
+
+
 @receiver(post_save, sender=Status)
 def status_post_save(sender, instance, created=False, **kwargs):
 

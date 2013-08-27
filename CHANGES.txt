@@ -1,3 +1,9 @@
+1.0.5a
+======
+ * Fixed broken search index
+ * Added comments and status comments to index
+ * minor style fixes
+
 1.0.4a
 ======
  * Added 'on hold' status

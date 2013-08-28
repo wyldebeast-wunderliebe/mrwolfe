@@ -1,20 +1,17 @@
 {% extends "base.html" %}
 
 {% block tools %}
-<a class="btn btn-success" 
-   href="{% url 'create_issue' %}?sla={{ sla.pk }}"><i class="icon-plus"></i> New issue</a>
+<a class="btn btn"
+   href="{% url 'edit_sla' sla.pk %}"><i class="icon-pencil"></i> Edit</a>  
+<a class="btn btn btn-danger"
+   href="{% url 'delete_sla' sla.pk %}"><i class="icon-remove"></i> Delete</a>
 {% endblock %}
 
 {% block content %}
 
-<h2>{{ object }}
-  <div class="btn-group controls">
-    <a class="btn btn-mini"
-       href="{% url 'edit_sla' sla.pk %}"><i class="icon-pencil"></i></a>  
-    <a class="btn btn-mini btn-danger"
-       href="{% url 'delete_sla' sla.pk %}"><i class="icon-remove"></i></a>
-  </div>
-</h2>
+<header>
+  <h2>{{ object }}</h2>
+</header>
 
 <table class="table well">
   <thead>
@@ -30,9 +27,10 @@
 </table>
 
 <div class="viewlet well">
-  <h2>Contacts
-  </h2>
-  
+  <header>
+    <h2>Contacts</h2>
+  </header>
+    
   {% if not view.list_contacts %}
   <div class="alert warning">No contacts defined yet!</div>
   {% endif %}
@@ -45,12 +43,15 @@
 </div>
 
 <div class="viewlet well">
-  <h2>Services 
-    <a class="add-inline btn btn-success btn-mini"
-       target="#services"
-       href="{% url 'create_service_json' sla.pk %}"
-       ><i class="icon-plus"></i></a>
-  </h2>
+  <header>
+    <h2 class="pull-left">Services</h2>
+    <span class="controls pull-right">
+      <a class="add-inline btn btn-success btn-mini"
+         target="#services"
+         href="{% url 'create_service_json' sla.pk %}"
+         ><i class="icon-plus"></i></a>
+    </span>
+  </header>
   
   {% if not view.list_services %}
   <div class="alert warning">No services defined yet!</div>
@@ -64,12 +65,15 @@
 </div>
 
 <div class="viewlet well">
-  <h2>Rules 
-    <a class="add-inline btn btn-success btn-mini"
-       target="#rules"
-       href="{% url 'create_rule_json' sla.pk %}"
-       ><i class="icon-plus"></i></a>
-  </h2>
+  <header> 
+    <h2 class="pull-left">Rules</h2> 
+    <span class="controls pull-right">
+      <a class="add-inline btn btn-success btn-mini"
+         target="#rules"
+         href="{% url 'create_rule_json' sla.pk %}"
+         ><i class="icon-plus"></i></a>
+    </span>
+  </header>
 
   <p class="text-info">
     Add matching rules for incoming mail. If a rule matches, this SLA

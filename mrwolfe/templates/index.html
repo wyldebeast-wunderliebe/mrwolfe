@@ -1,16 +1,11 @@
 {% extends "base.html" %}
 
-{% block tools %}
-<div id="tools" class="btn-group">
-  <a class="btn btn-success" 
-     href="{% url 'create_issue' %}"><i class="icon-plus"></i> New issue</a>
-</div>
-{% endblock %}
-
 {% block content %}
 
 <div class="viewlet well">
-  <h2>Unassigned tickets</h2>
+  <header>
+    <h2>Unassigned tickets</h2>
+  </header>
   <ul>
     {% for issue in view.list_unassigned_issues %}
     {% include "snippets/issue.html" with object=issue %}
@@ -19,12 +14,18 @@
 </div>
 
 <div class="viewlet well">
-  <h2>Your tickets</h2>
+  <header>
+    <h2>Your tickets</h2>
+  </header>
+  {% if not view.list_my_issues %}
+  No issues. Sit back and relax.
+  {% else %}
   <ul>
     {% for issue in view.list_my_issues %}
     {% include "snippets/issue.html" with object=issue %}
     {% endfor %}
   </ul>
+  {% endif %}
 </div>
 
 <div class="viewlet well">

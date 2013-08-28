@@ -3,6 +3,15 @@
     margin-bottom: 20px;
 }
 
+.navbar {
+    margin-top: 10px;
+}
+
+.navbar-inner {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 .issue.normal {
 }
 
@@ -53,10 +62,6 @@ h2 {
     float: right;
 }
 
-.viewlet ul {
-    width: 60%;
-}
-
 li.editable .controls {
     float: right;
     opacity: 0.2;
@@ -64,7 +69,8 @@ li.editable .controls {
 
 li.editable {
     clear: both;
-    height: 30px;
+    padding: 5px;
+    border-radius: 5px;
 }
 
 li.editable:hover .controls {
@@ -76,7 +82,7 @@ li.editable:hover .controls {
 }
 
 li.editable:hover {
-    text-decoration: underline;
+    background-color: #e3e3e3;
 }
 
 .controls .btn-danger {
@@ -105,6 +111,11 @@ li.editable:hover {
 
 .issue {
     color: #303030;
+    margin-bottom: 20px;
+}
+
+.issue a {
+    margin-left: 20px;
 }
 
 time {
@@ -115,12 +126,15 @@ time {
 }
 
 .issue time {
-    margin-left: 50px;
+    margin-left: 70px;
 }
 
 .viewlet h2 {
     margin-top: 0px;
-    margin-bottom: 0px;
+}
+
+.viewlet header .controls {
+    padding-right: 5px;
 }
 
 .viewlet .controls .btn {

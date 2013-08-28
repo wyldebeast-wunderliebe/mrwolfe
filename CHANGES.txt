@@ -1,3 +1,7 @@
+1.0.6a
+======
+ * Style consistency fixes
+
 1.0.5a
 ======
  * Fixed broken search index

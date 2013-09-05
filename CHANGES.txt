@@ -1,6 +1,7 @@
 1.0.6a
 ======
  * Style consistency fixes
+ * cleanup of redundant code
 
 1.0.5a
 ======

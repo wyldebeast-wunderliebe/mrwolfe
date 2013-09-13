@@ -1,9 +1,9 @@
-import poplib
 import logging
 from email import parser
 from django.core.management.base import NoArgsCommand
 from mrwolfe.models.mailqueue import MailQueue
 from mrwolfe.utils import handle_message
+from mrwolfe.mailutils import POPService, IMAPService
 
 
 LOGGER = logging.getLogger("mrwolfe")
@@ -21,30 +21,38 @@ class Command(NoArgsCommand):
             self.handle_queue(queue)
 
     def handle_queue(self, mailqueue):
-        
-        pop_conn = poplib.POP3_SSL(mailqueue.host, int(mailqueue.port or 995))
-        pop_conn.user(mailqueue.usr)
-        pop_conn.pass_(mailqueue.pwd)
 
         LOGGER.info("Handling queue %s" % mailqueue)
 
-        nr_of_messages = len(pop_conn.list()[1])
+        if mailqueue.protocol == 0:
+            service = POPService(mailqueue.host, int(mailqueue.port or 995))
+        else:
+            service = IMAPService(mailqueue.host, int(mailqueue.port or 143))
+        
+        LOGGER.debug("Protocol used: %s" % 
+                     (mailqueue.protocol and "IMAP" or "POP"))
 
-        LOGGER.info("Fetching %s messages" % nr_of_messages)
+        service.auth(mailqueue.usr, mailqueue.pwd)
 
-        for i in range(nr_of_messages):
-            message = "\n".join(pop_conn.retr(i+1)[1])
-            
-            message = parser.Parser().parsestr(message)
+        cnt = 0
+        unhandled = []
 
-            # TODO: handle complex messages, with attachments and the likes...
-            #
+        for msg_id, message in service.list():
+
             try:
                 handled = handle_message(message)
 
                 if not handled:
                     LOGGER.warning("Unhandled message!")
+                    unhandled.append(msg_id)
+                else:
+                    cnt += 1
             except:
                 LOGGER.exception("Exception in handling message!")
+                unhandled.append(msg_id)
 
-        pop_conn.quit()
+        service.unread(unhandled)
+
+        LOGGER.info("Handled %i messages" % cnt)
+
+        service.quit()

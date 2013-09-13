@@ -166,6 +166,11 @@ LOGGING = {
             'class': 'django.utils.log.AdminEmailHandler',
             'filters': []
         },
+        'console':{
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'standard'
+        },
         'default': {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',

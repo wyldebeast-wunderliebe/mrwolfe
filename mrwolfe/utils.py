@@ -90,7 +90,7 @@ def handle_message(message):
                            str(charset), 
                            "ignore").encode('utf8','ignore')
 
-            html.append(html2text(text))
+            html.append(html2text(text).replace("&nbsp_place_holder;", " "))
         else:
             filename = part.get_filename()
             if not filename:

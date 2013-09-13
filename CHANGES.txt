@@ -1,3 +1,9 @@
+1.1.0a
+======
+ * Added IMAP support
+   You need to change the mrwolfe_mailqueue for that, as follows:
+   ALTER TABLE mrwolfe_mailqueue add column protocol integer NOT NULL;
+
 1.0.6a
 ======
  * Style consistency fixes

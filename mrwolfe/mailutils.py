@@ -22,7 +22,10 @@ class IMAPService(object):
         response = self.service.fetch(messages, ['RFC822'])
 
         for msg_id, data in response.iteritems():
-            yield (msg_id, email.message_from_string(data['RFC822']))
+
+            x = 1
+            
+            yield (msg_id, email.message_from_string(data['RFC822'].encode("utf-8", "ignore")))
 
     def quit(self):
 

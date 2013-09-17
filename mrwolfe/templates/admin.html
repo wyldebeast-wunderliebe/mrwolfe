@@ -35,7 +35,7 @@
 
 <div class="viewlet well">
   <header class="clearfix">
-    <h2 class="pull-left">Operators</h2>
+    <h2 class="pull-left">Operators ({ view.list_operators.count })</h2>
     <span class="controls pull-right">
       <a href="{% url 'create_operator_json' %}" 
          target="#operators"
@@ -60,7 +60,7 @@
 
 <div class="viewlet well">
   <header class="clearfix">
-    <h2 class="pull-left">Contacts</h2>
+    <h2 class="pull-left">Contacts ({{ view.list_contacts.count }})</h2>
     <span class="controls pull-right">
       <a href="{% url 'create_contact_json' %}" 
          target="#contacts"
@@ -85,7 +85,7 @@
 
 <div class="viewlet well">
   <header class="clearfix">
-    <h2 class="pull-left">Mail queues</h2>
+    <h2 class="pull-left">Mail queues ({{ view.list_mailqueues.count }})</h2>
     <span class="controls pull-right">
       <a href="{% url 'create_mailqueue_json' %}" 
          target="#mailqueues"

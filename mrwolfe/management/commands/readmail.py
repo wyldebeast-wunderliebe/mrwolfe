@@ -51,7 +51,7 @@ class Command(NoArgsCommand):
                 LOGGER.exception("Exception in handling message!")
                 unhandled.append(msg_id)
 
-        service.unread(unhandled)
+        service.mark_unread(unhandled)
 
         LOGGER.info("Handled %i messages" % cnt)
 

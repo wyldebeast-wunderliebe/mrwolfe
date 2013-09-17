@@ -31,7 +31,7 @@ class IMAPService(object):
 
         pass
 
-    def unread(self, msg_ids):
+    def mark_unread(self, msg_ids):
 
         self.service.remove_flags(msg_ids, [SEEN])
 
@@ -59,6 +59,6 @@ class POPService(object):
 
         self.service.quit()
 
-    def unread(self, msg_ids):
+    def mark_unread(self, msg_ids):
 
         pass

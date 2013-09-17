@@ -33,15 +33,15 @@ mrwolfe.init_fileuploader = function(options) {
   var defaults = {
     url: '/fileupload',
     dataType: 'json',
-    
+
     start: function(e) {
-      $($(e.target).data("progress")).show();      
+      $($(e.target).data("progress")).show();
     },
     done: function (e, data) {
-      
+
       var tgt = $(e.target);
-      
-      $(tgt.data("target")).append(data.result.html);        
+
+      $(tgt.data("target")).append(data.result.html);
       $(tgt.data("progress") + " .bar").css("width", "100%");
       $(tgt.data("progress")).hide("slow");
     },
@@ -50,13 +50,13 @@ mrwolfe.init_fileuploader = function(options) {
       $($(e.target).data("progress") + " .bar").css("width", progress + "%");
     }
   };
-  
+
   if (options) {
     $.extend(defaults, options);
   }
-  
+
   $("input[type='file']").each(function() {
-      defaults['formData'] = {"issue_id": $(this).data("issueid")}; 
+      defaults['formData'] = {"issue_id": $(this).data("issueid")};
       $(this).fileupload(defaults);
     });
 };
@@ -65,7 +65,7 @@ mrwolfe.init_fileuploader = function(options) {
 $(document).ready(function() {
 
     // Setup AJAX calls for CSRF
-    $.ajaxSetup({ 
+    $.ajaxSetup({
         beforeSend: function(xhr, settings) {
           function getCookie(name) {
             var cookieValue = null;
@@ -82,9 +82,9 @@ $(document).ready(function() {
             }
             return cookieValue;
           }
-          
+
           xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
-        } 
+        }
       });
 
     $(document).on("click", "#MyModal .cancel", function(e) {
@@ -107,12 +107,11 @@ $(document).ready(function() {
     $.datepicker.setDefaults({dateFormat: "dd-mm-yy"});
 
     $("input.date").datepicker();
-    
+
     // init datepickers in modal
     $(document).on("show", "#MyModal", function(e) {
         $("#MyModal").find("input.date").datepicker();
       });
-
 
     // Make sure to clean up modal after use...
     $('#MyModal').on('hide', function () {
@@ -121,6 +120,3 @@ $(document).ready(function() {
 
     mrwolfe.init_fileuploader();
   });
-
-
-

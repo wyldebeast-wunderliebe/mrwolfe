@@ -20,3 +20,6 @@ as well. These you can find in the setup.py file.
 There is some settings you may wish to override. The mrwolfe_buildout
 project provides an easy way of doing so. Otherwise, read the
 settings.py file within the mrwolfe sources and adapt to your needs.
+
+Check the CHANGES.txt when upgrading for database changes. We're too
+lazy to provide migrations.

@@ -1,4 +1,4 @@
-1.1.0a
+1.1.0b
 ======
  * Added IMAP support
    You need to change the mrwolfe_mailqueue for that, as follows:

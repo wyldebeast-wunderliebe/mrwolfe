@@ -1,16 +1,20 @@
 mrwolfe - "I'm Mr. Wolfe. I solve problems"
 ===========================================
 
-Mr.Wolfe is a tracker for support issues written as a Django
-application. It is not a tracker for software issues, like Bugzilla,
-Jira, etc. In the latter issues are related to software, and are
-tracked in terms of a life cycle from incoming to resolving in a
-specific software release (or closing without a release). Mr.Wolfe on
-the other hand tracks support issues, that may be questions,
-performance problems, software failures, etc. in terms of a life cycle
-from perceived problem to solved problem.  An issue in Mr.Wolfe may or
-may not result in a software issue.
+Summary
+-------
+Mr.Wolfe is a tracker for support issues written on the Django
+platform. It is not a tracker for software issues specifically, like
+Bugzilla, Jira, etc. In the latter type of tracker, issues are related
+to software, and are tracked in terms of a life cycle from incoming to
+resolving in a specific software release (or closing without a
+release). Mr.Wolfe on the other hand tracks support issues, that may
+be questions, performance problems, software failures, etc. in terms
+of a life cycle from perceived problem to solved problem. An issue in
+Mr.Wolfe may or may not result in a software issue.
 
+Principles
+----------
 Issues in Mr.Wolfe are related to a Service Level Agreement, and are
 handled according to the services agreed in the SLA. Several services
 may be added to a SLA, like 'high priority, solve within 8 hours' or
@@ -19,9 +23,11 @@ these services to determine the status of the issue, like 'critical'
 (deadline is soon) or 'normal' (sit back and relax).
 
 Issues are read from one or more mail queues (let's face it, customers
-will just keep sending those issues per mail anyway) and dispatched to
-the proper SLA if one can be found. Otherwise, it is orphaned and
-shown on the operator dashboard.
+will just keep sending those issues per mail anyway; POP and IMAP are
+supported) and dispatched to the proper SLA if one can be
+found. Otherwise, it is orphaned and shown on the operator dashboard.
+The tracker is not intended for web access by customers; their only
+interface to issues is email.
 
 The intended target audience of Mr.Wolfe is support teams and help
 desks; it is an alternative to the well known OTRS, although it is

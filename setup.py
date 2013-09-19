@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 here = os.path.abspath(os.path.dirname(__file__))
 README = open(os.path.join(here, 'README.md')).read()
 CHANGES = open(os.path.join(here, 'CHANGES.txt')).read()
-VERSION = "1.1.0a"
+VERSION = "1.1.0b"
 REQUIRES = ['django>=1.5', 'pu_in_core', 'pu_in_content', 'django-compressor',
             'django-attachments', 'django-haystack>=2.0', 'whoosh',
             'markdown', 'html2text', 'chardet', 'django-bootstrap-form',
@@ -17,7 +17,7 @@ setup(name='mrwolfe',
       description='Django Issue tracker & support system',
       long_description=README,
       classifiers=[
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 4 - Beta",
         "Framework :: Django",
         "Intended Audience :: Developers",
         "License :: Freely Distributable",

@@ -7,5 +7,6 @@ from service import Service
 from comment import Comment
 from rule import Rule
 from attachment import Attachment
+from mailqueue import MailQueue
 
 from signal_processors import *

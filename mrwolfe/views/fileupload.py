@@ -26,6 +26,7 @@ class UploadView(View):
 
         temp_file = None
         file_name = None
+        attachments = []
 
         for filename in request.FILES.keys():
 
@@ -40,13 +41,12 @@ class UploadView(View):
             att.mimetype = mime_type
             att.issue = issue
             att.save()
+            attachments.append(att)
 
         # Send back results to the client. Client should 'handle'
         # file_id etc.
         #
         context = {}
-
-        attachments = issue.attachment_set.all()
 
         template = "snippets/attachments.html"
 

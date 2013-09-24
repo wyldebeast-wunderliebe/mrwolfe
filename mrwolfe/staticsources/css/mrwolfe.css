@@ -201,3 +201,7 @@ div.descr {
     margin-bottom: 20px;
     border-bottom: 1px solid #c0c0c0;
 }
+
+.wide input, .wide textarea, .wide .uneditable-input {
+    width: 412px;
+}

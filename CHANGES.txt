@@ -1,3 +1,11 @@
+1.1.1b
+======
+ * Fix for issue #10
+ * Fix for issue #9
+ * Fix for issue #6
+ * Fix for issue #7
+ * Unicode problem in utils fixed
+
 1.1.0b
 ======
  * Added IMAP support

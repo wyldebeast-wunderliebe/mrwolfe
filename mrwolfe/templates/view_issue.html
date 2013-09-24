@@ -77,7 +77,7 @@
 
 <div class="viewlet well expanded">
   <header class="clearfix">
-    <h2 class="pull-left">Comments</h2>
+    <h2 class="pull-left">Comments ({{ object.comments.count }})</h2>
     <span class="controls pull-right">
       <a href="{% url 'create_comment_json' object.pk %}" 
          class="btn btn-success btn-mini add-inline"
@@ -92,9 +92,11 @@
       </a>
     </span>
   </header>
+  <div id="comments">
   {% for comment in object.comments.all %}
   {% include "snippets/comment.html" with object=comment %}
   {% endfor %}
+  </div>
 </div>
 
 {% include "snippets/history.html" %}

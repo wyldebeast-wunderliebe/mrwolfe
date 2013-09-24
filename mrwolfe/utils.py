@@ -78,17 +78,15 @@ def handle_message(message):
                 part.get_payload(decode=True),
                 part.get_content_charset(),
                 'ignore'
-            ).encode('utf8','ignore'))
+            ))
         elif part.get_content_type() == "text/html":
 
             if part.get_content_charset() is None:
-                charset = chardet.detect(str(part))['encoding']
+                charset = str(chardet.detect(str(part))['encoding'])
             else:
-                charset = part.get_content_charset()
+                charset = str(part.get_content_charset())
 
-            text = unicode(part.get_payload(decode=True), 
-                           str(charset), 
-                           "ignore").encode('utf8','ignore')
+            text = unicode(part.get_payload(decode=True), charset, "ignore")
 
             html.append(html2text(text).replace("&nbsp_place_holder;", " "))
         else:

@@ -40,7 +40,7 @@
       </a>
     </span>    
   </header>
-  <ul class="hide" id="unclosed">
+  <ul id="unclosed">
     {% for issue in view.list_unclosed_issues %}
     {% include "snippets/issue.html" with object=issue %}
     {% endfor %}

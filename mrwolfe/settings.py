@@ -291,3 +291,35 @@ HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 HAYSTACK_SEARCH_RESULTS_PER_PAGE = 27
 #
 # END search
+
+
+## BEGIN OpenID settings
+#
+
+# Should users be created when new OpenIDs are used to log in?
+OPENID_CREATE_USERS = False
+
+# When logging in again, should we overwrite user details based on
+# data received via Simple Registration?
+OPENID_UPDATE_DETAILS_FROM_SREG = False
+
+# If set, always use this as the identity URL rather than asking the
+# user.  This only makes sense if it is a server URL.
+OPENID_SSO_SERVER_URL = 'https://www.google.com/accounts/o8/id'
+
+# Tell django.contrib.auth to use the OpenID signin URLs.
+LOGIN_URL = '/openid/login/'
+LOGIN_REDIRECT_URL = 'http://support.evilempire.org/'
+
+ALLOWED_EXTERNAL_OPENID_REDIRECT_DOMAINS = ['support.evilempire.org']
+
+# Should django_auth_openid be used to sign into the admin interface?
+OPENID_USE_AS_ADMIN_LOGIN = False
+
+# Enable these for OpenID authentication
+#
+# AUTHENTICATION_BACKENDS += ('django_openid_auth.auth.OpenIDBackend',)
+# SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+
+#
+## END OpenID settings

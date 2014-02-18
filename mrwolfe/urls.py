@@ -185,3 +185,12 @@ urlpatterns = patterns(
     (r'^static/(?P<path>.*)$', 'django.views.static.serve',
      {'document_root': settings.STATIC_ROOT}),
     )
+
+# Use Open ID if available
+#
+if ("django_openid_auth" in settings.INSTALLED_APPS):
+
+    urlpatterns += patterns(
+        "",
+        (r'^openid/', include('django_openid_auth.urls'))
+    )

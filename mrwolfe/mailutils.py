@@ -23,8 +23,6 @@ class IMAPService(object):
 
         for msg_id, data in response.iteritems():
 
-            x = 1
-            
             yield (msg_id, email.message_from_string(data['RFC822'].encode("utf-8", "ignore")))
 
     def quit(self):

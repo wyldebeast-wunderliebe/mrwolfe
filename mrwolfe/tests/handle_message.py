@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+import os
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.application import MIMEApplication
 from django.test.testcases import TestCase
 from mrwolfe.tests.utils import NotificationsBin
 from mrwolfe.utils import handle_message
@@ -8,8 +12,7 @@ from mrwolfe.models.issue import Issue
 from mrwolfe.models.rule import Rule
 from mrwolfe.models.service import Service
 from mrwolfe.models.contact import Contact
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
+
 
 TO = "support@evilempire.com"
 FROM = "dokter@evilempire.com"
@@ -156,3 +159,24 @@ class HandleMessageTest(TestCase):
 
         self.assertEquals("Invalid contact for support", 
                           notification['subject'])
+
+
+    def test_handle_winmail_dat(self):
+
+        msg = MIMEMultipart('alternative')
+
+        msg['Subject'] = self.simplemsg['Subject'] = "Issue"
+        msg['From'] = self.simplemsg['From'] = FROM
+        msg['To'] = self.simplemsg['To'] = TO
+
+        winmaildat = os.path.join(os.path.dirname(__file__), "winmail.dat")
+
+        msg.attach(MIMEApplication(file(winmaildat).read(), "ms-tnef"))
+
+        handle_message(msg)
+
+        issue = self.sla.issue_set.all()[0]
+
+        self.assertEquals(1, issue.attachment_set.all().count())
+
+        self.assertTrue(issue.attachment_set.all()[0].is_image)

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+
 {% block tools %}
 
   {% include "controls/status_control.html" %}
@@ -21,6 +22,17 @@
   <span class="label label-{{ issue.urgency }}">{{ issue.urgency }}</span>
   {{ object.issue_id }} {{ object.title }}
 </h2>
+
+
+{% if not object.sla %}
+<div class="alert alert-error"> 
+  <span class="alert-body">
+    This issue has not been assigned to a Service Level Agreement!
+    Please fix this before doing anything else...
+  </span>
+</div>
+{% endif %}
+
 
 <dl>
   {% if object.sla %}

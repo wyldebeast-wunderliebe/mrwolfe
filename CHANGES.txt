@@ -1,3 +1,9 @@
+1.2.0
+=====
+ * Added TNEF parse for dealing with winmail.dat sadness
+ * Cosmetic changes
+ * Added support for OpenID
+
 1.1.1b
 ======
  * Fix for issue #10

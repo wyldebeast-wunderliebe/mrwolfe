@@ -15,3 +15,5 @@ directory patches. The openid.cfg runs the patches automatically.
 
 You may want to change some of the settings concerning OpenID. These
 are in the OpenID section of the Mr.Wolfe settings.
+
+Also, add django_openid_auth to your installed apps.

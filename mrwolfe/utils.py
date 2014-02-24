@@ -2,6 +2,7 @@ import re
 import mimetypes
 import chardet
 from html2text import html2text
+from tnefparse.tnef import TNEF
 from django.conf import settings
 from django.core.files.base import ContentFile
 from mrwolfe.models.attachment import Attachment
@@ -89,8 +90,22 @@ def handle_message(message):
             text = unicode(part.get_payload(decode=True), charset, "ignore")
 
             html.append(html2text(text).replace("&nbsp_place_holder;", " "))
+
+        elif part.get_content_type() == "application/ms-tnef":
+
+            tnef = TNEF(part.get_payload(decode=True), do_checksum=False)
+
+            for tnef_att in tnef.attachments:
+
+                att = Attachment()
+                att._file = ContentFile(tnef_att.data)
+                att._file.name = tnef_att.long_filename()
+                att.mimetype = mimetypes.guess_type(tnef_att.long_filename())
+                attachments.append(att)
+
         else:
             filename = part.get_filename()
+
             if not filename:
                 ext = mimetypes.guess_extension(part.get_content_type())
                 if not ext:

@@ -5,11 +5,11 @@ from setuptools import setup, find_packages
 here = os.path.abspath(os.path.dirname(__file__))
 README = open(os.path.join(here, 'README.md')).read()
 CHANGES = open(os.path.join(here, 'CHANGES.txt')).read()
-VERSION = "1.1.1b"
+VERSION = "1.2.0"
 REQUIRES = ['django>=1.5', 'pu_in_core', 'pu_in_content', 'django-compressor',
             'django-attachments', 'django-haystack>=2.0', 'whoosh',
             'markdown', 'html2text', 'chardet', 'django-bootstrap-form',
-            'imapclient'
+            'imapclient', 'tnefparse'
             ]
 
 setup(name='mrwolfe',

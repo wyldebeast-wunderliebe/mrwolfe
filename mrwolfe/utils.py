@@ -53,7 +53,7 @@ def handle_message(message):
             settings.ALLOW_NON_CONTACTS:
         notify("issue_bounced", {}, send_from, from_addr)
         return False
-                
+
     # Is this a reply to an existing issue?
     #
     match = ISSUE_SUBJECT_MATCH.search(message['subject'])
@@ -131,7 +131,7 @@ def handle_message(message):
     if match:
         issue_id = int(match.groups()[0])
         issue = Issue.objects.get(pk=issue_id)
-        
+
         issue.comments.create(comment=body)
     else:
         issue = Issue(title=message['subject'],
@@ -148,8 +148,8 @@ def handle_message(message):
         att.issue = issue
         att.save()
 
-    notify("issue_received", 
-           {"issue": issue}, 
+    notify("issue_received",
+           {"issue": issue},
            issue.email_from,
            from_addr)
 

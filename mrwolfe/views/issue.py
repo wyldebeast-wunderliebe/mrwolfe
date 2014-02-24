@@ -7,7 +7,7 @@ from pu_in_content.views.jsonbase import JSONUpdateView, JSONDetailView
 from mrwolfe.models.issue import Issue
 from mrwolfe.models.status import Status
 from mrwolfe.models.sla import SLA
-from mrwolfe.models.user import User
+from mrwolfe.models.operator import Operator
 from mrwolfe.forms.issue import IssueForm
 from base import BaseView
 
@@ -22,12 +22,12 @@ class IssueView(BaseView):
 
     def list_status_options(self):
 
-        return (opt for opt in settings.ISSUE_STATUS_CHOICES \
-                    if opt[0] != self.object.status)
+        return (opt for opt in settings.ISSUE_STATUS_CHOICES
+                if opt[0] != self.object.status)
 
     def list_users(self):
 
-        users = User.objects.all()
+        users = Operator.objects.all()
 
         if self.object.assignee:
             users = users.exclude(id=self.object.assignee.id)
@@ -36,7 +36,7 @@ class IssueView(BaseView):
 
     @property
     def text(self):
-        
+
         return mark_safe(markdown(self.object.text))
 
 
@@ -68,17 +68,18 @@ class IssueCreate(CreateView):
     def post(self, request, *args, **kwargs):
 
         if self.request.POST.get('submit', '') == "Cancel":
-            return HttpResponseRedirect("/")    
-        else:            
+            return HttpResponseRedirect("/")
+        else:
             return super(IssueCreate, self).post(request, *args, **kwargs)
 
     def get_form(self, form_class):
-        
+
         form = super(IssueCreate, self).get_form(form_class)
 
         if "sla" in self.request.GET:
 
-            form.fields["service"].queryset = SLA.objects.get(pk=self.request.GET["sla"]).service_set.all()
+            form.fields["service"].queryset = SLA.objects.get(
+                pk=self.request.GET["sla"]).service_set.all()
 
         return form
 
@@ -94,16 +95,16 @@ class IssueAssigneeJSONEdit(JSONUpdateView):
     success_template_name = "controls/assignee_control.html"
 
     def get_context_data(self, **kwargs):
-        
+
         ctx = super(IssueAssigneeJSONEdit, self).get_context_data(**kwargs)
-        
+
         ctx.update({"view": self})
-        
-        return ctx    
+
+        return ctx
 
     def list_users(self):
 
-        users = User.objects.all()
+        users = Operator.objects.all()
 
         if self.object.assignee:
             users = users.exclude(id=self.object.assignee.id)
@@ -114,7 +115,7 @@ class IssueAssigneeJSONEdit(JSONUpdateView):
 class IssueJSONClone(JSONDetailView):
 
     model = Issue
-    
+
     def post(self, request, *args, **kwargs):
 
         self.object = self.get_object()
@@ -123,7 +124,8 @@ class IssueJSONClone(JSONDetailView):
         if clone:
 
             context = {"status": 0,
-                       "message": "Your issue has been cloned to %s" % clone.issue_id}
+                       "message": "Your issue has been cloned to %s" %
+                       clone.issue_id}
         else:
             context = {"status": -1,
                        "message": "Not cloned!"}
@@ -144,6 +146,6 @@ class IssueEdit(UpdateView):
     def post(self, request, *args, **kwargs):
 
         if self.request.POST.get('submit', '') == "Cancel":
-            return HttpResponseRedirect("/")    
-        else:            
+            return HttpResponseRedirect("/")
+        else:
             return super(IssueEdit, self).post(request, *args, **kwargs)

@@ -46,4 +46,13 @@ def notify(notification_id, context, from_addr, to_addr):
                   email_message['to'].split(","),
                   fail_silently=False)
     except:
-        LOGGER.exception("Couldn't render template, no mail sent")
+        try:
+            LOGGER.warning("Couldn't render template, trying simple message")
+
+            send_mail(email_message['subject'], 
+                      "An issue has been created", 
+                      email_message['from'],
+                      email_message['to'].split(","),
+                      fail_silently=False)
+        except:
+            LOGGER.exception("No mail sent")

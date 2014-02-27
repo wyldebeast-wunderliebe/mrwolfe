@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.test.testcases import TestCase
 from django.conf import settings
 from mrwolfe.tests.utils import NotificationsBin
@@ -8,7 +10,7 @@ class TestIssue(object):
 
     issue_id = "foo"
     title = "Foo"
-    text = "Foo foo foo"
+    text = "Foo foo foo 天津元/月</p>"
     url = "http://foo.org/foo"
 
 

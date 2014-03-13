@@ -3,6 +3,7 @@
  * Added TNEF parse for dealing with winmail.dat sadness
  * Cosmetic changes
  * Added support for OpenID
+ * Added optinal wiki addon
 
 1.1.1b
 ======

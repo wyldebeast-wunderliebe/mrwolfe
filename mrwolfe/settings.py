@@ -50,6 +50,8 @@ SITE_ID = 1
 # to load the internationalization machinery.
 USE_I18N = True
 
+USE_TZ = True
+
 # If you set this to False, Django will not format dates, numbers and
 # calendars according to the current locale
 USE_L10N = True
@@ -116,11 +118,13 @@ MIDDLEWARE_CLASSES = (
 
 TEMPLATE_CONTEXT_PROCESSORS =(
     "django.contrib.auth.context_processors.auth",
-    #"django.core.context_processors.debug",
-    #"django.core.context_processors.i18n",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
     "django.core.context_processors.static",
     "django.core.context_processors.media",
     "django.core.context_processors.request",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages",
 )
 
 ROOT_URLCONF = 'mrwolfe.urls'
@@ -133,6 +137,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'django.contrib.admin',
+    'django.contrib.sites',
     'django_extensions',
     'compressor',
     'haystack',
@@ -222,7 +227,8 @@ ISSUE_STATUS_CHOICES = (
     ('open', 'Open'),
     ('closed', 'Closed'),
     ('progress', 'In progress'),
-    ('hold', 'On hold')
+    ('hold', 'On hold'),
+    ('wait_input', 'Awaiting input'),
     )
 
 ISSUE_STATUS_OPEN = ISSUE_STATUS_CHOICES[0][0]
@@ -301,14 +307,17 @@ OPENID_CREATE_USERS = False
 
 # When logging in again, should we overwrite user details based on
 # data received via Simple Registration?
+#
 OPENID_UPDATE_DETAILS_FROM_SREG = False
 
 # If set, always use this as the identity URL rather than asking the
 # user.  This only makes sense if it is a server URL.
+#
 OPENID_SSO_SERVER_URL = 'https://www.google.com/accounts/o8/id'
 
 # Tell django.contrib.auth to use the OpenID signin URLs.
-LOGIN_URL = '/openid/login/'
+#
+#LOGIN_URL = '/openid/login/'
 LOGIN_REDIRECT_URL = 'http://support.evilempire.org/'
 
 ALLOWED_EXTERNAL_OPENID_REDIRECT_DOMAINS = ['support.evilempire.org']

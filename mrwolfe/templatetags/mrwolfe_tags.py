@@ -6,6 +6,14 @@ from django.conf import settings
 register = Library()
 
 
+@register.filter
+def get_setting(name):
+
+    """ get access to any setting in template """
+
+    return getattr(settings, name, "")
+
+
 @register.inclusion_tag('snippets/css.html')
 def list_plugin_css():
 

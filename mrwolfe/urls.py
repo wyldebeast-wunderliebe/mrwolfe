@@ -186,6 +186,7 @@ urlpatterns = patterns(
      {'document_root': settings.STATIC_ROOT}),
     )
 
+
 # Use Open ID if available
 #
 if ("django_openid_auth" in settings.INSTALLED_APPS):
@@ -193,4 +194,17 @@ if ("django_openid_auth" in settings.INSTALLED_APPS):
     urlpatterns += patterns(
         "",
         (r'^openid/', include('django_openid_auth.urls'))
+    )
+
+
+# Use Wiki if it's there
+#
+if ("wiki" in settings.INSTALLED_APPS):
+    from wiki.urls import get_pattern as get_wiki_pattern
+    from django_notify.urls import get_pattern as get_notify_pattern
+    
+    urlpatterns += patterns(
+        '',
+        (r'^notify/', get_notify_pattern()),
+        (r'^wiki', get_wiki_pattern())
     )

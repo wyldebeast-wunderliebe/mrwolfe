@@ -7,6 +7,7 @@ Contents
 - [Installation](/install.md)
 - [Configuration](/settings.md)
 - [Look & Feel](/skin.md)
+- [Wiki](/wiki.md)
 
 Introduction
 ------------

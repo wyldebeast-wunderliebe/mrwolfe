@@ -4,8 +4,8 @@ from mrwolfe.models.comment import Comment
 
 class CommentForm(forms.ModelForm):
 
-    no_notification = forms.BooleanField("Do not send notification",
-                                         required=False)
+    #no_notification = forms.BooleanField("Do not send notification",
+    #                                     required=False)
 
     class Meta:
         model = Comment

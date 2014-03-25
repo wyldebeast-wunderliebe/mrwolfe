@@ -206,5 +206,6 @@ if ("wiki" in settings.INSTALLED_APPS):
     urlpatterns += patterns(
         '',
         (r'^notify/', get_notify_pattern()),
+        (r'^wiki/', get_wiki_pattern()),
         (r'^wiki', get_wiki_pattern())
     )

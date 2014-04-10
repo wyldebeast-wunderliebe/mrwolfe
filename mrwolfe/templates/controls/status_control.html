@@ -5,11 +5,12 @@
   </a>
   <ul class="dropdown-menu">
     {% for opt in view.list_status_options %}
-    <li><a class="add-inline" 
-           href="{% url 'change_status' object.pk %}?status={{ opt.0 }}"
-           target="#status"
-           data-pu_callback="mrwolfe.refreshHistory:{{ object.pk }}"
-           data-pu_targetbehavior="replace">{{ opt.1 }}</a></li>
+    <li>
+      <a class="create-status" 
+         href="{% url 'change_status' object.pk %}?status={{ opt.0 }}">
+        {{ opt.1 }}
+      </a>
+    </li>
     {% endfor %}
   </ul>
 </div>

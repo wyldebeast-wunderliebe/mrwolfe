@@ -2,12 +2,12 @@
   <i class="icon-cog"></i>
   {{ object }}
   <div class="controls">
-    <a class="btn btn-mini edit-inline" 
-       href="{% url 'edit_service_json' object.pk %}">
+    <a class="btn btn-mini" 
+       href="{% url 'edit_service' object.pk %}">
       <i class="icon-pencil"></i>
     </a>
-    <a class="rm-inline btn btn-mini btn-danger" 
-       href="{% url 'delete_service_json' object.pk %}">
+    <a class="btn btn-mini btn-danger" 
+       href="{% url 'delete_service' object.pk %}">
       <i class="icon-remove"></i>
     </a>
     {% if not object.is_default %}

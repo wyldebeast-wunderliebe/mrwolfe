@@ -77,7 +77,7 @@ def handle_message(message):
         if part.get_content_type() == "text/plain":
             body.append(unicode(
                 part.get_payload(decode=True),
-                part.get_content_charset(),
+                part.get_content_charset() or "utf8",
                 'ignore'
             ))
         elif part.get_content_type() == "text/html":
@@ -133,6 +133,9 @@ def handle_message(message):
         issue = Issue.objects.get(pk=issue_id)
 
         issue.comments.create(comment=body)
+
+        if issue.status == settings.ISSUE_STATUS_WAIT:
+            issue.set_status(settings.ISSUE_STATUS_OPEN)
     else:
         issue = Issue(title=message['subject'],
                       contact=sender,

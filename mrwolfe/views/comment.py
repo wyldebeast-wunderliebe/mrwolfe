@@ -1,26 +1,16 @@
-from pu_in_content.views.jsonbase import JSONCreateView, JSONUpdateView, \
-    JSONDeleteView
+from django.views.generic.edit import CreateView
 from mrwolfe.models.comment import Comment
 from mrwolfe.forms.comment import CommentForm
 
 
-class CommentJSONCreate(JSONCreateView):
+class CreateComment(CreateView):
 
     model = Comment
     form_class = CommentForm
-    success_template_name = "snippets/comment.html"
+    template_name = "snippets/comment.html"
 
-    def get_initial(self):
+    def form_valid(self, form):
 
-        return {'issue': self.kwargs['issue_pk']}
+        form.instance.save()
 
-class CommentJSONEdit(JSONUpdateView):
-
-    model = Comment
-    form_class = CommentForm
-    success_template_name = "snippets/comment.html"
-
-
-class CommentJSONDelete(JSONDeleteView):
-
-    model = Comment
+        return self.render_to_response({'object': form.instance})

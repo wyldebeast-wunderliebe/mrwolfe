@@ -56,67 +56,91 @@ mrwolfe.init_fileuploader = function(options) {
   }
 
   $("input[type='file']").each(function() {
-      defaults['formData'] = {"issue_id": $(this).data("issueid")};
-      $(this).fileupload(defaults);
-    });
+    defaults['formData'] = {"issue_id": $(this).data("issueid")};
+    $(this).fileupload(defaults);
+  });
 };
 
 
 $(document).ready(function() {
 
-    // Setup AJAX calls for CSRF
-    $.ajaxSetup({
-        beforeSend: function(xhr, settings) {
-          function getCookie(name) {
-            var cookieValue = null;
-            if (document.cookie && document.cookie != '') {
-              var cookies = document.cookie.split(';');
-              for (var i = 0; i < cookies.length; i++) {
-                var cookie = jQuery.trim(cookies[i]);
-                // Does this cookie string begin with the name we want?
-                if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                  break;
-                }
-              }
+  // Setup AJAX calls for CSRF
+  $.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+      function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+          var cookies = document.cookie.split(';');
+          for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
             }
-            return cookieValue;
           }
-
-          xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
         }
-      });
+        return cookieValue;
+      }
 
-    $(document).on("click", "#MyModal .cancel", function(e) {
-        $('#MyModal').modal('hide');
-        e.preventDefault();
-        e.stopPropagation();
-      })
-
-      $("body").on("click", ".toggle", function(e) {
-
-          var tgt = $(e.currentTarget);
-
-          tgt.parents(".viewlet").toggleClass("expanded");
-          $(tgt.attr("href")).toggle("slow");
-
-          e.preventDefault();
-        });
-
-    // Set calendar defaults
-    $.datepicker.setDefaults({dateFormat: "dd-mm-yy"});
-
-    $("input.date").datepicker();
-
-    // init datepickers in modal
-    $(document).on("show", "#MyModal", function(e) {
-        $("#MyModal").find("input.date").datepicker();
-      });
-
-    // Make sure to clean up modal after use...
-    $('#MyModal').on('hide', function () {
-        $(this).removeData('modal');
-      });
-
-    mrwolfe.init_fileuploader();
+      xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+    }
   });
+
+  $(document).on("click", "#MyModal .cancel", function(e) {
+    $('#MyModal').modal('hide');
+    e.preventDefault();
+    e.stopPropagation();
+  })
+
+  $("body").on("click", ".toggle", function(e) {
+
+    var tgt = $(e.currentTarget);
+
+    tgt.parents(".viewlet").toggleClass("expanded");
+    $(tgt.attr("href")).toggle("slow");
+
+    e.preventDefault();
+  });
+
+  // Set calendar defaults
+  $.datepicker.setDefaults({dateFormat: "dd-mm-yy"});
+
+  $("input.date").datepicker();
+
+  // Make sure to clean up modal after use...
+  $('.modal').on('hide', function () {
+    $(this).removeData('modal');
+  });
+
+  $(document).on("click", ".create-status", function(e) {
+
+    var link = $(e.currentTarget);
+
+    e.preventDefault();
+
+    $.get(link.attr("href"), function(data) {
+
+      $("#modalcontainer").html(data);
+      $("#modalcontainer .modal").modal('show');
+    });
+
+    $(document).on("submit", "form.create-inline", function(e) {
+
+      var form = $(e.currentTarget);
+
+      e.preventDefault();      
+
+      $.post(form.attr("action"), form.serialize(), function(data) {
+
+        $("#modalcontainer .modal").modal('hide');
+        
+        $("#status").replaceWith(data);
+      });
+
+    });
+
+  });
+
+  mrwolfe.init_fileuploader();
+});

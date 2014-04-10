@@ -1,18 +1,5 @@
-#tools {
-    clear: both;
-    margin-bottom: 20px;
-}
-
 .navbar {
     margin-top: 10px;
-}
-
-.navbar-inner {
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-.issue.normal {
 }
 
 .issue.high {
@@ -35,18 +22,23 @@
     font-style: italic;
 }
 
-dt {
-    float: left;
-    clear: both;
+dl.details dt {
     width: 150px;
+    text-align: left;
 }
 
 .submission, #MyModal .btn-group {
     display: block !important;
 }
 
+h1 {
+    font-size: 140%;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
 h2 {
-    font-size: 20px !important;
+    font-size: 120% !important;
 }
 
 .viewlet h2 {

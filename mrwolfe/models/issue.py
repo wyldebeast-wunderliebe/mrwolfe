@@ -158,6 +158,13 @@ class Issue(models.Model):
 
         return not self.is_closed()
 
+    def set_status(self, status):
+
+        """ Set status and create status object in log """
+
+        self.status_set.create(name=status)
+        self.status = status
+
     def clone(self):
 
         """ Clone into new issue """

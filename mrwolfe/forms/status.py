@@ -4,11 +4,12 @@ from mrwolfe.models.status import Status
 
 class StatusForm(forms.ModelForm):
 
-    #no_comment = forms.BooleanField("No comment", required=False)
-    #no_notification = forms.BooleanField("Do not send notification",
-    #required=False)
+    skip_notification = forms.BooleanField(
+        label="Skip notification",
+        required=False
+    )
 
     class Meta:
         model = Status
-        fields = ('comment', 'name', 'issue')
-        widgets = {'issue': forms.HiddenInput(), 'name': forms.HiddenInput()}
+        fields = ('comment', 'name', 'skip_notification')
+        widgets = {'name': forms.HiddenInput()}

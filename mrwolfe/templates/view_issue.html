@@ -5,23 +5,29 @@
 
   {% include "controls/status_control.html" %}
   {% include "controls/assignee_control.html" %}
-  <a href="{% url 'edit_issue' object.pk %}" class="btn">
+
+  <a href="{% url 'edit_issue' object.pk %}"
+     class="btn btn-default">
     <i class="icon-edit"></i> Edit
   </a>
+
   {% if issue.can_clone %}
-  <a href="{% url 'clone_issue' object.pk %}" class="btn action-inline"
+  <a href="{% url 'clone_issue' object.pk %}"
+     class="btn btn-default action-inline"
      data-pu_actionmethod="POST" data-pu_protect="true">
     <i class="icon-copy"></i> Clone
   </a>
   {% endif %}
-{% endblock %}
+
+{% endblock tools %}
+
 
 {% block content %}
 
-<h2>
+<h1>
   <span class="label label-{{ issue.urgency }}">{{ issue.urgency }}</span>
-  {{ object.issue_id }} {{ object.title }}
-</h2>
+  {{ object }}
+</h1>
 
 
 {% if not object.sla %}
@@ -34,7 +40,7 @@
 {% endif %}
 
 
-<dl>
+<dl class="dl-horizontal details">
   {% if object.sla %}
   <dt>SLA</dt>
   <dd><a href="{% url 'view_sla' object.sla.pk %}">{{ object.sla }}</a></dd>
@@ -53,6 +59,41 @@
 <div class="descr">
   {{ view.text|safe }}
 </div>
+
+
+<div class="viewlet well expanded">
+  <header class="clearfix">
+    <h2 class="pull-left">Comments ({{ object.comments.count }})</h2>
+    <span class="controls pull-right">
+      <a class="btn btn-mini toggle expand" href="#comments" title="Expand">
+        <i class="icon-expand"></i>
+      </a>
+      <a class="btn btn-mini toggle collapse" href="#comments" title="Collapse">
+        <i class="icon-collapse"></i>
+      </a>
+    </span>
+  </header>
+
+  <div  class="clearfix">
+    <form role="form" class="submit-inline" target="#comments"
+          action="{% url 'create_comment' %}" method="POST">
+      <div class="form-group">
+        <textarea class="form-control" name="comment"></textarea>
+      </div>
+      <input type="hidden" name="issue" value="{{ object.id }}" />
+      <div class="btn-group submission">
+        <button type="submit" class="btn btn-success">Add comment</button>
+      </div>
+    </form>
+  </div>
+
+  <div id="comments">
+  {% for comment in object.comments.all %}
+  {% include "snippets/comment.html" with object=comment %}
+  {% endfor %}
+  </div>
+</div>
+
 
 <div class="viewlet well expanded">
   <header class="clearfix">
@@ -87,29 +128,6 @@
   </ul>
 </div>
 
-<div class="viewlet well expanded">
-  <header class="clearfix">
-    <h2 class="pull-left">Comments ({{ object.comments.count }})</h2>
-    <span class="controls pull-right">
-      <a href="{% url 'create_comment_json' object.pk %}" 
-         class="btn btn-success btn-mini add-inline"
-         target="#comments" title="Add comment">
-        <i class="icon-plus"></i>
-      </a>  
-      <a class="btn btn-mini toggle expand" href="#comments" title="Expand">
-        <i class="icon-expand"></i>
-      </a>
-      <a class="btn btn-mini toggle collapse" href="#comments" title="Collapse">
-        <i class="icon-collapse"></i>
-      </a>
-    </span>
-  </header>
-  <div id="comments">
-  {% for comment in object.comments.all %}
-  {% include "snippets/comment.html" with object=comment %}
-  {% endfor %}
-  </div>
-</div>
 
 {% include "snippets/history.html" %}
 

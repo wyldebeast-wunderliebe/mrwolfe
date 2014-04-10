@@ -4,21 +4,23 @@
 <!DOCTYPE html>
 
 <html lang="nl">
-<head>
+  <head>
 
     <meta charset="utf-8">
 
     <title>Mr. Wolfe Support Centre</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" 
+          href="{{STATIC_URL}}bootstrap/dist/css/bootstrap.min.css" 
+          type="text/css">
+    <link rel="stylesheet" 
+          href="{{STATIC_URL}}jqueryui/themes/base/minified/jquery-ui.min.css" 
+          type="text/css">
 
     {% compress css %}
     <link rel="stylesheet" href="{{STATIC_URL}}css/mrwolfe.css" type="text/css">
-    <link rel="stylesheet" 
-          href="{{STATIC_URL}}jquery/css/jquery-ui-1.10.0.custom.css" 
-          type="text/css">
-    <link rel="stylesheet" href="{{STATIC_URL}}bootstrap/css/bootstrap.css" 
-          type="text/css">
     <link rel="stylesheet" 
           href="{{STATIC_URL}}font-awesome/css/font-awesome.css" 
           type="text/css">
@@ -29,13 +31,11 @@
 
     {% list_plugin_css %}
 
-    <script src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
+    <script src="{{ STATIC_URL }}jquery/dist/jquery.min.js"></script>
+    <script src="{{STATIC_URL}}jqueryui/ui/minified/jquery-ui.min.js"></script>
+    <script src="{{STATIC_URL}}bootstrap/dist/js/bootstrap.min.js"></script> 
 
     {% compress js %}
-    <script src="{{STATIC_URL}}jquery/js/jquery-ui-1.10.3.custom.js"></script>
-    <script type="text/javascript" 
-            src="{{STATIC_URL}}bootstrap/js/bootstrap.js">
-    </script> 
     <script type="text/javascript" 
             src="{{STATIC_URL}}fileupload/js/jquery.fileupload.js">
     </script>     
@@ -48,86 +48,95 @@
     <script src="{{STATIC_URL}}js/pu_in_content.js" 
             defer="defer"></script>
     {% endcompress %}
-</head>
+  </head>
 
-<body>
+  <body>
 
-  {% csrf_token %}
+    {% csrf_token %}
 
-  {% block container %}
-  <div class="container">
+    {% block container %}
+    <div class="container">
 
-    <div class="navbar navbar-inverse">
-      <div class="navbar-inner">
-        <a class="brand" href="/">Mr.Wolfe</a>
-        <ul class="nav">
-          <li><a href="/"><i class="icon-tasks"></i> {% username request.user %}</a></li>
-          <li><a href="/config"><i class="icon-wrench"></i> Admin</a></li>
+      <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container-fluid">
 
-          {% if "wiki" in "INSTALLED_APPS"|get_setting %}
-          <li><a href="/wiki"><i class="icon-info"></i> Wiki</a></li>
-          {% endif %}
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Mr.Wolfe</a>
+          </div>
 
-          <li><a href="/help"><i class="icon-info-sign"></i> Help</a></li>
-        </ul>
-        <form class="navbar-form pull-left" action="/search/"
-              method="GET">
-          {% csrf_token %}
-          <input type="text" name="q" class="span2" 
-                 placeholder="Search issues">
-          <input type="hidden" name="models" value="mrwolfe.issue"/>
-          <button type="submit" class="btn">
-            <i class="icon-search"></i>
-          </button>
-        </form>
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
 
-        <a class="btn btn-success pull-right" 
-           href="{% url 'create_issue' %}">
-          <i class="icon-plus"></i> New issue
-        </a>
+              <li><a href="/"><i class="icon-tasks"></i> {% username request.user %}</a></li>
+              <li><a href="/config"><i class="icon-wrench"></i> Admin</a></li>
+              
+              {% if "wiki" in "INSTALLED_APPS"|get_setting %}
+              <li><a href="/wiki"><i class="icon-info"></i> Wiki</a></li>
+              {% endif %}
+              
+              <li><a href="/help"><i class="icon-info-sign"></i> Help</a></li>
+            </ul>
 
+            <form class="navbar-form navbar-left" action="/search/"
+                  method="GET" role="search">
+              {% csrf_token %}
+              <div class="form-group">
+                <input type="text" name="q"
+                       class="form-control"
+                       placeholder="Search issues">
+                <input type="hidden" name="models" value="mrwolfe.issue"/>
+              </div>
+              <button type="submit" class="btn">
+                <i class="icon-search"></i>
+              </button>
+            </form>
+
+            <a class="btn btn-success navbar-btn pull-right" 
+               href="{% url 'create_issue' %}">
+              <i class="icon-plus"></i> New issue
+            </a>
+
+          </div>
+        </div>
+      </nav>
+
+      <div class="alert 
+                  {% if request.GET.status == "0" %}alert-success{% endif %}
+                  {% if request.GET.status == "-1" %}alert-error{% endif %}
+                  {% if not request.GET.message %}hide{% endif %}
+                  " id="alerts">
+        <button class="close" data-dismiss="alert">×</button>
+        <span class="alert-body">{{ request.GET.message }}</span>
       </div>
-    </div>
 
-    <div class="alert 
-                {% if request.GET.status == "0" %}alert-success{% endif %}
-                {% if request.GET.status == "-1" %}alert-error{% endif %}
-                {% if not request.GET.message %}hide{% endif %}
-              " id="alerts">
-      <button class="close" data-dismiss="alert">×</button>
-      <span class="alert-body">{{ request.GET.message }}</span>
-    </div>
+      <div class="panel panel-default" role="toolbar">
+        <div class="panel-body">
+          {% block tools %}
+          {% endblock %}
+        </div>
+      </div>
 
-    <div class="btn-toolbar" id="tools">
-    {% block tools %}
-    {% endblock %}
-    </div>
-
-    <div id="main">
-      {% block content %}
+      <div id="main">
+        {% block content %}
+        
+        {% endblock %}
+      </div>
       
-      {% endblock %}
+      <div id="footer">
+      </div>
+      
     </div>
-    
-    <div id="footer">
-    </div>
-    
-  </div>
-  {% endblock %}
+    {% endblock %}
 
-  <div class="modal hide fade" id="MyModal">
-    <div class="modal-header">
-      <a class="close" data-dismiss="modal">x Close</a>
-      <h3></h3>
-    </div>
-    <div class="modal-body">
-      <img src="/static/img/loading.gif">
-      <p>Laden...</p>
-    </div>
-    <div class="modal-footer">
-    </div>
-  </div>
-  
-</body>
+    <div id="modalcontainer"></div>
+    
+  </body>
 
 </html>

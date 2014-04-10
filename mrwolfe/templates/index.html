@@ -2,49 +2,43 @@
 
 {% block content %}
 
-<div class="viewlet well">
-  <header>
-    <h2>Unassigned tickets</h2>
-  </header>
-  <ul>
-    {% for issue in view.list_unassigned_issues %}
-    {% include "snippets/issue.html" with object=issue %}
-    {% endfor %}
-  </ul>
+{% if view.list_unassigned_issues %}
+<div class="viewlet panel panel-danger">
+  <div class="panel-heading">Unassigned tickets</div>
+  <div class="panel-body">
+    <ul>
+      {% for issue in view.list_unassigned_issues %}
+      {% include "snippets/issue.html" with object=issue %}
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endif %}
+
+<div class="viewlet panel panel-primary">
+  <div class="panel-heading">Your tickets</div>
+  <div class="panel-body">
+    {% if not view.list_my_issues %}
+    No issues. Sit back and relax.
+    {% else %}
+    <ul>
+      {% for issue in view.list_my_issues %}
+      {% include "snippets/issue.html" with object=issue %}
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
 </div>
 
-<div class="viewlet well">
-  <header>
-    <h2>Your tickets</h2>
-  </header>
-  {% if not view.list_my_issues %}
-  No issues. Sit back and relax.
-  {% else %}
-  <ul>
-    {% for issue in view.list_my_issues %}
-    {% include "snippets/issue.html" with object=issue %}
-    {% endfor %}
-  </ul>
-  {% endif %}
-</div>
-
-<div class="viewlet well">
-  <header class="clearfix">
-    <h2 class="pull-left">All unclosed tickets</h2>
-    <span class="controls pull-right">
-      <a class="btn btn-mini toggle expand" href="#unclosed" title="Expand">
-        <i class="icon-expand"></i>
-      </a>
-      <a class="btn btn-mini toggle collapse" href="#unclosed" title="Collapse">
-        <i class="icon-collapse"></i>
-      </a>
-    </span>    
-  </header>
-  <ul id="unclosed">
-    {% for issue in view.list_unclosed_issues %}
-    {% include "snippets/issue.html" with object=issue %}
-    {% endfor %}
-  </ul>
+<div class="viewlet panel panel-default">
+  <div class="panel-heading">All unclosed tickets</div>
+  <div class="panel-body">
+    <ul id="unclosed">
+      {% for issue in view.list_unclosed_issues %}
+      {% include "snippets/issue.html" with object=issue %}
+      {% endfor %}
+    </ul>
+  </div>
 </div>
 
 {% endblock %}

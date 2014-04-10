@@ -1,5 +1,5 @@
 from django.db import models
-from mailqueue import MailQueue
+from django.core.urlresolvers import reverse
 
 
 class SLA(models.Model):
@@ -24,3 +24,7 @@ class SLA(models.Model):
         """ Is the given contact a valid contact for this sla? """
         
         return self.contact_set.filter(pk=contact.pk).exists()
+
+    def get_absolute_url(self):
+
+        return reverse("view_sla", kwargs={'pk': self.pk})

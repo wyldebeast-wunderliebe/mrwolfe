@@ -1,31 +1,60 @@
-from pu_in_content.views.jsonbase import JSONCreateView
-from mrwolfe.models.status import Status
-from mrwolfe.models.issue import Issue
-from mrwolfe.forms.status import StatusForm
+from django.views.generic.edit import UpdateView
 from django.conf import settings
+from django.db.models.signals import post_save
+from django.template.loader import render_to_string
+from django.http import HttpResponse
+from mrwolfe.models.issue import Issue
+from mrwolfe.models.signal_processors import status_post_save
+from mrwolfe.forms.status import StatusForm
 
 
-class StatusJSONCreate(JSONCreateView):
+class CreateStatus(UpdateView):
 
-    model = Status
+    model = Issue
     form_class = StatusForm
-    success_template_name = "controls/status_control.html"
+    template_name = "create_status.html"
 
-    def get_context_data(self, **kwargs):
-        
-        ctx = super(StatusJSONCreate, self).get_context_data(**kwargs)
-        
-        ctx.update({"view": self,
-                    "object": Issue.objects.get(pk=self.kwargs['issue_pk'])})
-        
-        return ctx
+    def post(self, request, *args, **kwargs):
+
+        self.object = self.get_object()
+
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+
+        if form.is_valid():
+            
+            if form.cleaned_data.get('skip_notification'):
+                post_save.disconnect(status_post_save)
+
+            self.object.status_history.create(
+                name=form.cleaned_data['name'],
+                comment=form.cleaned_data['comment']
+            )
+
+            # reconnect
+            if form.cleaned_data.get('skip_notification'):
+                post_save.connect(status_post_save)
+
+            self.object.status = form.cleaned_data['name']
+
+            self.object.save()
+
+        return HttpResponse(render_to_string(
+            'controls/status_control.html', 
+            {'view': self, 'object': self.object}
+        ))
+
+
+    @property
+    def status_name(self):
+
+        return self.request.GET.get('status', '')
 
     def get_initial(self):
 
-        return {'issue': self.kwargs['issue_pk'],
-                'name': self.request.GET.get('status', '')}
+        return {'name': self.status_name}
 
     def list_status_options(self):
 
         return (opt for opt in settings.ISSUE_STATUS_CHOICES \
-                    if opt[0] != self.object.name)
+                    if opt[0] != self.status_name)

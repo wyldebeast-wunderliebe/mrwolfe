@@ -4,6 +4,9 @@
  * Cosmetic changes
  * Added support for OpenID
  * Added optinal wiki addon
+ * Removed most popups for editing
+ * Set status of issue to open when it is in wait_input and someone reacts
+ * removed bootstrap from sources
 
 1.1.1b
 ======

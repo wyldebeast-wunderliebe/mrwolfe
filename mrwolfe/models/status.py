@@ -9,7 +9,7 @@ class Status(models.Model):
                             choices=settings.ISSUE_STATUS_CHOICES)
     date = models.DateTimeField(auto_now_add=True)
     issue = models.ForeignKey(Issue, related_name="status_history")
-    comment = models.TextField()
+    comment = models.TextField(null=True, blank=True)
 
     class Meta:
         app_label = "mrwolfe"

@@ -6,20 +6,16 @@ from django.views.generic.detail import DetailView
 from django.views.decorators.csrf import csrf_exempt
 from views.index import IndexView, AdminView
 from views.issue import IssueCreate, IssueEdit, IssueView, \
-    IssueAssigneeJSONEdit, IssueHistoryView, IssueJSONClone
-from views.service import ServiceJSONCreate, ServiceJSONEdit, \
-    ServiceJSONDelete, ServiceJSONSetDefault
-from views.rule import RuleJSONCreate, RuleJSONEdit, RuleJSONDelete
-from views.sla import SLAView, SLAJSONCreate, SLAJSONEdit, SLAJSONDelete, \
-    SLADelete, SLAEdit
-from views.operator import OperatorJSONCreate, OperatorJSONEdit, \
-    OperatorJSONDelete
-from views.contact import ContactJSONCreate, ContactJSONEdit, \
-    ContactJSONDelete
-from views.comment import CommentJSONCreate
-from views.mailqueue import MailQueueJSONCreate, MailQueueJSONEdit, \
-    MailQueueJSONDelete
-from views.status import StatusJSONCreate
+    UpdateIssueAssignee, IssueHistoryView, IssueJSONClone
+from views.service import CreateService, UpdateService, DeleteService, \
+    ServiceJSONSetDefault
+from views.rule import CreateRule, UpdateRule, DeleteRule
+from views.sla import SLAView, CreateSLA, UpdateSLA, DeleteSLA
+from views.operator import CreateOperator, UpdateOperator, DeleteOperator
+from views.contact import CreateContact, UpdateContact, DeleteContact
+from views.comment import CreateComment
+from views.mailqueue import CreateMailQueue, UpdateMailQueue, DeleteMailQueue
+from views.status import CreateStatus
 from views.login import LoginView
 from views.help import HelpView
 from views.fileupload import UploadView
@@ -40,7 +36,7 @@ urlpatterns = patterns(
     (r'^logout/$', 'django.contrib.auth.views.logout'),
     
     (r'^$', login_required(IndexView.as_view())),
-    (r'^config$', login_required(AdminView.as_view())),
+    url(r'^config$', login_required(AdminView.as_view()), name="config"),
 
     (r'^help$', login_required(HelpView.as_view())),
     (r'^[a-zA-Z0-9]*\.md$', login_required(HelpView.as_view())),
@@ -67,11 +63,11 @@ urlpatterns = patterns(
     url(r'^view_issue/(?P<pk>[\d]+)$', 
         login_required(IssueView.as_view()),
         name="view_issue"),
-    url(r'^change_status/(?P<issue_pk>[\d]+)$', 
-        login_required(StatusJSONCreate.as_view()),
+    url(r'^change_status/(?P<pk>[\d]+)$', 
+        login_required(CreateStatus.as_view()),
         name="change_status"),
     url(r'^change_assignee/(?P<pk>[\d]+)$', 
-        login_required(IssueAssigneeJSONEdit.as_view()),
+        login_required(UpdateIssueAssignee.as_view()),
         name="change_assignee"),
     url(r'^issue_history/(?P<pk>[\d]+)$', 
         login_required(IssueHistoryView.as_view()),
@@ -82,87 +78,81 @@ urlpatterns = patterns(
     
     # Service
     #
-    url(r'^create_service_json/(?P<sla_pk>[\d]+)$', 
-        login_required(ServiceJSONCreate.as_view()),
-        name="create_service_json"),
-    url(r'^edit_service_json/(?P<pk>[\d]+)$', 
-        login_required(ServiceJSONEdit.as_view()),
-        name="edit_service_json"),
-    url(r'^delete_service_json/(?P<pk>[\d]+)$', 
-                           login_required(ServiceJSONDelete.as_view()),
-        name="delete_service_json"),
+    url(r'^create_service/(?P<sla_pk>[\d]+)$', 
+        login_required(CreateService.as_view()),
+        name="create_service"),
+    url(r'^edit_service/(?P<pk>[\d]+)$', 
+        login_required(UpdateService.as_view()),
+        name="edit_service"),
+    url(r'^delete_service/(?P<pk>[\d]+)$', 
+                           login_required(DeleteService.as_view()),
+        name="delete_service"),
     url(r'^set_default_service/(?P<pk>[\d]+)$',
         login_required(ServiceJSONSetDefault.as_view()),
         name="set_default_service"),
 
     # Rule
     #
-    url(r'^create_rule_json/(?P<sla_pk>[\d]+)$', 
-        login_required(RuleJSONCreate.as_view()),
-        name="create_rule_json"),
-    url(r'^edit_rule_json/(?P<pk>[\d]+)$', 
-        login_required(RuleJSONEdit.as_view()),
-        name="edit_rule_json"),
-    url(r'^delete_rule_json/(?P<pk>[\d]+)$', 
-        login_required(RuleJSONDelete.as_view()),
-        name="delete_rule_json"),
+    url(r'^create_rule/(?P<sla_pk>[\d]+)$', 
+        login_required(CreateRule.as_view()),
+        name="create_rule"),
+    url(r'^edit_rule/(?P<pk>[\d]+)$', 
+        login_required(UpdateRule.as_view()),
+        name="edit_rule"),
+    url(r'^delete_rule/(?P<pk>[\d]+)$', 
+        login_required(DeleteRule.as_view()),
+        name="delete_rule"),
 
     # SLA
     # 
-    url(r'^create_sla_json/', 
-        login_required(SLAJSONCreate.as_view()),
-        name="create_sla_json"),
-    url(r'^edit_sla_json/(?P<pk>[\d]+)$', 
-        login_required(SLAJSONEdit.as_view()),
-        name="edit_sla_json"),
+    url(r'^create_sla/', 
+        login_required(CreateSLA.as_view()),
+        name="create_sla"),
     url(r'^edit_sla/(?P<pk>[\d]+)$', 
-        login_required(SLAEdit.as_view()),
+        login_required(UpdateSLA.as_view()),
         name="edit_sla"),
     url(r'^view_sla/(?P<pk>[\d]+)$', 
         login_required(SLAView.as_view()),
         name="view_sla"),
-    url(r'^delete_sla_json/(?P<pk>[\d]+)$',
-        login_required(SLAJSONDelete.as_view()),
-        name="delete_sla_json"),
     url(r'^delete_sla/(?P<pk>[\d]+)$',
-        login_required(SLADelete.as_view()),
+        login_required(DeleteSLA.as_view()),
         name="delete_sla"),
                        
     # Operator
     #
-    url(r'^create_operator_json/', 
-        login_required(OperatorJSONCreate.as_view()),
-        name="create_operator_json"),
-    url(r'^edit_operator_json/(?P<pk>[\d]+)$', 
-        login_required(OperatorJSONEdit.as_view()),
-        name="edit_operator_json"),
-    url(r'^delete_operator_json/(?P<pk>[\d]+)$', 
-        login_required(OperatorJSONDelete.as_view()),
-        name="delete_operator_json"),
+    url(r'^create_operator/', 
+        login_required(CreateOperator.as_view()),
+        name="create_operator"),
+    url(r'^edit_operator/(?P<pk>[\d]+)$', 
+        login_required(UpdateOperator.as_view()),
+        name="edit_operator"),
+    url(r'^delete_operator/(?P<pk>[\d]+)$', 
+        login_required(DeleteOperator.as_view()),
+        name="delete_operator"),
 
     # Contact
     #
-    url(r'^create_contact_json/', 
-        login_required(ContactJSONCreate.as_view()),
-        name="create_contact_json"),
-    url(r'^edit_contact_json/(?P<pk>[\d]+)$', 
-        login_required(ContactJSONEdit.as_view()),
-        name="edit_contact_json"),
-    url(r'^delete_contact_json/(?P<pk>[\d]+)$', 
-        login_required(ContactJSONDelete.as_view()),
-        name="delete_contact_json"),
+    url(r'^create_contact/', 
+        login_required(CreateContact.as_view()),
+        name="create_contact"),
+    url(r'^edit_contact/(?P<pk>[\d]+)$', 
+        login_required(UpdateContact.as_view()),
+        name="edit_contact"),
+    url(r'^delete_contact/(?P<pk>[\d]+)$', 
+        login_required(DeleteContact.as_view()),
+        name="delete_contact"),
     
     # MailQueue
     #
-    url(r'^create_mailqueue_json/', 
-        login_required(MailQueueJSONCreate.as_view()),
-        name="create_mailqueue_json"),
-    url(r'^edit_mailqueue_json/(?P<pk>[\d]+)$', 
-        login_required(MailQueueJSONEdit.as_view()),
-        name="edit_mailqueue_json"),
-    url(r'^delete_mailqueue_json/(?P<pk>[\d]+)$', 
-        login_required(MailQueueJSONDelete.as_view()),
-        name="delete_mailqueue_json"),
+    url(r'^create_mailqueue/', 
+        login_required(CreateMailQueue.as_view()),
+        name="create_mailqueue"),
+    url(r'^edit_mailqueue/(?P<pk>[\d]+)$', 
+        login_required(UpdateMailQueue.as_view()),
+        name="edit_mailqueue"),
+    url(r'^delete_mailqueue/(?P<pk>[\d]+)$', 
+        login_required(DeleteMailQueue.as_view()),
+        name="delete_mailqueue"),
 
     # Attachments
     url(r'^view_image/(?P<pk>[\d]+)$', 
@@ -177,9 +167,9 @@ urlpatterns = patterns(
     
     # Comment
     #
-    url(r'^create_comment/(?P<issue_pk>[\d]+)$', 
-        login_required(CommentJSONCreate.as_view()),
-        name="create_comment_json"),
+    url(r'^create_comment$', 
+        login_required(CreateComment.as_view()),
+        name="create_comment"),
 
     # Pattern for serving media while developing
     (r'^static/(?P<path>.*)$', 'django.views.static.serve',

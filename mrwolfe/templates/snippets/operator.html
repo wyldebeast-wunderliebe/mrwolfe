@@ -2,12 +2,12 @@
   <i class="icon-user-md"></i>
   {{ object }}
   <div class="controls">
-    <a class="btn btn-mini edit-inline" 
-       href="{% url 'edit_operator_json' object.pk %}">
+    <a class="btn btn-mini" 
+       href="{% url 'edit_operator' object.pk %}">
       <i class="icon-pencil"></i>
     </a>
-    <a class="btn btn-danger btn-mini rm-inline" 
-       href="{% url 'delete_operator_json' object.pk %}">
+    <a class="btn btn-danger btn-mini" 
+       href="{% url 'delete_operator' object.pk %}">
       <i class="icon-remove"></i>
     </a>
   </div>

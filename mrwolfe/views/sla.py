@@ -1,7 +1,6 @@
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
-from pu_in_content.views.jsonbase import JSONCreateView, JSONUpdateView, \
-    JSONDeleteView
+from django.core.urlresolvers import reverse_lazy
 from mrwolfe.models.sla import SLA
 from mrwolfe.models.service import Service
 from mrwolfe.forms.sla import SLAForm
@@ -49,7 +48,7 @@ class SLAView(DetailView):
             return "-"
 
 
-class SLACreate(CreateView):
+class CreateSLA(CreateView):
 
     model = SLA
     form_class = SLAForm
@@ -57,33 +56,14 @@ class SLACreate(CreateView):
 
     def get_form(self, form_class):
 
-        form = super(SLACreate, self).get_form(form_class)
-
-        form.fields['default_service'].queryset = Service.objects.none()
-
-        return form
-
-    def get_success_url(self):
-
-        return "/config?message=SLA+created&status=0"
-
-
-class SLAJSONCreate(JSONCreateView):
-
-    model = SLA
-    form_class = SLAForm    
-    success_template_name = "snippets/sla.html"
-
-    def get_form(self, form_class):
-
-        form = super(SLAJSONCreate, self).get_form(form_class)
+        form = super(CreateSLA, self).get_form(form_class)
 
         form.fields['default_service'].queryset = Service.objects.none()
 
         return form
 
 
-class SLAEdit(UpdateView):
+class UpdateSLA(UpdateView):
 
     model = SLA
     form_class = SLAForm
@@ -91,43 +71,15 @@ class SLAEdit(UpdateView):
 
     def get_form(self, form_class):
 
-        form = super(SLAEdit, self).get_form(form_class)
-
-        form.fields['default_service'].queryset = self.object.service_set
-
-        return form
-
-    def get_success_url(self):
-
-        return "/config?message=SLA+updated&status=0"
-
-
-class SLAJSONEdit(JSONUpdateView):
-
-    model = SLA
-    form_class = SLAForm
-    success_template_name = "snippets/sla.html"
-
-    def get_form(self, form_class):
-
-        form = super(SLAJSONEdit, self).get_form(form_class)
+        form = super(UpdateSLA, self).get_form(form_class)
 
         form.fields['default_service'].queryset = self.object.service_set
 
         return form
 
 
-class SLADelete(DeleteView):
+class DeleteSLA(DeleteView):
 
     model = SLA
-
-    def get(self, *args, **kwargs):
-        return self.delete(*args, **kwargs)
-
-    def get_success_url(self):
-
-        return "/config?message=SLA+removed&status=0"
-
-class SLAJSONDelete(JSONDeleteView):
-
-    model = SLA
+    template_name = "snippets/confirm_delete.html"
+    success_url = reverse_lazy("config")

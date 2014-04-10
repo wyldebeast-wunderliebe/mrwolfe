@@ -1,6 +1,4 @@
 from django.db import models
-from mrwolfe.models.sla import SLA
-from django.contrib.auth.models import User as Base
 
 
 class User(models.Model):

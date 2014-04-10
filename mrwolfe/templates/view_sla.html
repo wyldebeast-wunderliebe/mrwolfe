@@ -27,7 +27,7 @@
 </table>
 
 <div class="viewlet well">
-  <header>
+  <header class="clearfix">
     <h2>Contacts</h2>
   </header>
     
@@ -45,12 +45,12 @@
 </div>
 
 <div class="viewlet well">
-  <header>
+  <header class="clearfix">
     <h2 class="pull-left">Services</h2>
     <span class="controls pull-right">
-      <a class="add-inline btn btn-success btn-mini"
+      <a class="btn btn-success btn-mini"
          target="#services"
-         href="{% url 'create_service_json' sla.pk %}"
+         href="{% url 'create_service' sla.pk %}"
          ><i class="icon-plus"></i></a>
     </span>
   </header>
@@ -67,19 +67,19 @@
 </div>
 
 <div class="viewlet well">
-  <header> 
+  <header class="clearfix"> 
     <h2 class="pull-left">Rules</h2> 
     <span class="controls pull-right">
-      <a class="add-inline btn btn-success btn-mini"
+      <a class="btn btn-success btn-mini"
          target="#rules"
-         href="{% url 'create_rule_json' sla.pk %}"
+         href="{% url 'create_rule' sla.pk %}"
          ><i class="icon-plus"></i></a>
     </span>
   </header>
 
   <p class="text-info">
-    Add matching rules for incoming mail. If a rule matches, this SLA
-    will be the one!
+    Add matching rules for incoming mail. If a rule matches, the issue will
+    be created for this SLA.
   </p>
   
   {% if not view.list_rules %}

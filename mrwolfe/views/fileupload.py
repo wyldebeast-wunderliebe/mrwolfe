@@ -1,17 +1,12 @@
 import json
 import os
 from tempfile import mkstemp
-import uuid
-from shutil import copyfile
 from django.template.loader import render_to_string
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import View
 from django.http import HttpResponse
 from django.core.files.base import ContentFile
-import logging as log
 import mimetypes
-from django.conf import settings
-from django.core.files import File
 from mrwolfe.models import Attachment, Issue
 
 

@@ -1,0 +1,23 @@
+{% extends "create_base_modal.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %}Change status{% endblock %}
+
+{% block form %}
+<form action="/change_status/{{ object.id }}" method="POST"
+      class="create-inline"
+      >
+
+  {% csrf_token %}
+
+  {% bootstrap_form form %}
+
+  <div class="btn-group submission">
+    <input name="submit" class="btn btn-primary" type="submit" value="Change" />
+    <button class="btn btn-default"
+            type="submit" data-dismiss="modal">Cancel</button>
+  </div>
+
+</form>
+{% endblock %}

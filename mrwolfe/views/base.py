@@ -15,3 +15,11 @@ class BaseView(DetailView):
         ctx.update({"view": self})
         
         return ctx    
+
+
+class CTypeMixin(object):
+
+    @property
+    def ctype(self):
+
+        return self.model.__class__.__name__

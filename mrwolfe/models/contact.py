@@ -1,6 +1,7 @@
 from django.db import models
-from mrwolfe.models.sla import SLA
 from django.contrib.auth.models import User as BaseUser
+from django.core.urlresolvers import reverse
+from mrwolfe.models.sla import SLA
 from user import User
 
 
@@ -21,3 +22,7 @@ class Contact(User):
             return self.user.get_full_name() or self.email
         except:
             return self.email
+
+    def get_absolute_url(self):
+
+        return reverse("config")

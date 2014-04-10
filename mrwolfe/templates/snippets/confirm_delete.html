@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="alert alert-danger">Do you really want to delete {{ object }}?</div>
+
+<form action=""
+      method="POST" 
+      class="form">
+
+    {% csrf_token %}
+
+    <div class="btn-group submission">
+      <button type="submit" class="btn btn-primary">
+        Yes
+      </button>
+      <a href="/" class="btn btn-default">
+        Cancel
+      </a>
+    </div>
+
+</form>
+
+{% endblock %}

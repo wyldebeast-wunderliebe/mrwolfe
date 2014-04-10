@@ -4,7 +4,7 @@
 
 <h2>
 {% block title %}
-Edit {{ view.ctype }}
+Add {{ view.ctype }}
 {% endblock %}
 </h2>
 
@@ -23,11 +23,7 @@ Edit {{ view.ctype }}
 
   <div class="btn-group submission">
     <input name="submit" class="btn btn-primary" type="submit" value="Save" />
-    {% if view.cancel_url %}
-    <a href="{{ view.cancel_url }}" class="btn">Cancel</a>
-    {% else %}
     <a href="{% url 'config' %}" class="btn">Cancel</a>
-    {% endif %}
   </div>
 </form>
 

@@ -1,27 +1,30 @@
-from pu_in_content.views.jsonbase import JSONCreateView, JSONUpdateView, \
-    JSONDeleteView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.core.urlresolvers import reverse_lazy
 from mrwolfe.models.rule import Rule
 from mrwolfe.forms.rule import RuleForm
+from base import CTypeMixin
 
 
-class RuleJSONCreate(JSONCreateView):
+class CreateRule(CreateView, CTypeMixin):
 
     model = Rule
     form_class = RuleForm    
-    success_template_name = "snippets/rule.html"
+    template_name = "addform.html"
 
     def get_initial(self):
 
         return {'sla': self.kwargs['sla_pk']}
 
 
-class RuleJSONEdit(JSONUpdateView):
+class UpdateRule(UpdateView):
 
     model = Rule
     form_class = RuleForm    
-    success_template_name = "snippets/rule.html"
+    template_name = "editform.html"
 
 
-class RuleJSONDelete(JSONDeleteView):
+class DeleteRule(DeleteView):
 
     model = Rule
+    template_name = "snippets/confirm_delete.html"
+    success_url = reverse_lazy("config")

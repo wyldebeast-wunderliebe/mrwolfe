@@ -1,6 +1,7 @@
 import re
 from django.db import models
 from django.conf import settings
+from django.core.urlresolvers import reverse
 from mrwolfe.models.sla import SLA
 
 
@@ -30,3 +31,7 @@ class Rule(models.Model):
                 return re.search(self.regexp, message.as_string())
         except:
             return False
+
+    def get_absolute_url(self):
+
+        return reverse("view_sla", kwargs={'pk': self.sla.pk})

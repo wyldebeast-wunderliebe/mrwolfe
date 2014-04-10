@@ -1,5 +1,6 @@
 from django.db import models
 from sla import SLA
+from django.core.urlresolvers import reverse
 
 
 class Service(models.Model):
@@ -21,3 +22,7 @@ class Service(models.Model):
     def is_default(self):
 
         return self == self.sla.default_service
+
+    def get_absolute_url(self):
+
+        return reverse("config")

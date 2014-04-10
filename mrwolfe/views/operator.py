@@ -1,23 +1,26 @@
-from pu_in_content.views.jsonbase import JSONCreateView, JSONUpdateView, \
-    JSONDeleteView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.core.urlresolvers import reverse_lazy
 from mrwolfe.models.operator import Operator
 from mrwolfe.forms.operator import OperatorForm
+from base import CTypeMixin
 
 
-class OperatorJSONCreate(JSONCreateView):
-
-    model = Operator
-    form_class = OperatorForm
-    success_template_name = "snippets/operator.html"
-
-
-class OperatorJSONEdit(JSONUpdateView):
+class CreateOperator(CreateView, CTypeMixin):
 
     model = Operator
     form_class = OperatorForm
-    success_template_name = "snippets/operator.html"
+    template_name = "addform.html"
 
 
-class OperatorJSONDelete(JSONDeleteView):
+class UpdateOperator(UpdateView):
 
     model = Operator
+    form_class = OperatorForm
+    template_name = "editform.html"
+
+
+class DeleteOperator(DeleteView):
+
+    model = Operator
+    template_name = "snippets/confirm_delete.html"
+    success_url = reverse_lazy("config")

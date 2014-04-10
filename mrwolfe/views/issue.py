@@ -3,12 +3,12 @@ from django.utils.safestring import mark_safe
 from django.views.generic.edit import CreateView, UpdateView
 from django.conf import settings
 from django.http import HttpResponseRedirect
-from pu_in_content.views.jsonbase import JSONUpdateView, JSONDetailView
+from pu_in_content.views.jsonbase import JSONDetailView
 from mrwolfe.models.issue import Issue
 from mrwolfe.models.status import Status
 from mrwolfe.models.sla import SLA
 from mrwolfe.models.operator import Operator
-from mrwolfe.forms.issue import IssueForm
+from mrwolfe.forms.issue import IssueForm, IssueAssigneeForm
 from base import BaseView
 
 
@@ -88,19 +88,27 @@ class IssueCreate(CreateView):
         return "/?message=Issue+created&status=0"
 
 
-class IssueAssigneeJSONEdit(JSONUpdateView):
+class UpdateIssueAssignee(UpdateView):
 
     model = Issue
-    form_class = IssueForm
-    success_template_name = "controls/assignee_control.html"
+    form_class = IssueAssigneeForm
+    template_name = "controls/assignee_control.html"
 
-    def get_context_data(self, **kwargs):
+    def get_form_kwargs(self):
 
-        ctx = super(IssueAssigneeJSONEdit, self).get_context_data(**kwargs)
+        return {'data': self.request.GET, 'instance': self.object}
 
-        ctx.update({"view": self})
+    def get(self, request, *args, **kwargs):
 
-        return ctx
+        self.object = self.get_object()
+
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+
+        if form.is_valid():
+            form.update()
+
+        return super(UpdateIssueAssignee, self).get(request, *args, **kwargs)
 
     def list_users(self):
 
@@ -145,7 +153,9 @@ class IssueEdit(UpdateView):
 
     def post(self, request, *args, **kwargs):
 
-        if self.request.POST.get('submit', '') == "Cancel":
-            return HttpResponseRedirect("/")
-        else:
-            return super(IssueEdit, self).post(request, *args, **kwargs)
+        return super(IssueEdit, self).post(request, *args, **kwargs)
+
+    @property
+    def cancel_url(self):
+
+        return "/"

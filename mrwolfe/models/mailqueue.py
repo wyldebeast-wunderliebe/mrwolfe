@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.urlresolvers import reverse
 
 
 class MailQueue(models.Model):
@@ -14,3 +15,7 @@ class MailQueue(models.Model):
 
     def __unicode__(self):
         return self.usr
+
+    def get_absolute_url(self):
+
+        return reverse("config")

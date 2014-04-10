@@ -6,10 +6,9 @@
   <header class="clearfix">
     <h2 class="pull-left">Service Level Agreements</h2>
     <span class="controls pull-right">
-      <a href="{% url 'create_sla_json' %}" 
+      <a href="{% url 'create_sla' %}" 
          target="#slas"
-         data-pu_callback="mrwolfe.afterAdd"
-         class="btn btn-mini btn-success add-inline">
+         class="btn btn-mini btn-success">
         <i class="icon-plus"></i> 
       </a>
       <a class="btn btn-mini toggle expand" href="#slas" title="Expand">
@@ -37,10 +36,9 @@
   <header class="clearfix">
     <h2 class="pull-left">Operators ({{ view.list_operators.count }})</h2>
     <span class="controls pull-right">
-      <a href="{% url 'create_operator_json' %}" 
+      <a href="{% url 'create_operator' %}" 
          target="#operators"
-         data-pu_callback="mrwolfe.afterAdd"
-         class="btn btn-mini btn-success add-inline">
+         class="btn btn-mini btn-success">
         <i class="icon-plus"></i> 
       </a>
       <a class="btn btn-mini toggle expand" href="#operators" title="Expand">
@@ -62,10 +60,9 @@
   <header class="clearfix">
     <h2 class="pull-left">Contacts ({{ view.list_contacts.count }})</h2>
     <span class="controls pull-right">
-      <a href="{% url 'create_contact_json' %}" 
+      <a href="{% url 'create_contact' %}" 
          target="#contacts"
-         data-pu_callback="mrwolfe.afterAdd"
-         class="btn btn-mini btn-success add-inline">
+         class="btn btn-mini btn-success">
         <i class="icon-plus"></i> 
       </a>
       <a class="btn btn-mini toggle expand" href="#contacts" title="Expand">
@@ -87,10 +84,9 @@
   <header class="clearfix">
     <h2 class="pull-left">Mail queues ({{ view.list_mailqueues.count }})</h2>
     <span class="controls pull-right">
-      <a href="{% url 'create_mailqueue_json' %}" 
+      <a href="{% url 'create_mailqueue' %}" 
          target="#mailqueues"
-         data-pu_callback="mrwolfe.afterAdd"
-         class="btn btn-mini btn-success add-inline">
+         class="btn btn-mini btn-success">
         <i class="icon-plus"></i> 
       </a>
       <a class="btn btn-mini toggle expand" href="#mailqueues" title="Expand">

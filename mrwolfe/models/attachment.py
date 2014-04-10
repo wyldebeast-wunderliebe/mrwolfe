@@ -8,7 +8,7 @@ class Attachment(models.Model):
 
     issue = models.ForeignKey(Issue)
     _file = models.FileField('Attachment', upload_to="attachments/%Y/%m/%d")
-    mimetype = models.CharField(max_length=50)
+    mimetype = models.CharField(max_length=128)
 
     class Meta:
         app_label = "mrwolfe"

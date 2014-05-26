@@ -6,7 +6,7 @@ from django.views.generic.detail import DetailView
 from django.views.decorators.csrf import csrf_exempt
 from views.index import IndexView, AdminView
 from views.issue import IssueCreate, IssueEdit, IssueView, \
-    UpdateIssueAssignee, IssueHistoryView, IssueJSONClone, DeleteIssue
+    UpdateIssueAssignee, IssueHistoryView, IssueClone, DeleteIssue
 from views.service import CreateService, UpdateService, DeleteService, \
     ServiceSetDefault
 from views.rule import CreateRule, UpdateRule, DeleteRule
@@ -74,7 +74,7 @@ urlpatterns = patterns(
         login_required(IssueHistoryView.as_view()),
         name="issue_history"),
     url(r'^clone_issue/(?P<pk>[\d]+)$',
-        login_required(IssueJSONClone.as_view()),
+        login_required(IssueClone.as_view()),
         name="clone_issue"),
     url(r'^delete_issue/(?P<pk>[\d]+)$',
         login_required(DeleteIssue.as_view()),

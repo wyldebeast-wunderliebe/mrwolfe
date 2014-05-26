@@ -8,7 +8,7 @@ from views.index import IndexView, AdminView
 from views.issue import IssueCreate, IssueEdit, IssueView, \
     UpdateIssueAssignee, IssueHistoryView, IssueJSONClone, DeleteIssue
 from views.service import CreateService, UpdateService, DeleteService, \
-    ServiceJSONSetDefault
+    ServiceSetDefault
 from views.rule import CreateRule, UpdateRule, DeleteRule
 from views.sla import SLAView, CreateSLA, UpdateSLA, DeleteSLA
 from views.operator import CreateOperator, UpdateOperator, DeleteOperator
@@ -92,7 +92,7 @@ urlpatterns = patterns(
         login_required(DeleteService.as_view()),
         name="delete_service"),
     url(r'^set_default_service/(?P<pk>[\d]+)$',
-        login_required(ServiceJSONSetDefault.as_view()),
+        login_required(ServiceSetDefault.as_view()),
         name="set_default_service"),
 
     # Rule

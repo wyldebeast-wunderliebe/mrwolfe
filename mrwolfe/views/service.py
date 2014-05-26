@@ -1,6 +1,5 @@
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
-from pu_in_content.views.jsonbase import JSONDetailView
 from mrwolfe.models.service import Service
 from mrwolfe.forms.service import ServiceForm
 from base import CTypeMixin
@@ -31,9 +30,10 @@ class DeleteService(DeleteView):
     success_url = reverse_lazy("config")
 
 
-class ServiceJSONSetDefault(JSONDetailView):
+class ServiceSetDefault(UpdateView):
 
     model = Service
+    form_class = ServiceForm
     template_name = "snippets/service.html"
 
     def get(self, request, *args, **kwargs):
@@ -43,4 +43,4 @@ class ServiceJSONSetDefault(JSONDetailView):
         self.object.sla.default_service = self.object
         self.object.sla.save()
 
-        return super(ServiceJSONSetDefault, self).get(request, *args, **kwargs)
+        return super(ServiceSetDefault, self).get(request, *args, **kwargs)

@@ -17,14 +17,15 @@ setup(name='mrwolfe',
       description='Django Issue tracker & support system',
       long_description=README,
       classifiers=[
-        "Development Status :: 4 - Beta",
-        "Framework :: Django",
-        "Intended Audience :: Developers",
-        "License :: Freely Distributable",
-        "Programming Language :: Python",
-        "Topic :: Internet :: WWW/HTTP :: Site Management",
-        "Topic :: Software Development :: Libraries :: Application Frameworks"
-        ],
+          "Development Status :: 4 - Beta",
+          "Framework :: Django",
+          "Intended Audience :: Developers",
+          "License :: Freely Distributable",
+          "Programming Language :: Python",
+          "Topic :: Internet :: WWW/HTTP :: Site Management",
+          "Topic :: Software Development :: Libraries :: "
+          "Application Frameworks"
+      ],
       author='D.A.Dokter',
       author_email='dokter@w20e.com',
       license='beer-ware',
@@ -33,8 +34,8 @@ setup(name='mrwolfe',
       packages=find_packages(),
       include_package_data=True,
       zip_safe=False,
-      install_requires = REQUIRES,
-      tests_require= REQUIRES,
+      install_requires=REQUIRES,
+      tests_require=REQUIRES,
       test_suite="mrwolfe",
-      entry_points = ""
+      entry_points=""
       )

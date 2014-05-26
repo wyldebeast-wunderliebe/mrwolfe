@@ -1,17 +1,29 @@
 import pkg_resources
 from django.template import Library
 from django.conf import settings
+from mrwolfe.models import Setting
 
 
 register = Library()
 
 
 @register.filter
-def get_setting(name):
+def get_django_setting(name):
 
     """ get access to any setting in template """
 
     return getattr(settings, name, "")
+
+
+@register.filter
+def get_setting(name):
+
+    """ Access mrwolfe setting """
+
+    if Setting.objects.filter(name=name).exists():
+        return Setting.objects.get(name=name).value
+    else:
+        return None
 
 
 @register.inclusion_tag('snippets/css.html')

@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 
-{% block tools %}
-<a class="btn btn"
-   href="{% url 'edit_sla' sla.pk %}"><i class="icon-pencil"></i> Edit</a>  
-<a class="btn btn btn-danger"
-   href="{% url 'delete_sla' sla.pk %}"><i class="icon-remove"></i> Delete</a>
+{% block toolbar %}
+<a class="btn btn-default"
+   href="{% url 'edit_sla' sla.pk %}"><i class="fa fa-edit"></i> Edit</a>  
+<a class="btn btn-danger"
+   href="{% url 'delete_sla' sla.pk %}"><i class="fa fa-remove"></i> Delete</a>
 {% endblock %}
 
 {% block content %}
 
 <header>
-  <h2>{{ object }}</h2>
+  <h1>{{ object }}</h1>
 </header>
 
 <table class="table well">
@@ -26,71 +26,71 @@
   </tbody>
 </table>
 
-<div class="viewlet well">
-  <header class="clearfix">
-    <h2>Contacts</h2>
-  </header>
+<div class="panel panel-default">
+  <div class="panel-heading">Contacts</div>
+
+  <div class="panel-body">
+    {% if not view.list_contacts %}
+    <div class="alert warning">
+      No contacts defined yet! Add contacts and assign them to this SLA.
+    </div>
+    {% endif %}
     
-  {% if not view.list_contacts %}
-  <div class="alert warning">
-    No contacts defined yet! Add contacts and assign them to this SLA.
+    <ul id="contacts" class="list-unstyled">
+      {% for contact in view.list_contacts %}
+      {% include "snippets/contact.html" with object=contact %}
+      {% endfor %}
+    </ul>
   </div>
-  {% endif %}
-  
-  <ul id="contacts">
-    {% for contact in view.list_contacts %}
-    {% include "snippets/contact.html" with object=contact %}
-    {% endfor %}
-  </ul>
 </div>
 
-<div class="viewlet well">
-  <header class="clearfix">
-    <h2 class="pull-left">Services</h2>
+<div class="panel panel-default">
+  <div class="panel-heading">Services
     <span class="controls pull-right">
-      <a class="btn btn-success btn-mini"
-         target="#services"
+      <a class="btn btn-success btn-xs"
          href="{% url 'create_service' sla.pk %}"
-         ><i class="icon-plus"></i></a>
+         ><i class="fa fa-plus"></i></a>
     </span>
-  </header>
+  </div>
   
-  {% if not view.list_services %}
-  <div class="alert warning">No services defined yet!</div>
-  {% endif %}
-  
-  <ul id="services">
-    {% for service in view.list_services %}
-    {% include "snippets/service.html" with object=service %}
-    {% endfor %}
-  </ul>
+  <div class="panel-body">
+    {% if not view.list_services %}
+    <div class="alert warning">No services defined yet!</div>
+    {% endif %}
+    
+    <ul id="services" class="list-unstyled">
+      {% for service in view.list_services %}
+      {% include "snippets/service.html" with object=service %}
+      {% endfor %}
+    </ul>
+  </div>
 </div>
 
-<div class="viewlet well">
-  <header class="clearfix"> 
-    <h2 class="pull-left">Rules</h2> 
+<div class="panel panel-default">
+  <div class="panel-heading">Rules
     <span class="controls pull-right">
-      <a class="btn btn-success btn-mini"
-         target="#rules"
+      <a class="btn btn-success btn-xs"
          href="{% url 'create_rule' sla.pk %}"
-         ><i class="icon-plus"></i></a>
+         ><i class="fa fa-plus"></i></a>
     </span>
-  </header>
+  </div>
 
-  <p class="text-info">
-    Add matching rules for incoming mail. If a rule matches, the issue will
-    be created for this SLA.
-  </p>
-  
-  {% if not view.list_rules %}
-  <div class="alert warning">No rules defined yet!</div>
-  {% endif %}
-
-  <ul id="rules">
-    {% for rule in view.list_rules %}
-    {% include "snippets/rule.html" with object=rule %}
-    {% endfor %}
-  </ul>
+  <div class="panel-body">
+    <p class="text-info">
+      Add matching rules for incoming mail. If a rule matches, the issue will
+      be created for this SLA.
+    </p>
+    
+    {% if not view.list_rules %}
+    <div class="alert warning">No rules defined yet!</div>
+    {% endif %}
+    
+    <ul id="rules" class="list-unstyled">
+      {% for rule in view.list_rules %}
+      {% include "snippets/rule.html" with object=rule %}
+      {% endfor %}
+    </ul>
+  </div>
 </div>
 
 {% endblock %}

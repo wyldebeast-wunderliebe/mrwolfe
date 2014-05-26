@@ -5,9 +5,22 @@ from django.core.urlresolvers import reverse
 
 class Service(models.Model):
 
+    """Service for a given SLA. This is a combination of a priority, and
+    a response/resolution time. Response times are usually as per
+    contract, resolution times are often used to specify an average,
+    as no guarantee can be given to an actual resolution per issue.
+    """
+
     sla = models.ForeignKey(SLA)
-    response_time = models.FloatField(null=True)
-    solution_time = models.FloatField(null=True)
+    response_time = models.FloatField(
+        null=True,
+        help_text="Response time in hours. Use '.' for decimals. Note that"
+        "2.5 means two and a half hours, not two hours and 50 minutes."
+    )
+    solution_time = models.FloatField(
+        null=True,
+        help_text="Time to resolve in hours. Same behavior as response time."
+    )
     priority = models.CharField(max_length=100)
 
     class Meta:

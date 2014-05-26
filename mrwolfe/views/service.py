@@ -9,7 +9,7 @@ from base import CTypeMixin
 class CreateService(CreateView, CTypeMixin):
 
     model = Service
-    form_class = ServiceForm    
+    form_class = ServiceForm
     template_name = "addform.html"
 
     def get_initial(self):
@@ -20,7 +20,7 @@ class CreateService(CreateView, CTypeMixin):
 class UpdateService(UpdateView, CTypeMixin):
 
     model = Service
-    form_class = ServiceForm    
+    form_class = ServiceForm
     template_name = "editform.html"
 
 

@@ -22,7 +22,7 @@
     {% compress css %}
     <link rel="stylesheet" href="{{STATIC_URL}}css/mrwolfe.css" type="text/css">
     <link rel="stylesheet" 
-          href="{{STATIC_URL}}font-awesome/css/font-awesome.css" 
+          href="{{STATIC_URL}}fontawesome/css/font-awesome.css" 
           type="text/css">
     <link rel="stylesheet" 
           href="{{STATIC_URL}}fileupload/css/jquery.fileupload-ui.css" 
@@ -75,17 +75,21 @@
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
 
-              <li><a href="/"><i class="icon-tasks"></i> {% username request.user %}</a></li>
-              <li><a href="/config"><i class="icon-wrench"></i> Admin</a></li>
+              <li><a href="/"><i class="fa fa-tachometer">
+                  </i> {% username request.user %}</a>
+              </li>
+              <li><a href="/config"><i class="fa fa-wrench"></i> 
+                  Settings</a>
+              </li>
               
-              {% if "wiki" in "INSTALLED_APPS"|get_setting %}
-              <li><a href="/wiki"><i class="icon-info"></i> Wiki</a></li>
+              {% if "wiki" in "INSTALLED_APPS"|get_django_setting %}
+              <li><a href="/wiki"><i class="fa fa-info"></i> Wiki</a></li>
               {% endif %}
               
-              <li><a href="/help"><i class="icon-info-sign"></i> Help</a></li>
+              <li><a href="/help"><i class="fa fa-question"></i> Help</a></li>
             </ul>
 
-            <form class="navbar-form navbar-left" action="/search/"
+            <form class="navbar-form navbar-right" action="/search/"
                   method="GET" role="search">
               {% csrf_token %}
               <div class="form-group">
@@ -95,14 +99,9 @@
                 <input type="hidden" name="models" value="mrwolfe.issue"/>
               </div>
               <button type="submit" class="btn">
-                <i class="icon-search"></i>
+                <i class="fa fa-search"></i>
               </button>
             </form>
-
-            <a class="btn btn-success navbar-btn pull-right" 
-               href="{% url 'create_issue' %}">
-              <i class="icon-plus"></i> New issue
-            </a>
 
           </div>
         </div>
@@ -117,16 +116,29 @@
         <span class="alert-body">{{ request.GET.message }}</span>
       </div>
 
-      <div class="panel panel-default" role="toolbar">
-        <div class="panel-body">
-          {% block tools %}
-          {% endblock %}
-        </div>
+      <div class="btn-toolbar well" role="toolbar">
+        {% block toolbar %}
+        <a class="btn btn-success" 
+           href="{% url 'create_issue' %}">
+          <i class="fa fa-plus"></i> New issue
+        </a>
+
+        {% if "notification"|get_setting == "on" %}
+        <a class="btn btn-warning action-inline" 
+           href="{% url 'set_notification' %}?name=notification&value=off">
+          <i class="fa fa-volume-off"></i> Notification off
+        </a>
+        {% else %}
+        <a class="btn btn-warning action-inline" 
+           href="{% url 'set_notification' %}?name=notification&value=on">
+          <i class="fa fa-volume-up"></i> Notification on
+        </a>
+        {% endif %}
+        {% endblock %}
       </div>
 
       <div id="main">
         {% block content %}
-        
         {% endblock %}
       </div>
       

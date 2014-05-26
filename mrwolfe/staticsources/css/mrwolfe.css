@@ -16,6 +16,11 @@
 
 .status {
     font-weight: bold;
+    width: 20%;
+}
+
+td.date {
+    width: 20%;
 }
 
 .comment {

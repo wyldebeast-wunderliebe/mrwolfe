@@ -1,12 +1,16 @@
 {% extends "base.html" %}
 
+{% load bootstrap3 %}
+
+{% block toolbar %}{% endblock %}
+
 {% block content %}
 
-<h2>
+<h1>
 {% block title %}
 Edit {{ view.ctype }}
 {% endblock %}
-</h2>
+</h1>
 
 {% if form.errors %}
 <div class="alert alert-error">
@@ -15,18 +19,25 @@ Edit {{ view.ctype }}
 {% endif %}
 
 <form action="" method="POST">
+
+  {% if form.help %}
+  <div class="alert alert-info">
+    {{ form.help|safe }}
+  </div>
+  {% endif %}
+
   {% csrf_token %}
 
   {% block form %}
-  {{ form }}
+  {% bootstrap_form form %}
   {% endblock %}
 
   <div class="btn-group submission">
     <input name="submit" class="btn btn-primary" type="submit" value="Save" />
     {% if view.cancel_url %}
-    <a href="{{ view.cancel_url }}" class="btn">Cancel</a>
+    <a href="{{ view.cancel_url }}" class="btn btn-default">Cancel</a>
     {% else %}
-    <a href="{% url 'config' %}" class="btn">Cancel</a>
+    <a href="{% url 'config' %}" class="btn btn-default">Cancel</a>
     {% endif %}
   </div>
 </form>

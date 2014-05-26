@@ -1,8 +1,9 @@
 from markdown import markdown
 from django.utils.safestring import mark_safe
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.conf import settings
 from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse_lazy
 from pu_in_content.views.jsonbase import JSONDetailView
 from mrwolfe.models.issue import Issue
 from mrwolfe.models.status import Status
@@ -159,3 +160,10 @@ class IssueEdit(UpdateView):
     def cancel_url(self):
 
         return "/"
+
+
+class DeleteIssue(DeleteView):
+
+    model = Issue
+    template_name = "snippets/confirm_delete_issue.html"
+    success_url = reverse_lazy("config")

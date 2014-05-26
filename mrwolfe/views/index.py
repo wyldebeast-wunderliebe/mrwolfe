@@ -5,6 +5,7 @@ from mrwolfe.models.mailqueue import MailQueue
 from mrwolfe.models.issue import Issue
 from mrwolfe.models.operator import Operator
 from mrwolfe.models.contact import Contact
+from mrwolfe.models.setting import Setting
 
 
 class IndexView(TemplateView):
@@ -17,7 +18,7 @@ class IndexView(TemplateView):
 
         ctx.update({"view": self})
 
-        return ctx    
+        return ctx
 
     def list_my_issues(self):
 
@@ -33,7 +34,7 @@ class IndexView(TemplateView):
     def list_unclosed_issues(self):
 
         return Issue.objects.all().exclude(status=settings.ISSUE_STATUS_CLOSED)
-        
+
 
 class AdminView(IndexView):
 
@@ -54,3 +55,7 @@ class AdminView(IndexView):
     def list_contacts(self):
 
         return Contact.objects.all()
+
+    def list_settings(self):
+
+        return Setting.objects.all()

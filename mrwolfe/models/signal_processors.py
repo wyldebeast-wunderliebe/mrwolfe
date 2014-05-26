@@ -17,7 +17,7 @@ def issue_post_save(sender, instance, created=False, **kwargs):
 
         if operators:
 
-            notify("issue_created", 
+            notify("issue_created",
                    {"issue": instance},
                    settings.DEFAULT_FROM_ADDR,
                    ", ".join(operators))
@@ -28,7 +28,7 @@ def comment_post_save(sender, instance, created=False, **kwargs):
 
     if created:
 
-        notify("comment_added", 
+        notify("comment_added",
                {"issue": instance.issue, "comment": instance},
                settings.DEFAULT_FROM_ADDR,
                instance.issue.contact.email
@@ -49,12 +49,12 @@ def status_post_save(sender, instance, created=False, **kwargs):
 
     if instance.name == settings.ISSUE_STATUS_CLOSED:
 
-        notify("issue_closed", 
+        notify("issue_closed",
                {"issue": instance.issue, "comment": instance.comment},
                instance.issue.email_from,
-               instance.issue.contact.email)        
+               instance.issue.contact.email)
     else:
-        notify("issue_status", 
+        notify("issue_status",
                {"issue": instance.issue, "comment": instance.comment},
                instance.issue.email_from,
                instance.issue.contact.email)

@@ -11,10 +11,10 @@ from contact import Contact
 
 class Issue(models.Model):
 
-    sla = models.ForeignKey(SLA, null=True)
+    sla = models.ForeignKey(SLA, null=True, blank=True)
     service = models.ForeignKey(Service, blank=True, null=True)
     title = models.CharField(max_length=100)
-    text =  models.TextField()
+    text = models.TextField()
     assignee = models.ForeignKey(User, blank=True, null=True,
                                  related_name="assignee_set")
     contact = models.ForeignKey(Contact, related_name="contact_set")
@@ -32,32 +32,34 @@ class Issue(models.Model):
         return "%s - %s" % (self.issue_id, self.title[:50])
 
     def url(self):
-        
-        return "%s%s" % (settings.HOST_ADDRESS, 
-                         reverse('view_issue', args=[], 
-                                 kwargs={'pk': self.pk }))
+
+        return "%s%s" % (settings.HOST_ADDRESS,
+                         reverse('view_issue', args=[],
+                                 kwargs={'pk': self.pk}))
 
     @property
     def issue_id(self):
-    
+
         return "#%08i" % self.pk
 
     @property
     def time_to_resolve(self):
 
         """ (created + hours of service) - now """
-        
+
         now = datetime.now()
 
         if self.deadline:
 
             if self.deadline < now:
 
-                return time.strftime("%H:%M late", 
-                                     time.gmtime((now - self.deadline).seconds))
+                return time.strftime(
+                    "%H:%M late",
+                    time.gmtime((now - self.deadline).seconds))
             else:
-                return time.strftime("%H:%M", 
-                                     time.gmtime((self.deadline - now).seconds))
+                return time.strftime(
+                    "%H:%M",
+                    time.gmtime((self.deadline - now).seconds))
         else:
             return None
 
@@ -85,7 +87,7 @@ class Issue(models.Model):
 
         if now > self.deadline:
             tts = -tts
-            
+
         return tts
 
     @property
@@ -109,11 +111,11 @@ class Issue(models.Model):
 
     def is_closed(self):
 
-        return self.status == settings.ISSUE_STATUS_CLOSED        
+        return self.status == settings.ISSUE_STATUS_CLOSED
 
     @property
     def dateclosed(self):
-        
+
         if self.status == settings.ISSUE_STATUS_CLOSED:
             return self.status_history.filter(
                 name=settings.ISSUE_STATUS_CLOSED)[0].date
@@ -122,7 +124,7 @@ class Issue(models.Model):
 
     @property
     def urgency(self):
-        
+
         """ How urgent is it..? """
 
         try:
@@ -145,7 +147,7 @@ class Issue(models.Model):
         _in_time = True
 
         if self.deadline:
-            
+
             compare_with = self.dateclosed or datetime.now()
 
             if compare_with > self.deadline:
@@ -158,11 +160,11 @@ class Issue(models.Model):
 
         return not self.is_closed()
 
-    def set_status(self, status):
+    def set_status(self, status, comment=None):
 
         """ Set status and create status object in log """
 
-        self.status_set.create(name=status)
+        self.status_set.create(name=status, comment=comment)
         self.status = status
 
     def clone(self):
@@ -188,8 +190,8 @@ class Issue(models.Model):
             comment_clone.save()
 
         self.status_history.create(name=self.status,
-                               issue=_clone,
-                               comment="Cloned status")
+                                   issue=_clone,
+                                   comment="Cloned status")
 
         return _clone
 
@@ -197,7 +199,7 @@ class Issue(models.Model):
     def email_from(self):
 
         _from = settings.DEFAULT_FROM_ADDR
-        
+
         if self.sla and self.sla.email_from:
             _from = self.sla.email_from
 

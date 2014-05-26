@@ -1,18 +1,18 @@
-<li class="editable">
+<li>
   <a href="{% url 'view_sla' object.pk %}">{{ object }}</a>
-  <div class="controls">
-    <a class="btn btn-mini edit" title="Edit"
+  <div class="controls pull-right">
+    <a class="btn btn-default btn-xs edit" title="Edit"
        href="{% url 'edit_sla' object.pk %}">
-      <i class="icon-pencil"></i>
+      <i class="fa fa-edit"></i>
     </a>
-    <a class="btn btn-mini" title="Settings" 
+    <a class="btn btn-default btn-xs" title="Settings" 
        href="{% url 'view_sla' object.pk %}">
-      <i class="icon-wrench"></i>
+      <i class="fa fa-wrench"></i>
     </a>
-    <a class="btn btn-mini btn-danger" 
+    <a class="btn btn-xs btn-danger" 
        data-pu_confirmdelete="true" title="Remove"
        href="{% url 'delete_sla' object.pk %}">
-      <i class="icon-remove"></i>
+      <i class="fa fa-minus"></i>
     </a>
   </div>
 </li>

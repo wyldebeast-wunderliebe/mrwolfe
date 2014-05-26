@@ -1,14 +1,14 @@
 <li class="editable">
-  <i class="icon-user-md"></i>
+  <i class="fa fa-user-md"></i>
   {{ object }}
   <div class="controls">
-    <a class="btn btn-mini" 
+    <a class="btn btn-default btn-xs" 
        href="{% url 'edit_operator' object.pk %}">
-      <i class="icon-pencil"></i>
+      <i class="fa fa-edit"></i>
     </a>
-    <a class="btn btn-danger btn-mini" 
+    <a class="btn btn-danger btn-xs" 
        href="{% url 'delete_operator' object.pk %}">
-      <i class="icon-remove"></i>
+      <i class="fa fa-minus"></i>
     </a>
   </div>
 </li>

@@ -1,23 +1,23 @@
-<li class="editable {% if object.is_default %}default{% endif %}">
-  <i class="icon-cog"></i>
+<li class="{% if object.is_default %}default{% endif %}">
+  <i class="fa fa-cog"></i>
   {{ object }}
-  <div class="controls">
-    <a class="btn btn-mini" 
+  <div class="controls pull-right">
+    <a class="btn btn-default btn-xs" 
        href="{% url 'edit_service' object.pk %}">
-      <i class="icon-pencil"></i>
+      <i class="fa fa-edit"></i>
     </a>
-    <a class="btn btn-mini btn-danger" 
+    <a class="btn btn-xs btn-danger" 
        href="{% url 'delete_service' object.pk %}">
-      <i class="icon-remove"></i>
+      <i class="fa fa-minus"></i>
     </a>
     {% if not object.is_default %}
-    <a class="action-inline btn btn-mini" 
+    <a class="action-inline btn btn-default btn-xs" 
        href="{% url 'set_default_service' object.pk %}"
        target="parents('li')"
        title="Set as default"
        rel="tooltip"
        data-pu_targetbehavior="replace">
-      <i class="icon-star"></i>
+      <i class="fa fa-star"></i>
     </a>
     {% endif %}
   </div>

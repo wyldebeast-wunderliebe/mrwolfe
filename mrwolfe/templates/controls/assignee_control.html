@@ -7,7 +7,7 @@
   <ul class="dropdown-menu">
     {% for user in view.list_users %}
     <li>
-      <a class="action-inline" 
+      <a class="inline" 
        <a href="{% url 'change_assignee' object.pk %}?assignee={{ user.pk }}"
           target="#assignee">
          {{ user }}

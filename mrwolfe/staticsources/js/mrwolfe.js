@@ -2,6 +2,16 @@
 
 var mrwolfe = {};
 
+
+mrwolfe.showMessage = function(mesg, type) {
+
+  $("body").append('<div id="message" class="alert alert-' + type + '"><a class="close" data-dismiss="alert">&times;</a>' + mesg + '</div>');
+  
+  setTimeout('$("#message").hide("slow")', 5000);
+  
+  $("#message").alert();
+};
+
 mrwolfe.refreshHistory = function(issue_id) {
 
   $.get("/issue_history/" + issue_id,
@@ -129,17 +139,82 @@ $(document).ready(function() {
 
       var form = $(e.currentTarget);
 
-      e.preventDefault();      
+      e.preventDefault();
 
       $.post(form.attr("action"), form.serialize(), function(data) {
 
         $("#modalcontainer .modal").modal('hide');
-        
+
         $("#status").replaceWith(data);
       });
 
     });
 
+  });
+
+  /**
+   * Handle inline a clicks.
+   */
+  $(document).on("click", "a.inline", function(e) {
+
+    e.preventDefault();
+
+    var link = $(e.currentTarget);
+    var tgt = link;
+    var behavior = link.data('targetbehavior') || "replace";
+
+    if (link.attr("target")) {
+      tgt = $(link.attr("target"));
+    }
+
+    $.ajax(link.attr("href"),
+           {type: link.data('method') || "GET",
+            success: function(data, status, xhr) {
+
+              if (xhr.getResponseHeader("content-type").indexOf("json") > -1) {
+                mrwolfe.showMessage(data.message, "success");
+              } else {
+                if (behavior == "replace") {
+                  tgt.replaceWith(data);
+                } else if (behavior == "append") {
+                  tgt.append(data);
+                }
+              }
+            }
+           });
+  });
+
+  /**
+   * Handle inline a clicks.
+   */
+  $(document).on("submit", "form.inline", function(e) {
+
+    e.preventDefault();
+
+    var form = $(e.target);
+    var tgt = form;
+    var behavior = form.data('targetbehavior') || "replace";
+
+    if (form.attr("target")) {
+      tgt = $(form.attr("target"));
+    }
+
+    $.ajax(form.attr("action"),
+           {type: form.attr('method') || "POST",
+            data: form.serialize(),
+            success: function(data, status, xhr) {
+
+              if (xhr.getResponseHeader("content-type").indexOf("json") > -1) {
+                mrwolfe.showMessage(data.message, "success");
+              } else {
+                if (behavior == "replace") {
+                  tgt.replaceWith(data);
+                } else if (behavior == "append") {
+                  tgt.append(data);
+                }
+              }
+            }
+           });
   });
 
   mrwolfe.init_fileuploader();

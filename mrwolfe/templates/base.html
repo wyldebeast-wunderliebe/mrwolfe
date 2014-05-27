@@ -43,10 +43,6 @@
             src="{{STATIC_URL}}fileupload/js/jquery.iframe-transport.js">
     </script>     
     <script src="{{STATIC_URL}}js/mrwolfe.js"></script>    
-    <script src="{{STATIC_URL}}js/pu_in_core.js" 
-            defer="defer"></script>
-    <script src="{{STATIC_URL}}js/pu_in_content.js" 
-            defer="defer"></script>
     {% endcompress %}
 
   </head>
@@ -124,12 +120,12 @@
         </a>
 
         {% if "notification"|get_setting == "on" %}
-        <a class="btn btn-warning action-inline" 
+        <a class="btn btn-warning inline" 
            href="{% url 'set_notification' %}?name=notification&value=off">
           <i class="fa fa-volume-off"></i> Disable notification
         </a>
         {% else %}
-        <a class="btn btn-warning action-inline" 
+        <a class="btn btn-warning inline" 
            href="{% url 'set_notification' %}?name=notification&value=on">
           <i class="fa fa-volume-up"></i> Enable notification
         </a>

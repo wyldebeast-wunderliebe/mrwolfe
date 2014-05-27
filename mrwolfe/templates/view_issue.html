@@ -14,8 +14,8 @@
 
 {% if issue.can_clone %}
 <a href="{% url 'clone_issue' object.pk %}"
-   class="btn btn-default action-inline"
-   data-pu_actionmethod="POST" data-pu_protect="true">
+   class="btn btn-default inline"
+   data-method="POST">
   <i class="fa fa-copy"></i> Clone
 </a>
 {% endif %}
@@ -77,8 +77,8 @@
   <div class="panel-body">
 
     {% if not issue.is_closed %}
-    <form role="form" class="submit-inline" target="#comments"
-          data-pu_targetbehavior="append"
+    <form role="form" class="inline" target="#comments"
+          data-targetbehavior="append"
           action="{% url 'create_comment' %}" method="POST">
       <div class="form-group">
         <textarea class="form-control" name="comment"></textarea>

@@ -1,4 +1,5 @@
-<li class="{% if object.is_default %}default{% endif %}">
+<li class="{% if object.is_default %}default{% endif %}"
+    id="service_{{ object.pk }}">
   {{ object }}
   <div class="controls pull-right">
     <a class="btn btn-default btn-xs" 
@@ -10,12 +11,11 @@
       <i class="fa fa-minus"></i>
     </a>
     {% if not object.is_default %}
-    <a class="action-inline btn btn-default btn-xs" 
+    <a class="inline btn btn-default btn-xs" 
        href="{% url 'set_default_service' object.pk %}"
-       target="parents('li')"
+       target="#service_{{ object.pk }}"
        title="Set as default"
-       rel="tooltip"
-       data-pu_targetbehavior="replace">
+       rel="tooltip">
       <i class="fa fa-star"></i>
     </a>
     {% endif %}

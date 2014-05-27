@@ -1,10 +1,10 @@
 {% if object.value == "on" %}
-<a class="btn btn-warning action-inline" 
+<a class="btn btn-warning inline" 
    href="{% url 'set_notification' %}?name=notification&value=off">
   <i class="fa fa-volume-off"></i> Disable notification
 </a>
 {% else %}
-<a class="btn btn-warning action-inline" 
+<a class="btn btn-warning inline" 
    href="{% url 'set_notification' %}?name=notification&value=on">
   <i class="fa fa-volume-up"></i> Enable notification
 </a>

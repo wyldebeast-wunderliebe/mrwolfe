@@ -125,7 +125,7 @@ time {
     position: relative;
 }
 
-#alerts {
+#alerts, #message {
     position: absolute;
     min-height: 30px;
     width: 90%;

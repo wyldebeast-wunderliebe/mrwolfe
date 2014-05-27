@@ -50,6 +50,13 @@ sent back to the sender, with the acknowledgement and the issue
 id. Any further response on the issue (as determined by the use of the
 issue ID in the subject, will be added as comments on the same issue.
 
+The issue should be addressed by one of the operators. The issue can
+be assigned to the operator, and usually resides there untill it is
+resolved. Mr.Wolfe does not support re-asignment to the original
+caller; the operator is and stays responsible for the issue. In case
+of the need of more feedback of the customer, the issue can be set to
+the 'on hold' or 'awaiting input' status, as per the situation.
+
 
 Resolving issues to an SLA
 --------------------------

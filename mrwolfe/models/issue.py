@@ -1,7 +1,8 @@
-from datetime import datetime, timedelta
+from datetime import timedelta
 import time
 from django.db import models
 from django.core.urlresolvers import reverse
+from django.utils import timezone
 from user import User
 from django.conf import settings
 from sla import SLA
@@ -47,7 +48,7 @@ class Issue(models.Model):
 
         """ (created + hours of service) - now """
 
-        now = datetime.now()
+        now = timezone.now()
 
         if self.deadline:
 
@@ -81,7 +82,7 @@ class Issue(models.Model):
     @property
     def raw_time_to_resolve(self):
 
-        now = datetime.now()
+        now = timezone.now()
 
         tts = (self.deadline - now).seconds / 3600.0
 
@@ -148,7 +149,7 @@ class Issue(models.Model):
 
         if self.deadline:
 
-            compare_with = self.dateclosed or datetime.now()
+            compare_with = self.dateclosed or timezone.now()
 
             if compare_with > self.deadline:
                 _in_time = False

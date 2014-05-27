@@ -3,5 +3,14 @@
   <a href="{% url 'view_issue' object.pk %}">
     {{ object }}
   </a>
-  <time>{{ object.created }} | status: {{ object.status }} | time to resolve: {{ object.time_to_resolve }} | {{ object.sla }}</time>
+  <time>
+    {{ object.created }} | 
+    status: {{ object.status }} | 
+    time to resolve: {{ object.time_to_resolve|default:"Not specified" }} | 
+    {% if object.sla %}
+    {{ object.sla }}
+    {% else %}
+    <span class="text-danger">No SLA! Please assign one.</span>
+    {% endif %}
+  </time>
 </li>

@@ -12,7 +12,7 @@ class Operator(User):
         app_label = "mrwolfe"
 
     def __unicode__(self):
-        
+
         return self.user.get_full_name() or self.email
 
     def get_absolute_url(self):

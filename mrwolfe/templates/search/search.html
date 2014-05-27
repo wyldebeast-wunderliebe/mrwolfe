@@ -3,16 +3,18 @@
 {% block content %}
 
 {% if query %}
-<div class="viewlet well">
-  <h2>Tickets</h2>
-  <ul>
-    {% for issue in page.object_list %}
-    {% include "snippets/issue.html" with object=issue.object %}
-    {% endfor %}
-  </ul>
+<div class="panel panel-default">
+  <div class="panel-heading">Tickets</div>
+  <div class="panel-body">
+    <ul class="list-unstyled">
+      {% for issue in page.object_list %}
+      {% include "snippets/issue.html" with object=issue.object %}
+      {% endfor %}
+    </ul>
+  </div>
 </div>
 {% else %}
 Nothing found for query "{{ request.POST.q }}"
 {% endif %}
-
+  
 {% endblock %}

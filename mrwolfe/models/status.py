@@ -13,7 +13,7 @@ class Status(models.Model):
 
     class Meta:
         app_label = "mrwolfe"
-        ordering = ["date"]
+        ordering = ["-date"]
 
     def __unicode__(self):
         return self.name

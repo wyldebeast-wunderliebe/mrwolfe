@@ -6,14 +6,6 @@
     color: #ff0000;
 }
 
-.viewlet ul {
-    list-style: none;
-}
-
-.viewlet ul a {
-    color: inherit !important;
-}
-
 .status {
     font-weight: bold;
     width: 20%;
@@ -46,31 +38,18 @@ h2 {
     font-size: 120% !important;
 }
 
-.viewlet h2 {
-    line-height: 26px;
-}
-
-.viewlet h2.pull-left {
-    margin-right: 20px;
-}
-
-.viewlet h2 .btn {
-    margin-right: 40px;
-    float: right;
-}
-
-li.editable .controls {
-    float: right;
-    opacity: 0.2;
-}
-
-li.editable {
-    clear: both;
+.panel li {
+    line-height: 25px;
     padding: 5px;
     border-radius: 5px;
 }
 
-li.editable:hover .controls {
+li .controls {
+    float: right;
+    opacity: 0.2;
+}
+
+li:hover .controls {
     opacity: 1.0;
 }
 
@@ -78,7 +57,7 @@ li.editable:hover .controls {
     margin-left: 40px;
 }
 
-li.editable:hover {
+.panel li:hover {
     background-color: #e3e3e3;
 }
 
@@ -126,40 +105,6 @@ time {
     margin-left: 70px;
 }
 
-.viewlet h2 {
-    margin-top: 0px;
-}
-
-.viewlet header .controls {
-    padding-right: 5px;
-}
-
-.viewlet .controls .btn {
-    float: left;
-    margin-right: 5px;
-}
-
-.viewlet .toggle {
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.toggle.expand, .toggle.collapse {
-    height: auto;
-}
-
-.viewlet .toggle.collapse {
-    display: none;
-}
-
-.viewlet.expanded .toggle.collapse {
-    display: block;
-}
-
-.viewlet.expanded .toggle.expand {
-    display: none;
-}
-
 .center {
     margin-left: auto;
     margin-right: auto;
@@ -199,6 +144,6 @@ div.descr {
     border-bottom: 1px solid #c0c0c0;
 }
 
-.wide input, .wide textarea, .wide .uneditable-input {
-    width: 412px;
+#comments {
+    margin-top: 20px;
 }

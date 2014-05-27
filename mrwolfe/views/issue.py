@@ -168,4 +168,4 @@ class DeleteIssue(DeleteView):
 
     model = Issue
     template_name = "snippets/confirm_delete_issue.html"
-    success_url = reverse_lazy("config")
+    success_url = "/"

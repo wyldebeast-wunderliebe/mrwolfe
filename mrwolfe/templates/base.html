@@ -126,12 +126,12 @@
         {% if "notification"|get_setting == "on" %}
         <a class="btn btn-warning action-inline" 
            href="{% url 'set_notification' %}?name=notification&value=off">
-          <i class="fa fa-volume-off"></i> Notification off
+          <i class="fa fa-volume-off"></i> Disable notification
         </a>
         {% else %}
         <a class="btn btn-warning action-inline" 
            href="{% url 'set_notification' %}?name=notification&value=on">
-          <i class="fa fa-volume-up"></i> Notification on
+          <i class="fa fa-volume-up"></i> Enable notification
         </a>
         {% endif %}
         {% endblock %}

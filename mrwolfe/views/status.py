@@ -1,7 +1,7 @@
 from django.views.generic.edit import UpdateView
 from django.conf import settings
 from django.template.loader import render_to_string
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from mrwolfe.models.issue import Issue
 from mrwolfe.forms.status import StatusForm
 
@@ -32,7 +32,8 @@ class CreateStatus(UpdateView):
 
         return HttpResponse(render_to_string(
             'controls/status_control.html',
-            {'view': self, 'object': self.object}
+            {'view': self, 'object': self.object,
+             'redir': self.object.is_closed}
         ))
 
     @property

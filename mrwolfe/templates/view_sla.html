@@ -4,7 +4,7 @@
 <a class="btn btn-default"
    href="{% url 'edit_sla' sla.pk %}"><i class="fa fa-edit"></i> Edit</a>  
 <a class="btn btn-danger"
-   href="{% url 'delete_sla' sla.pk %}"><i class="fa fa-remove"></i> Delete</a>
+   href="{% url 'delete_sla' sla.pk %}"><i class="fa fa-minus"></i> Delete</a>
 {% endblock %}
 
 {% block content %}
@@ -27,7 +27,7 @@
 </table>
 
 <div class="panel panel-default">
-  <div class="panel-heading">Contacts</div>
+  <div class="panel-heading"><i class="fa fa-user"></i> Contacts</div>
 
   <div class="panel-body">
     {% if not view.list_contacts %}
@@ -45,7 +45,7 @@
 </div>
 
 <div class="panel panel-default">
-  <div class="panel-heading">Services
+  <div class="panel-heading"><i class="fa fa-fire-extinguisher"></i> Services
     <span class="controls pull-right">
       <a class="btn btn-success btn-xs"
          href="{% url 'create_service' sla.pk %}"
@@ -67,7 +67,7 @@
 </div>
 
 <div class="panel panel-default">
-  <div class="panel-heading">Rules
+  <div class="panel-heading"><i class="fa fa-magic"></i> Rules
     <span class="controls pull-right">
       <a class="btn btn-success btn-xs"
          href="{% url 'create_rule' sla.pk %}"

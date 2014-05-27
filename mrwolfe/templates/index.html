@@ -6,7 +6,7 @@
 <div class="viewlet panel panel-danger">
   <div class="panel-heading">Unassigned tickets</div>
   <div class="panel-body">
-    <ul>
+    <ul class="list-unstyled">
       {% for issue in view.list_unassigned_issues %}
       {% include "snippets/issue.html" with object=issue %}
       {% endfor %}
@@ -21,7 +21,7 @@
     {% if not view.list_my_issues %}
     No issues. Sit back and relax.
     {% else %}
-    <ul>
+    <ul class="list-unstyled">
       {% for issue in view.list_my_issues %}
       {% include "snippets/issue.html" with object=issue %}
       {% endfor %}
@@ -33,7 +33,7 @@
 <div class="viewlet panel panel-default">
   <div class="panel-heading">All unclosed tickets</div>
   <div class="panel-body">
-    <ul id="unclosed">
+    <ul id="unclosed" class="list-unstyled">
       {% for issue in view.list_unclosed_issues %}
       {% include "snippets/issue.html" with object=issue %}
       {% endfor %}

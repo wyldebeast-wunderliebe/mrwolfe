@@ -2,27 +2,30 @@
 
 {% block toolbar %}
 
-  {% include "controls/status_control.html" %}
-  {% include "controls/assignee_control.html" %}
+{% include "controls/status_control.html" %}
 
-  <a href="{% url 'edit_issue' object.pk %}"
-     class="btn btn-default">
-    <i class="fa fa-edit"></i> Edit
-  </a>
+{% if not issue.is_closed %}
+{% include "controls/assignee_control.html" %}
 
-  {% if issue.can_clone %}
-  <a href="{% url 'clone_issue' object.pk %}"
-     class="btn btn-default action-inline"
-     data-pu_actionmethod="POST" data-pu_protect="true">
-    <i class="fa fa-copy"></i> Clone
-  </a>
-  {% endif %}
+<a href="{% url 'edit_issue' object.pk %}"
+   class="btn btn-default">
+  <i class="fa fa-edit"></i> Edit
+</a>
 
-  <a href="{% url 'delete_issue' object.pk %}"
-     class="btn btn-danger">
-    <i class="fa fa-minus"></i> Delete
-  </a>
+{% if issue.can_clone %}
+<a href="{% url 'clone_issue' object.pk %}"
+   class="btn btn-default action-inline"
+   data-pu_actionmethod="POST" data-pu_protect="true">
+  <i class="fa fa-copy"></i> Clone
+</a>
+{% endif %}
 
+<a href="{% url 'delete_issue' object.pk %}"
+   class="btn btn-danger">
+  <i class="fa fa-minus"></i> Delete
+</a>
+
+{% endif %}
 {% endblock toolbar %}
 
 
@@ -67,21 +70,31 @@
 
 
 <div class="panel panel-default">
-  <div class="panel-heading">Comments</div>
+  <div class="panel-heading">
+    <i class="fa fa-comment"></i>
+    Comments
+  </div>
   <div class="panel-body">
 
+    {% if not issue.is_closed %}
     <form role="form" class="submit-inline" target="#comments"
+          data-pu_targetbehavior="append"
           action="{% url 'create_comment' %}" method="POST">
       <div class="form-group">
         <textarea class="form-control" name="comment"></textarea>
       </div>
       <input type="hidden" name="issue" value="{{ object.id }}" />
       <div class="btn-group submission">
-        <button type="submit" class="btn btn-success">Add comment</button>
+        <button type="submit" class="btn btn-success">
+          <i class="fa fa-plus"></i> Add comment
+        </button>
       </div>
     </form>
+    {% endif %}
 
-    <div id="comments" class="clearfix">
+    <div class="clearfix"></div>
+
+    <div id="comments">
       {% for comment in object.comments.all %}
       {% include "snippets/comment.html" with object=comment %}
       {% endfor %}
@@ -90,17 +103,22 @@
 </div>
 
 <div class="panel panel-default">
-  <div class="panel-heading">Attachments
+  <div class="panel-heading">
+    <i class="fa fa-paperclip"></i>
+    Attachments
+    {% if not issue.is_closed %}
     <span class="controls pull-right">
-    <div class="btn btn-mini btn-success fileinput-button">
-      <i class="icon-plus"></i>
-      <input type="file"
-             multiple="true"
-             name="attachment_upload"
-             data-progress="#progress_attachment"
-             data-issueid="{{ object.id }}"
-             data-target="#attachments" />
-    </div>  
+      <div class="btn btn-xs btn-success fileinput-button">
+        <i class="fa fa-plus"></i>
+        <input type="file"
+               multiple="true"
+               name="attachment_upload"
+               data-progress="#progress_attachment"
+               data-issueid="{{ object.id }}"
+               data-target="#attachments" />
+      </div>  
+    </span>
+    {% endif %}
   </div>
 
   <div id="progress_attachment" 
@@ -109,7 +127,7 @@
   </div>
 
   <div class="panel-body">
-    <ul id="attachments">
+    <ul id="attachments" class="list-unstyled">
       {% for attachment in object.attachment_set.all %}
       {% include "snippets/attachment.html" with object=attachment %}
       {% endfor %}

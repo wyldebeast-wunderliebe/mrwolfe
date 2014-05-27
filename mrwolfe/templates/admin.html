@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="panel panel-default">
-  <div class="panel-heading">Settings</div>
+  <div class="panel-heading"><i class="fa fa-cogs"></i> Settings</div>
   <div class="panel-body">
     <dl>
       {% for setting in view.list_settings %}
@@ -14,7 +14,9 @@
 </div>
 
 <div class="panel panel-default">
-  <div class="panel-heading">Service Level Agreements
+  <div class="panel-heading">
+    <i class="fa fa-umbrella"></i> 
+    Service Level Agreements
     <span class="controls pull-right">
       <a href="{% url 'create_sla' %}" 
          target="#slas"
@@ -42,7 +44,7 @@
 </div>
 
 <div class="panel panel-default">
-  <div class="panel-heading">Operators
+  <div class="panel-heading"><i class="fa fa-user-md"></i> Operators
     <span class="controls pull-right">
       <a href="{% url 'create_operator' %}" 
          target="#operators"
@@ -62,7 +64,7 @@
 </div>
 
 <div class="panel panel-default">
-  <div class="panel-heading">Contacts
+  <div class="panel-heading"><i class="fa fa-user"></i> Contacts
     <span class="controls pull-right">
       <a href="{% url 'create_contact' %}" 
          class="btn btn-xs btn-success">
@@ -80,7 +82,7 @@
 </div>
 
 <div class="panel panel-default">
-  <div class="panel-heading">Mail queues
+  <div class="panel-heading"><i class="fa fa-inbox"></i> Mail queues
     <span class="controls pull-right">
       <a href="{% url 'create_mailqueue' %}" 
          target="#mailqueues"

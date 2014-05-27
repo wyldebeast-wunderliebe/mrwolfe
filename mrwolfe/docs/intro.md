@@ -8,6 +8,7 @@ Contents
 - [Configuration](/settings.md)
 - [Look & Feel](/skin.md)
 - [Wiki](/wiki.md)
+- [OpenID](/openid.md)
 
 Introduction
 ------------

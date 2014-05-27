@@ -14,3 +14,9 @@
     {% endfor %}
   </ul>
 </div>
+
+{% if redir %}
+<script>
+  document.location = "{% url 'view_issue' object.pk  %}";
+</script>
+{% endif %}

@@ -45,3 +45,10 @@ don't work, let us know and we may fix it. Otherwise, fork us on
 GitHub. If you think it totally and utterly sucks, tough luck! We
 don't care! Hah, we're grown up developers! We don't need that. Well,
 just a bit maybe.
+
+
+Further reading
+---------------
+
+For those that still want to read on, there's documentation on
+installation in the docs directory.

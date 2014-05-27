@@ -1,14 +1,13 @@
-<li class="editable">
-  <i class="icon-filter"></i>
+<li>
   {{ object }}
   <div class="controls">
-    <a class="btn btn-mini edit" 
+    <a class="btn btn-default btn-xs" 
        href="{% url 'edit_rule' object.pk %}">
-      <i class="icon-pencil"></i>
+      <i class="fa fa-edit"></i>
     </a>
-    <a class="btn btn-mini btn-danger" 
+    <a class="btn btn-xs btn-danger" 
        href="{% url 'delete_rule' object.pk %}">
-      <i class="icon-remove"></i>
+      <i class="fa fa-minus"></i>
     </a>
   </div>
 </li>

@@ -4,7 +4,10 @@
 
 {% if view.list_unassigned_issues %}
 <div class="viewlet panel panel-danger">
-  <div class="panel-heading">Unassigned tickets</div>
+  <div class="panel-heading">
+    <i class="fa fa-bug"></i>
+    Unassigned tickets
+  </div>
   <div class="panel-body">
     <ul class="list-unstyled">
       {% for issue in view.list_unassigned_issues %}
@@ -16,7 +19,9 @@
 {% endif %}
 
 <div class="viewlet panel panel-primary">
-  <div class="panel-heading">Your tickets</div>
+  <div class="panel-heading">    
+    <i class="fa fa-bug"></i>
+       Your tickets</div>
   <div class="panel-body">
     {% if not view.list_my_issues %}
     No issues. Sit back and relax.
@@ -30,8 +35,12 @@
   </div>
 </div>
 
+{% if view.list_unclosed_issues %}
 <div class="viewlet panel panel-default">
-  <div class="panel-heading">All unclosed tickets</div>
+  <div class="panel-heading">
+    <i class="fa fa-bug"></i>
+    All unclosed tickets
+  </div>
   <div class="panel-body">
     <ul id="unclosed" class="list-unstyled">
       {% for issue in view.list_unclosed_issues %}
@@ -40,5 +49,6 @@
     </ul>
   </div>
 </div>
+{% endif %}
 
 {% endblock %}

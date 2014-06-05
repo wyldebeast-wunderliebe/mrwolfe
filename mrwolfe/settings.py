@@ -141,8 +141,6 @@ INSTALLED_APPS = (
     'django_extensions',
     'compressor',
     'haystack',
-    'pu_in_core',
-    'pu_in_content',
     'mrwolfe',
     'bootstrap3'
 )
@@ -156,7 +154,7 @@ AUTHENTICATION_BACKENDS = (
 LOGIN_REDIRECT_URL = "/login/"
 LOGIN_URL = "/login"
 
-APPEND_SLASH=False
+APPEND_SLASH = False
 
 # BEGIN logging
 #

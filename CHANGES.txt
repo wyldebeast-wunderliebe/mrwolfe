@@ -7,6 +7,9 @@
  * Removed most popups for editing
  * Set status of issue to open when it is in wait_input and someone reacts
  * removed bootstrap from sources
+ * Dropped not null constraint from status. If you migrate from an earlier
+   version of Mr.Wolfe, do something like: alter table mrwolfe_status alter
+   column comment drop not null;
 
 1.1.1b
 ======

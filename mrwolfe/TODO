@@ -3,9 +3,4 @@
 * get js datepicker format from settings, so as to keep in sync with 
   formatter for incoming data
 * readmail in readme
-* Add wiki
-* check no notify on comment
-* allow nog comment on issue state change
-* allow state change with no notification
-* add state "awaiting input"
-
+* add user to comment for reference

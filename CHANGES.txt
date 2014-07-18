@@ -1,3 +1,9 @@
+1.2.1
+=====
+ * comment by added:
+   ALTER TABLE mrwolfe_comment add column comment_by_id INTEGER;
+ * added urlize to comment rendering
+
 1.2.0
 =====
  * Added TNEF parse for dealing with winmail.dat sadness

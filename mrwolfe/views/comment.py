@@ -11,6 +11,8 @@ class CreateComment(CreateView):
 
     def form_valid(self, form):
 
+        form.instance.comment_by = self.request.user
+
         form.instance.save()
 
         return self.render_to_response({'object': form.instance})

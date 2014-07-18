@@ -5,7 +5,6 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.conf import settings
 from django.http import HttpResponseRedirect, HttpResponse
-from django.core.urlresolvers import reverse_lazy
 from mrwolfe.models.issue import Issue
 from mrwolfe.models.status import Status
 from mrwolfe.models.sla import SLA

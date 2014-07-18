@@ -132,7 +132,7 @@ def handle_message(message):
         issue_id = int(match.groups()[0])
         issue = Issue.objects.get(pk=issue_id)
 
-        issue.comments.create(comment=body)
+        issue.comments.create(comment=body, comment_by=sender)
 
         if issue.status == settings.ISSUE_STATUS_WAIT:
             issue.set_status(settings.ISSUE_STATUS_OPEN)

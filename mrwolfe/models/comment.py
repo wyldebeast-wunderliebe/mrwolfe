@@ -1,5 +1,6 @@
 from django.db import models
 from issue import Issue
+from django.contrib.auth.models import User
 
 
 class Comment(models.Model):
@@ -7,6 +8,7 @@ class Comment(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     issue = models.ForeignKey(Issue, related_name="comments")
     comment = models.TextField()
+    comment_by = models.ForeignKey(User, blank=True, null=True)
 
     class Meta:
         app_label = "mrwolfe"

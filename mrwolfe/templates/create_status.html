@@ -1,10 +1,10 @@
-{% extends "create_base_modal.html" %}
+{% extends "base_modal.html" %}
 
 {% load bootstrap3 %}
 
 {% block title %}Change status{% endblock %}
 
-{% block form %}
+{% block body %}
 <form action="/change_status/{{ object.id }}" method="POST"
       class="create-inline"
       >

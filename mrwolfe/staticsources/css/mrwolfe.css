@@ -116,6 +116,10 @@ time {
     min-height: 20px;
 }
 
+.modal img {
+    width: 100%;
+}
+
 .btn.disabled {
     cursor: wait !important;
 }

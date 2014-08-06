@@ -1,4 +1,6 @@
-/* Mr.Wolfe JS lib */
+/**
+ * Mr.Wolfe JS lib
+ */
 
 var mrwolfe = {};
 
@@ -6,9 +8,9 @@ var mrwolfe = {};
 mrwolfe.showMessage = function(mesg, type) {
 
   $("body").append('<div id="message" class="alert alert-' + type + '"><a class="close" data-dismiss="alert">&times;</a>' + mesg + '</div>');
-  
+
   setTimeout('$("#message").hide("slow")', 5000);
-  
+
   $("#message").alert();
 };
 
@@ -97,11 +99,12 @@ $(document).ready(function() {
     }
   });
 
-  $(document).on("click", "#MyModal .cancel", function(e) {
-    $('#MyModal').modal('hide');
+  $(document).on("click", ".modal .cancel", function(e) {
+    $('.modal').modal('hide');
+
     e.preventDefault();
     e.stopPropagation();
-  })
+  });
 
   $("body").on("click", ".toggle", function(e) {
 
@@ -123,7 +126,7 @@ $(document).ready(function() {
     $(this).removeData('modal');
   });
 
-  $(document).on("click", ".create-status", function(e) {
+  $(document).on("click", ".modal-action", function(e) {
 
     var link = $(e.currentTarget);
 

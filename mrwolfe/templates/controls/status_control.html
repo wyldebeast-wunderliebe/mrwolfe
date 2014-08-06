@@ -6,7 +6,7 @@
   <ul class="dropdown-menu">
     {% for opt in view.list_status_options %}
     <li>
-      <a class="create-status" 
+      <a class="modal-action" 
          href="{% url 'change_status' object.pk %}?status={{ opt.0 }}">
         {{ opt.1 }}
       </a>

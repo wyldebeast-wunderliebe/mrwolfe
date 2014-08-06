@@ -1,9 +1,6 @@
 <li>
   {% if object.is_image %}
-  <a href="{% url 'view_image' object.pk %}" 
-     data-target="#MyModal"
-     data-toggle="modal"
-     >
+  <a href="{% url 'view_image' object.pk %}" class="modal-action">
     {{ object.filename }} [{{ object.filesize }}]
   </a>
   {% else %}

@@ -9,6 +9,7 @@ from mrwolfe.models.issue import Issue
 from mrwolfe.models.status import Status
 from mrwolfe.models.sla import SLA
 from mrwolfe.models.operator import Operator
+from mrwolfe.models.itconnector import ITConnector
 from mrwolfe.forms.issue import IssueForm, IssueAssigneeForm
 from base import BaseView
 
@@ -39,6 +40,14 @@ class IssueView(BaseView):
     def text(self):
 
         return mark_safe(markdown(self.object.text))
+
+    def list_itc_options(self):
+
+        return ITConnector.objects.all()
+
+    def is_scheduled(self):
+
+        return self.object.status == settings.ISSUE_STATUS_SCHEDULED
 
 
 class IssueHistoryView(BaseView):

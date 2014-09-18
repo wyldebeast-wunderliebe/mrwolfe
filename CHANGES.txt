@@ -1,3 +1,8 @@
+1.2.2
+=====
+* comment by changed to mrwolfe user instead of django user
+ALTER TABLE `mrwolfe_comment` ADD CONSTRAINT `comment_by_id_refs_id_a7889bd0` FOREIGN KEY (`comment_by_id`) REFERENCES `auth_user` (`id`);
+
 1.2.1
 =====
  * comment by added:

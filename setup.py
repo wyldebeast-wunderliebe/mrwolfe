@@ -9,7 +9,7 @@ VERSION = "1.2.0"
 REQUIRES = ['django>=1.5', 'django-compressor',
             'django-attachments', 'django-haystack>=2.0', 'whoosh',
             'markdown', 'html2text', 'chardet',
-            'imapclient', 'tnefparse', 'django-bootstrap3'
+            'jira-python', 'imapclient', 'tnefparse', 'django-bootstrap3'
             ]
 
 setup(name='mrwolfe',

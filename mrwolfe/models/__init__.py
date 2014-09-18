@@ -8,6 +8,7 @@ from comment import Comment
 from rule import Rule
 from attachment import Attachment
 from mailqueue import MailQueue
+from itconnector import ITConnector
 from setting import Setting
 
 from signal_processors import *

@@ -25,6 +25,10 @@
   <i class="fa fa-minus"></i> Delete
 </a>
 
+{% if not view.is_scheduled %}
+{% include "controls/itc_control.html" %}
+{% endif %}
+
 {% endif %}
 {% endblock toolbar %}
 

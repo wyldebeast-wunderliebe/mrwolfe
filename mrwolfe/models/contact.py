@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User as BaseUser
 from django.core.urlresolvers import reverse
 from mrwolfe.models.sla import SLA
-from user import User
+from mrwolfe.models.user import User
 
 
 class Contact(User):

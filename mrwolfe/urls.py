@@ -15,11 +15,14 @@ from views.operator import CreateOperator, UpdateOperator, DeleteOperator
 from views.contact import CreateContact, UpdateContact, DeleteContact
 from views.comment import CreateComment
 from views.mailqueue import CreateMailQueue, UpdateMailQueue, DeleteMailQueue
+from views.itconnector import CreateITConnector, UpdateITConnector, \
+    DeleteITConnector
 from views.status import CreateStatus
 from views.login import LoginView
 from views.help import HelpView
 from views.setting import UpdateSetting
 from views.fileupload import UploadView
+from views.schedule import ScheduleIssue
 from haystack.views import SearchView
 from forms.search import SearchForm
 from models import Attachment
@@ -79,6 +82,9 @@ urlpatterns = patterns(
     url(r'^delete_issue/(?P<pk>[\d]+)$',
         login_required(DeleteIssue.as_view()),
         name="delete_issue"),
+    url(r'^schedule_issue/(?P<pk>[\d]+)$',
+        login_required(ScheduleIssue.as_view()),
+        name="schedule_issue"),
 
     # Service
     #
@@ -157,6 +163,18 @@ urlpatterns = patterns(
     url(r'^delete_mailqueue/(?P<pk>[\d]+)$',
         login_required(DeleteMailQueue.as_view()),
         name="delete_mailqueue"),
+
+    # ITConnector
+    #
+    url(r'^create_itconnector/',
+        login_required(CreateITConnector.as_view()),
+        name="create_itconnector"),
+    url(r'^edit_itconnector/(?P<pk>[\d]+)$',
+        login_required(UpdateITConnector.as_view()),
+        name="edit_itconnector"),
+    url(r'^delete_itconnector/(?P<pk>[\d]+)$',
+        login_required(DeleteITConnector.as_view()),
+        name="delete_itconnector"),
 
     # Attachments
     url(r'^view_image/(?P<pk>[\d]+)$',

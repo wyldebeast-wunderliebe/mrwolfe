@@ -11,7 +11,10 @@ class CreateComment(CreateView):
 
     def form_valid(self, form):
 
-        form.instance.comment_by = self.request.user
+        if self.request.user.operator:
+            form.instance.comment_by = self.request.user.operator
+        elif self.request.user.contact:
+            form.instance.comment_by = self.request.user.contact
 
         form.instance.save()
 

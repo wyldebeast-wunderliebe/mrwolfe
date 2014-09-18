@@ -100,4 +100,23 @@
   </div>
 </div>
 
+<div class="panel panel-default">
+  <div class="panel-heading"><i class="fa fa-plug"></i> Issue Tracker Connectors
+    <span class="controls pull-right">
+      <a href="{% url 'create_itconnector' %}" 
+         target="#itconnectors"
+         class="btn btn-xs btn-success">
+        <i class="fa fa-plus"></i> 
+      </a>
+    </span>
+  </div>
+  <div class="panel-body">
+    <ul id="itconnectors" class="list-unstyled">
+      {% for conn in view.list_connectors %}
+      {% include "snippets/itconnector.html" with object=conn %}    
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
 {% endblock %}

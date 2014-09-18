@@ -1,8 +1,8 @@
 <div class="comment">
   {{ object.comment|urlize }}
   <time>{{ object.date }}
-    {% if comment.comment_by %}
-    - by {{ comment.comment_by }}
+    {% if object.comment_by %}
+    - by {{ object.comment_by }}
     {% endif %}
   </time>
 </div>

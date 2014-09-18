@@ -6,6 +6,7 @@ from mrwolfe.models.issue import Issue
 from mrwolfe.models.operator import Operator
 from mrwolfe.models.contact import Contact
 from mrwolfe.models.setting import Setting
+from mrwolfe.models.itconnector import ITConnector
 
 
 class IndexView(TemplateView):
@@ -59,3 +60,7 @@ class AdminView(IndexView):
     def list_settings(self):
 
         return Setting.objects.all()
+
+    def list_connectors(self):
+
+        return ITConnector.objects.all()

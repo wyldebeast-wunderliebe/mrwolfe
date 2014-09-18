@@ -1,0 +1,15 @@
+<div class="btn-group" id="status">
+  <a class="btn dropdown-toggle btn-info" data-toggle="dropdown" href="#">
+    <i class="fa fa-bug"></i> Move to issue tracker
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">
+    {% for opt in view.list_itc_options %}
+    <li>
+      <a href="{% url 'schedule_issue' object.pk %}?itc={{ opt.pk }}">
+        {{ opt }}
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>

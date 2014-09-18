@@ -1,0 +1,14 @@
+<li class="editable">
+  <i class="icon-plug"></i>
+  {{ object }}
+  <div class="controls">
+    <a class="btn btn-xs btn-default" 
+       href="{% url 'edit_itconnector' object.pk %}">
+      <i class="fa fa-edit"></i>
+    </a>
+    <a class="btn btn-xs btn-danger" 
+       href="{% url 'delete_itconnector' object.pk %}">
+      <i class="fa fa-minus"></i>
+    </a>
+  </div>
+</li>

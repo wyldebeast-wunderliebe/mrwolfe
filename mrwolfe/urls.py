@@ -224,11 +224,11 @@ if ("django_openid_auth" in settings.INSTALLED_APPS):
 #
 if ("wiki" in settings.INSTALLED_APPS):
     from wiki.urls import get_pattern as get_wiki_pattern
-    from django_notify.urls import get_pattern as get_notify_pattern
+    from django_nyt.urls import get_pattern as get_notify_pattern
 
     urlpatterns += patterns(
         '',
-        (r'^notify/', get_notify_pattern()),
+        (r'^notification/', get_notify_pattern()),
         (r'^wiki/', get_wiki_pattern()),
         (r'^wiki', get_wiki_pattern())
     )

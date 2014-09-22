@@ -27,6 +27,7 @@ class Issue(models.Model):
 
     class Meta:
         app_label = "mrwolfe"
+        ordering = ["-created"]
 
     def __unicode__(self):
 

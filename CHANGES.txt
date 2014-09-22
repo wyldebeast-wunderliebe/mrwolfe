@@ -3,7 +3,16 @@
 * comment by changed to mrwolfe user instead of django user
   You may have to check the constraint on the mrwolfe_comment table and
   recreate it
-
+* Moved to new (optional) wiki. This uses django-nyt instead of django-notify,
+  so make sure you have that in your INSTALLED_APPS somewhere...
+* Added the possibility to plug in a connector to an actual issue tracker,
+  so as to be able to relay issues there and schedule in a release. This
+  way you can ignore issues in Mr.Wolfe that are scheduled, so the are not in 
+  the way of other tickets.
+* cosmetic changes
+* made edit of issue use sla for populating services vocab
+* fixed natural ordering of issues
+  
 1.2.1
 =====
  * comment by added:

@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 here = os.path.abspath(os.path.dirname(__file__))
 README = open(os.path.join(here, 'README.md')).read()
 CHANGES = open(os.path.join(here, 'CHANGES.txt')).read()
-VERSION = "1.2.0"
+VERSION = "1.2.1"
 REQUIRES = ['django>=1.5', 'django-compressor',
             'django-attachments', 'django-haystack>=2.0', 'whoosh',
             'markdown', 'html2text', 'chardet',

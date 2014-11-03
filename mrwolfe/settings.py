@@ -268,7 +268,7 @@ DEFAULT_FROM_ADDR = "support@evilempire.com"
 # read here, so as to never send to the mailbox that you also read
 # mail off...
 #
-NOTIFICATION_BLACKLIST = []
+NOTIFICATION_BLACKLIST = [DEFAULT_FROM_ADDR]
 
 #
 # END Mr.Wolfe settings

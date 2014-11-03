@@ -7,7 +7,7 @@ class IMAPService(object):
 
     def __init__(self, host, port=None):
 
-        self.service  = IMAPClient(host, port=port, ssl=True)
+        self.service = IMAPClient(host, port=port, ssl=True)
 
     def auth(self, usr, pwd):
 
@@ -23,7 +23,8 @@ class IMAPService(object):
 
         for msg_id, data in response.iteritems():
 
-            yield (msg_id, email.message_from_string(data['RFC822'].encode("utf-8", "ignore")))
+            yield (msg_id, email.message_from_string(
+                data['RFC822'].encode("utf-8", "ignore")))
 
     def quit(self):
 
@@ -37,7 +38,7 @@ class IMAPService(object):
 class POPService(object):
 
     def __init__(self, host, port=995):
-    
+
         self.service = poplib.POP3_SSL(host, port)
 
     def auth(self, usr, pwd):

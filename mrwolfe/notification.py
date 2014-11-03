@@ -19,9 +19,14 @@ def notify(notification_id, context, from_addr, to_addr):
         return
 
     # Check on to address, whether it contains our own
-    # mailbox. Sending to self is generally a bad idea (tm), as we
+    # mailbox. Sending to self is generally a Bad Idea (tm), as we
     # found out some day...
     #
+    if to_addr == from_addr:
+        LOGGER.warning("To and From addresses are the same."
+                       "Not sending notification..!")
+        return
+
     to_addr = ", ".join(filter(
         lambda x: x not in settings.NOTIFICATION_BLACKLIST,
         to_addr.split(", ")))

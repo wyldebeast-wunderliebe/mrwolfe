@@ -166,7 +166,7 @@ class Issue(models.Model):
 
         """ Set status and create status object in log """
 
-        self.status_set.create(name=status, comment=comment)
+        self.status_history.create(name=status, comment=comment)
         self.status = status
 
     def clone(self):

@@ -3,4 +3,4 @@
 * get js datepicker format from settings, so as to keep in sync with 
   formatter for incoming data
 * readmail in readme
-* add user to comment for reference
+* limit services to sla in edit issue

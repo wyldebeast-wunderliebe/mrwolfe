@@ -29,7 +29,7 @@ class IndexView(TemplateView):
 
     def list_unassigned_issues(self):
 
-        return Issue.objects.filter(assignee__isnull=True). \
+        return Issue.objects.filter(assignee__isnull=True,). \
             exclude(status=settings.ISSUE_STATUS_CLOSED)
 
     def list_unclosed_issues(self):

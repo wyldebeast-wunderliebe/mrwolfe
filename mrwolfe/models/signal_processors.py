@@ -26,12 +26,19 @@ def issue_post_save(sender, instance, created=False, **kwargs):
 @receiver(post_save, sender=Comment)
 def comment_post_save(sender, instance, created=False, **kwargs):
 
+    send_to = instance.issue.contact.email
+
+    try:
+        send_to = "%s, %s" % (send_to, instance.issue.assignee.email)
+    except:
+        pass
+
     if created:
 
         notify("comment_added",
                {"issue": instance.issue, "comment": instance},
                settings.DEFAULT_FROM_ADDR,
-               instance.issue.contact.email
+               send_to
                )
 
     # trigger save on issue, to reindex

@@ -2,6 +2,8 @@ From: {{ from }}
 To: {{ to }}
 Subject: {{ issue.issue_id }}: status changed
 
-The status of your issue has been changed to {{ issue.status }}
+The status of your issue has been changed to {{ issue.status }}:
+
+{{ comment|default:'no comment' }}
 
 Kind regards, the support team

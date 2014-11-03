@@ -5,14 +5,20 @@
 var mrwolfe = {};
 
 
+mrwolfe.hideMessage = function() {
+  $("#message").hide("slow");
+};
+
+
 mrwolfe.showMessage = function(mesg, type) {
 
   $("body").append('<div id="message" class="alert alert-' + type + '"><a class="close" data-dismiss="alert">&times;</a>' + mesg + '</div>');
 
-  setTimeout('$("#message").hide("slow")', 5000);
+  setTimeout(mrwolfe.hideMessage, 5000);
 
   $("#message").alert();
 };
+
 
 mrwolfe.refreshHistory = function(issue_id) {
 
@@ -68,7 +74,7 @@ mrwolfe.init_fileuploader = function(options) {
   }
 
   $("input[type='file']").each(function() {
-    defaults['formData'] = {"issue_id": $(this).data("issueid")};
+    defaults.formData = {"issue_id": $(this).data("issueid")};
     $(this).fileupload(defaults);
   });
 };
@@ -81,7 +87,7 @@ $(document).ready(function() {
     beforeSend: function(xhr, settings) {
       function getCookie(name) {
         var cookieValue = null;
-        if (document.cookie && document.cookie != '') {
+        if (document.cookie && document.cookie !== '') {
           var cookies = document.cookie.split(';');
           for (var i = 0; i < cookies.length; i++) {
             var cookie = jQuery.trim(cookies[i]);

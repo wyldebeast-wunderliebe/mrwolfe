@@ -20,9 +20,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'mrwolfe',
         'USER': 'root',
-        'PASSWORD': '', # Not used with sqlite3.
-        'HOST': '', # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '', # Set to empty string for default. Not used with sqlite3.
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
     }
 }
 
@@ -158,7 +158,7 @@ APPEND_SLASH = False
 
 # BEGIN logging
 #
-LOGFILE="mrwolfe.log"
+LOGFILE = "mrwolfe.log"
 
 LOGGING = {
     'version': 1,
@@ -278,7 +278,7 @@ NOTIFICATION_BLACKLIST = []
 EMAIL_HOST = "smtp.evilempire.com"
 EMAIL_PORT = 25
 EMAIL_HOST_USER = "bobdobalina"
-EMAIL_HOST_PASSWORD = "verySekret" 
+EMAIL_HOST_PASSWORD = "verySekret"
 EMAIL_USE_TLS = True
 #
 # END Email settings

@@ -1,8 +1,13 @@
 From: {{ from }}
 To: {{ to }}
-Subject: Issue {{ issue.issue_id }} closed
+Subject: {{ issue }} closed
 
-Issue '{{ issue.title }}' has been closed: 
+{{ issue }} has been closed: 
 {{ comment }}
+
+Description:
+{{ issue.title }}
+----------
+{{ issue.text }}
 
 Kind regards, the support team

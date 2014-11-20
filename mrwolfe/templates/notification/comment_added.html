@@ -1,8 +1,13 @@
 From: {{ from }}
 Reply-to: {{ from }}
 To: {{ to }}
-Subject: {{ issue.issue_id }} - Comment added
+Subject: {{ issue }} - Comment added
 
 A comment has been added to {{ issue.issue_id }}:
 
 {{ comment.comment }}
+
+Description:
+{{ issue.title }}
+----------
+{{ issue.text }}

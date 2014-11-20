@@ -12,9 +12,9 @@ LOGGER = logging.getLogger("mrwolfe")
 class Command(NoArgsCommand):
 
     help = """Read mailqueues for SLA's"""
-    
+
     def handle(self, *args, **options):
-        
+
         LOGGER.info("Reading mailqueues")
 
         for queue in MailQueue.objects.all():
@@ -28,8 +28,8 @@ class Command(NoArgsCommand):
             service = POPService(mailqueue.host, int(mailqueue.port or 995))
         else:
             service = IMAPService(mailqueue.host, int(mailqueue.port or 143))
-        
-        LOGGER.debug("Protocol used: %s" % 
+
+        LOGGER.debug("Protocol used: %s" %
                      (mailqueue.protocol and "IMAP" or "POP"))
 
         service.auth(mailqueue.usr, mailqueue.pwd)

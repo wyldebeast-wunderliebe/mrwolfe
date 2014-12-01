@@ -130,12 +130,17 @@ def handle_message(message):
         body = "\n\n".join(body)
 
     issue = None
+    comment = None
+    send_notification_tpl = None
+
     if match:
         issue_id = int(match.groups()[0])
 
 	try:
             issue = Issue.objects.get(pk=issue_id)
-            issue.comments.create(comment=body, comment_by=sender)
+            comment = issue.comments.create(comment=body, comment_by=sender)
+
+            send_notification_tpl = "comment_received"
 
             if issue.status == settings.ISSUE_STATUS_WAIT:
                 issue.set_status(settings.ISSUE_STATUS_OPEN)
@@ -147,21 +152,23 @@ def handle_message(message):
                       contact=sender,
                       text=body,
                       sla=sla)
+        send_notification_tpl = "issue_received"
 
         if sla and sla.default_service:
             issue.service = sla.default_service
 
-        to_addr = from_addr
-
-        notify("issue_received",
-               {"issue": issue},
-               issue.email_from,
-               to_addr)
 
     issue.save()
 
     for att in attachments:
         att.issue = issue
         att.save()
+
+    if send_notification_tpl:
+        to_addr = from_addr
+        notify(send_notification_tpl,
+            {"issue": issue, "comment":comment},
+            issue.email_from,
+            to_addr)
 
     return True

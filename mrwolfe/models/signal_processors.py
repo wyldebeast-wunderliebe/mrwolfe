@@ -37,9 +37,9 @@ def comment_post_save(sender, instance, created=False, **kwargs):
         send_to.append(instance.issue.assignee.email)
     else:
         operators = [op.email for op in Operator.objects.all()]
-        send_to.append(operators)
+        send_to.extend(operators)
 
-    to_addr = ", ".join(to)
+    to_addr = ", ".join(send_to)
 
     if created:
 

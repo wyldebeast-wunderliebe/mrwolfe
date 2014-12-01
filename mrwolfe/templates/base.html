@@ -19,7 +19,6 @@
           href="{{STATIC_URL}}jqueryui/themes/base/minified/jquery-ui.min.css" 
           type="text/css">
 
-    {% compress css %}
     <link rel="stylesheet" href="{{STATIC_URL}}css/mrwolfe.css" type="text/css">
     <link rel="stylesheet" 
           href="{{STATIC_URL}}fontawesome/css/font-awesome.css" 
@@ -27,7 +26,6 @@
     <link rel="stylesheet" 
           href="{{STATIC_URL}}fileupload/css/jquery.fileupload-ui.css" 
           type="text/css">
-    {% endcompress %}
 
     {% list_plugin_css %}
 
@@ -35,7 +33,6 @@
     <script src="{{STATIC_URL}}jqueryui/ui/minified/jquery-ui.min.js"></script>
     <script src="{{STATIC_URL}}bootstrap/dist/js/bootstrap.min.js"></script> 
 
-    {% compress js %}
     <script type="text/javascript" 
             src="{{STATIC_URL}}fileupload/js/jquery.fileupload.js">
     </script>     
@@ -43,7 +40,6 @@
             src="{{STATIC_URL}}fileupload/js/jquery.iframe-transport.js">
     </script>     
     <script src="{{STATIC_URL}}js/mrwolfe.js"></script>    
-    {% endcompress %}
 
   </head>
 

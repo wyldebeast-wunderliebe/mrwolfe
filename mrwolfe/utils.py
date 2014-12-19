@@ -9,6 +9,7 @@ from mrwolfe.models.attachment import Attachment
 from mrwolfe.models.contact import Contact
 from mrwolfe.models.sla import SLA
 from mrwolfe.models.issue import Issue
+from mrwolfe.models.operator import Operator
 from notification import notify
 
 
@@ -128,22 +129,34 @@ def handle_message(message):
     else:
         body = "\n\n".join(body)
 
+    issue = None
+    comment = None
+    send_notification_tpl = None
+
     if match:
         issue_id = int(match.groups()[0])
-        issue = Issue.objects.get(pk=issue_id)
 
-        issue.comments.create(comment=body, comment_by=sender)
+	try:
+            issue = Issue.objects.get(pk=issue_id)
+            comment = issue.comments.create(comment=body, comment_by=sender)
 
-        if issue.status == settings.ISSUE_STATUS_WAIT:
-            issue.set_status(settings.ISSUE_STATUS_OPEN)
-    else:
+            send_notification_tpl = "comment_received"
+
+            if issue.status == settings.ISSUE_STATUS_WAIT:
+                issue.set_status(settings.ISSUE_STATUS_OPEN)
+        except Issue.DoesNotExist:
+            pass
+
+    if not issue:
         issue = Issue(title=message['subject'],
                       contact=sender,
                       text=body,
                       sla=sla)
+        send_notification_tpl = "issue_received"
 
-    if sla and sla.default_service:
-        issue.service = sla.default_service
+        if sla and sla.default_service:
+            issue.service = sla.default_service
+
 
     issue.save()
 
@@ -151,9 +164,11 @@ def handle_message(message):
         att.issue = issue
         att.save()
 
-    notify("issue_received",
-           {"issue": issue},
-           issue.email_from,
-           from_addr)
+    if send_notification_tpl:
+        to_addr = from_addr
+        notify(send_notification_tpl,
+            {"issue": issue, "comment":comment},
+            issue.email_from,
+            to_addr)
 
     return True

@@ -26,19 +26,27 @@ def issue_post_save(sender, instance, created=False, **kwargs):
 @receiver(post_save, sender=Comment)
 def comment_post_save(sender, instance, created=False, **kwargs):
 
-    send_to = instance.issue.contact.email
+    # who should receive notification of this comment?
+    # - the issue's contact
+    # - the issue assignee if the issue has one
+    # - if issue has no assignee, all operators
 
-    try:
-        send_to = "%s, %s" % (send_to, instance.issue.assignee.email)
-    except:
-        pass
+    send_to = [instance.issue.contact.email, ]
+
+    if instance.issue.assignee:
+        send_to.append(instance.issue.assignee.email)
+    else:
+        operators = [op.email for op in Operator.objects.all()]
+        send_to.extend(operators)
+
+    to_addr = ", ".join(send_to)
 
     if created:
 
         notify("comment_added",
                {"issue": instance.issue, "comment": instance},
                settings.DEFAULT_FROM_ADDR,
-               send_to
+               to_addr,
                )
 
     # trigger save on issue, to reindex

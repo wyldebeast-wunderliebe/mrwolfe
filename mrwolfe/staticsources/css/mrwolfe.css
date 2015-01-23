@@ -11,10 +11,6 @@
     width: 20%;
 }
 
-td.date {
-    width: 20%;
-}
-
 .comment {
     font-style: italic;
 }
@@ -98,7 +94,6 @@ time {
     font-style: italic;
     font-size: 90%;
     display: block;
-    color: #909090;
 }
 
 .issue time {
@@ -150,4 +145,16 @@ div.descr {
 
 #comments {
     margin-top: 20px;
+}
+
+pre.comment {
+    max-height: 300px;
+}
+
+pre.comment,
+#main .descr pre,
+#history-viewlet pre {
+    padding: 0;
+    background-color: transparent;
+    border: 0px solid;
 }

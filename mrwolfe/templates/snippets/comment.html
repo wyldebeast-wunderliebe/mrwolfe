@@ -1,8 +1,12 @@
-<pre class="comment">
-  {{ object.comment|urlize }}
-  <time>{{ object.date }}
-    {% if object.comment_by %}
-    - by {{ object.comment_by }}
-    {% endif %}
-  </time>
-</pre>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <time>{{ object.date }}
+            {% if object.comment_by %}
+            - by {{ object.comment_by }}
+            {% endif %}
+        </time>
+    </div>
+    <div class="panel-body">
+        <pre class="comment">{{ object.comment|urlize }}</pre>
+    </div>
+</div>

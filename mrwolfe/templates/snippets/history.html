@@ -1,17 +1,20 @@
-<div class="panel panel-default" id="history-viewlet">
-  <div class="panel-heading"><i class="fa fa-history"></i> History</div>
-  <div class="panel-body">
-    <table class="table">
-      
-      {% for status in view.status_history %}
-      <tr>
-        <td class="status">{{ status.name }}</td>
-        <td class="date">{{ status.date }}</td>
-        <td class="comment">
-          {{ status.comment }}
-        </td>
-      </div>
-      {% endfor %}  
-    </table>
-  </div>
+<div class="panel panel-warning" id="history-viewlet">
+    <div class="panel-heading"><i class="fa fa-history"></i> History</div>
+    <div class="panel-body">
+        {% for status in view.status_history %}
+        <div class="row">
+
+            <div class="col-xs-6 col-md-2">
+                <strong>{{ status.name }}</strong>
+            </div>
+            <div class="col-xs-6 col-md-2">
+                {{ status.date }}
+            </div>
+            <div class="col-xs-12 col-md-8 comment"><pre>{{ status.comment }}</pre></div>
+        </div>
+
+        <hr>
+
+        {% endfor %}
+    </div>
 </div>

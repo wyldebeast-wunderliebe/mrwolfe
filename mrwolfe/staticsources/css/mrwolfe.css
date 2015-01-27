@@ -94,6 +94,7 @@ time {
     font-style: italic;
     font-size: 90%;
     display: block;
+    color: #909090;
 }
 
 .issue time {
@@ -147,14 +148,6 @@ div.descr {
     margin-top: 20px;
 }
 
-pre {
-    white-space: pre-wrap; /* CSS 3 */
-    white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
-    white-space: -pre-wrap; /* Opera 4-6 */
-    white-space: -o-pre-wrap; /* Opera 7 */
-    word-wrap: break-word; /* Internet Explorer 5.5+ */
-}
-
 pre.comment {
     max-height: 300px;
 }
@@ -164,5 +157,9 @@ pre.comment,
 #history-viewlet pre {
     padding: 0;
     background-color: transparent;
-    border: 0px solid;
+    border: 0 solid;
+}
+
+.btn-toolbar {
+    margin-left: 0;
 }

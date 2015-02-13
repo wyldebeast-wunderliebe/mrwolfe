@@ -11,10 +11,6 @@
     width: 20%;
 }
 
-.comment {
-    font-style: italic;
-}
-
 dl.details dt {
     width: 150px;
     text-align: left;
@@ -50,7 +46,7 @@ li:hover .controls {
 }
 
 .controls {
-    margin-left: 40px;
+    margin: 15px;
 }
 
 .panel li:hover {
@@ -112,10 +108,6 @@ time {
     min-height: 20px;
 }
 
-.modal img {
-    width: 100%;
-}
-
 .btn.disabled {
     cursor: wait !important;
 }
@@ -139,9 +131,8 @@ time {
 }
 
 div.descr {
-    font-style: italic;
     margin-bottom: 20px;
-    border-bottom: 1px solid #c0c0c0;
+    border-bottom: 1px solid #cecece;
 }
 
 #comments {
@@ -162,4 +153,10 @@ pre.comment,
 
 .btn-toolbar {
     margin-left: 0;
+}
+
+.row.history-item {
+    padding: 15px 0;
+    border-bottom: 1px solid #cecece;
+    margin: 0;
 }

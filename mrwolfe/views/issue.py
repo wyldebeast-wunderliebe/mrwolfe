@@ -6,17 +6,32 @@ from django.views.generic.detail import DetailView
 from django.conf import settings
 from django.http import HttpResponseRedirect, HttpResponse
 from mrwolfe.models.issue import Issue
+from mrwolfe.models.comment import Comment
 from mrwolfe.models.status import Status
 from mrwolfe.models.sla import SLA
 from mrwolfe.models.operator import Operator
 from mrwolfe.models.itconnector import ITConnector
 from mrwolfe.forms.issue import IssueForm, IssueAssigneeForm
 from base import BaseView
+from itertools import chain
 
 
 class IssueView(BaseView):
 
     model = Issue
+
+    def combined_history(self):
+        """
+        Fetch all comments and state changes and combine them into
+        one big resultset, sorted on date
+        :return: list of comments and state changes
+        """
+
+        comments = Comment.objects.filter(issue=self.object)
+        history = self.status_history()
+
+        return sorted(chain(comments, history),
+            key=lambda instance: instance.date, reverse=True)
 
     def status_history(self):
 
@@ -50,14 +65,14 @@ class IssueView(BaseView):
         return self.object.status == settings.ISSUE_STATUS_SCHEDULED
 
 
-class IssueHistoryView(BaseView):
-
-    model = Issue
-    template_name = "snippets/history.html"
-
-    def status_history(self):
-
-        return Status.objects.filter(issue=self.object)
+# class IssueHistoryView(BaseView):
+#
+#     model = Issue
+#     template_name = "snippets/history.html"
+#
+#     def status_history(self):
+#
+#         return Status.objects.filter(issue=self.object)
 
 
 class IssueCreate(CreateView):

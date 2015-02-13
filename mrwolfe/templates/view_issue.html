@@ -78,15 +78,13 @@
     <pre>{{ view.text|safe }}</pre>
 </div>
 
-
+{% if not issue.is_closed %}
 <div class="panel panel-default">
     <div class="panel-heading">
         <i class="fa fa-comment"></i>
         Comments
     </div>
     <div class="panel-body">
-
-        {% if not issue.is_closed %}
         <form role="form" class="inline" target="#comments"
               data-targetbehavior="append"
               action="{% url 'create_comment' %}" method="POST">
@@ -101,10 +99,10 @@
                 </button>
             </div>
         </form>
-        {% endif %}
 
     </div>
 </div>
+{% endif %}
 
 <div class="panel panel-default">
     <div class="panel-heading">
@@ -114,15 +112,15 @@
 
     {% if not issue.is_closed %}
     <div class="controls">
-      <div class="btn btn-xs btn-success fileinput-button">
-          <i class="fa fa-plus"></i>
-          <input type="file"
-                 multiple="true"
-                 name="attachment_upload"
-                 data-progress="#progress_attachment"
-                 data-issueid="{{ object.id }}"
-                 data-target="#attachments"/>
-      </div>
+        <div class="btn btn-xs btn-success fileinput-button">
+            <i class="fa fa-plus"></i>
+            <input type="file"
+                   multiple="true"
+                   name="attachment_upload"
+                   data-progress="#progress_attachment"
+                   data-issueid="{{ object.id }}"
+                   data-target="#attachments"/>
+        </div>
     </div>
     {% endif %}
 

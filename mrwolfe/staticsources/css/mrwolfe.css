@@ -142,6 +142,7 @@ div.descr {
 .history-item div.comment,
 pre.comment {
     max-height: 300px;
+    overflow: scroll;
 }
 
 pre.comment,

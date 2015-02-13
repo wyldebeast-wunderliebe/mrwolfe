@@ -139,6 +139,7 @@ div.descr {
     margin-top: 20px;
 }
 
+.history-item div.comment,
 pre.comment {
     max-height: 300px;
 }

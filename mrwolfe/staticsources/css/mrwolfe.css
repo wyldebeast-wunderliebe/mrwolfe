@@ -45,7 +45,7 @@ li:hover .controls {
     opacity: 1.0;
 }
 
-.controls {
+.controls.controls-attachments {
     margin: 15px;
 }
 

@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from issue import Issue
 
+from mrwolfe import utils
 
 class Status(models.Model):
 
@@ -17,3 +18,8 @@ class Status(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    @property
+    def screen_name(self):
+
+        return utils.status_screen_name(self.name)

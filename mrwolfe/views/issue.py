@@ -14,6 +14,7 @@ from mrwolfe.models.itconnector import ITConnector
 from mrwolfe.forms.issue import IssueForm, IssueAssigneeForm
 from base import BaseView
 from itertools import chain
+from mrwolfe import utils
 
 
 class IssueView(BaseView):
@@ -55,6 +56,11 @@ class IssueView(BaseView):
     def text(self):
 
         return mark_safe(markdown(self.object.text))
+
+    @property
+    def status_screen_name(self):
+
+        return utils.status_screen_name(self.object.status)
 
     def list_itc_options(self):
 

@@ -3,7 +3,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.template.loader import render_to_string
 from email.parser import Parser
-from mrwolfe.models import Setting
+from mrwolfe.models.setting import Setting
 
 
 LOGGER = logging.getLogger("mrwolfe")

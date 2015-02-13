@@ -9,6 +9,7 @@ from mrwolfe.models.attachment import Attachment
 from mrwolfe.models.contact import Contact
 from mrwolfe.models.sla import SLA
 from mrwolfe.models.issue import Issue
+from mrwolfe import settings as mrwolfe_settings
 from mrwolfe.models.operator import Operator
 from notification import notify
 
@@ -17,7 +18,6 @@ ISSUE_SUBJECT_MATCH = re.compile('#([0-9]{8})')
 
 
 def determine_sla(message):
-
     """ Determine to what SLA this email message is addressed. Return None
     if this cannot be determined. The email_message is a parsed message
     as per email.parser """
@@ -31,7 +31,6 @@ def determine_sla(message):
 
 
 def handle_message(message):
-
     sla = determine_sla(message)
     sender = None
 
@@ -97,7 +96,6 @@ def handle_message(message):
             tnef = TNEF(part.get_payload(decode=True), do_checksum=False)
 
             for tnef_att in tnef.attachments:
-
                 att = Attachment()
                 att._file = ContentFile(tnef_att.data)
                 att._file.name = tnef_att.long_filename()
@@ -136,7 +134,7 @@ def handle_message(message):
     if match:
         issue_id = int(match.groups()[0])
 
-	try:
+        try:
             issue = Issue.objects.get(pk=issue_id)
             comment = issue.comments.create(comment=body, comment_by=sender)
 
@@ -157,7 +155,6 @@ def handle_message(message):
         if sla and sla.default_service:
             issue.service = sla.default_service
 
-
     issue.save()
 
     for att in attachments:
@@ -167,8 +164,20 @@ def handle_message(message):
     if send_notification_tpl:
         to_addr = from_addr
         notify(send_notification_tpl,
-            {"issue": issue, "comment":comment},
-            issue.email_from,
-            to_addr)
+               {"issue": issue, "comment": comment},
+               issue.email_from,
+               to_addr)
 
     return True
+
+
+def status_screen_name(name):
+
+    screen_name = ""
+
+    key_val = [s for s in mrwolfe_settings.ISSUE_STATUS_CHOICES if s[0] == name]
+
+    if key_val:
+        screen_name = key_val[0][1]
+
+    return screen_name

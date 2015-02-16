@@ -14,7 +14,7 @@ Introduction
 ------------
 
 Mr.Wolfe is an issue tracker for support issues. This is not the same
-as a system for software issues, like Bugzilla, Ira, etc. In the
+as a system for software issues, like Bugzilla, Jira, etc. In the
 latter issues are related to software, and are tracked in terms of a
 life cycle from incoming to resolving in a specific release (or closing
 without a release). Mr.Wolfe tracks support issues, that may be
@@ -23,9 +23,9 @@ An issue in Mr.Wolfe may or may not result in a software issue.
 
 Handling support issues is an art! Ehh, well, it's actually pretty
 simple. Mr. Wolfe is based on the assumption that you always have a
-Service Level Agreement with for a given application that you expect
+Service Level Agreement with, for a given application that you expect
 issues for, and a fixed number of people that can send issues for this
-SLA.  Issues are sent over email by valid contacts, or added ttw by
+SLA. Issues are sent over email by valid contacts, or added TTW by
 authenticated users that are valid contacts. No SLA, no issue. Simple
 as that. If that is not the way your support organization works, don't
 use this system.
@@ -75,5 +75,5 @@ SLA
 ---
 
 A Service Level Agreement consists of a number of services that have
-been agreed upon. A service as basically a tuple of 'priority,
+been agreed upon. A service basically is a tuple of 'priority,
 reaction time, solution time'.

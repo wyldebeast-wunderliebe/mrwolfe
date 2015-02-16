@@ -112,20 +112,6 @@ time {
     cursor: wait !important;
 }
 
-/* alerts */
-.container {
-    position: relative;
-}
-
-#alerts, #message {
-    position: absolute;
-    min-height: 30px;
-    width: 90%;
-    top: 50px;
-    left: 20px;
-    z-index: 666;
-}
-
 .helptext {
     color: #3A87AD;
 }
@@ -161,4 +147,13 @@ pre.comment,
     padding: 15px 0;
     border-bottom: 1px solid #cecece;
     margin: 0;
+}
+
+footer blockquote {
+    margin: 0;
+}
+
+footer .externals {
+    text-align: right;
+    padding-right: 0;
 }

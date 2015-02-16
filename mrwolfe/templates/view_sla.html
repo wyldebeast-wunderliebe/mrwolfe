@@ -2,7 +2,7 @@
 
 {% block toolbar %}
 <a class="btn btn-default"
-   href="{% url 'edit_sla' sla.pk %}"><i class="fa fa-edit"></i> Edit</a>  
+   href="{% url 'edit_sla' sla.pk %}"><i class="fa fa-edit"></i> Edit</a>
 <a class="btn btn-danger"
    href="{% url 'delete_sla' sla.pk %}"><i class="fa fa-minus"></i> Delete</a>
 {% endblock %}
@@ -10,87 +10,87 @@
 {% block content %}
 
 <header>
-  <h1>{{ object }}</h1>
+    <h1>{{ object }}</h1>
 </header>
 
 <table class="table well">
-  <thead>
+    <thead>
     <th># Issues</th>
     <th># Issues late</th>
-    <th>% Issues late</th>
-  </thead>
-  <tbody>
+    <th>&percnt; Issues late</th>
+    </thead>
+    <tbody>
     <td>{{ view.nr_of_issues }}</td>
     <td>{{ view.nr_of_issues_late }}</td>
-    <td>{{ view.perc_of_issues_late }}%</td>
-  </tbody>
+    <td>{{ view.perc_of_issues_late }}&percnt;</td>
+    </tbody>
 </table>
 
 <div class="panel panel-default">
-  <div class="panel-heading"><i class="fa fa-user"></i> Contacts</div>
+    <div class="panel-heading"><i class="fa fa-user"></i> Contacts</div>
 
-  <div class="panel-body">
-    {% if not view.list_contacts %}
-    <div class="alert warning">
-      No contacts defined yet! Add contacts and assign them to this SLA.
+    <div class="panel-body">
+        {% if not view.list_contacts %}
+        <div class="alert warning">
+            No contacts defined yet! Add contacts and assign them to this SLA.
+        </div>
+        {% endif %}
+
+        <ul id="contacts" class="list-unstyled">
+            {% for contact in view.list_contacts %}
+            {% include "snippets/contact.html" with object=contact %}
+            {% endfor %}
+        </ul>
     </div>
-    {% endif %}
-    
-    <ul id="contacts" class="list-unstyled">
-      {% for contact in view.list_contacts %}
-      {% include "snippets/contact.html" with object=contact %}
-      {% endfor %}
-    </ul>
-  </div>
 </div>
 
 <div class="panel panel-default">
-  <div class="panel-heading"><i class="fa fa-fire-extinguisher"></i> Services
+    <div class="panel-heading"><i class="fa fa-fire-extinguisher"></i> Services
     <span class="controls pull-right">
       <a class="btn btn-success btn-xs"
          href="{% url 'create_service' sla.pk %}"
-         ><i class="fa fa-plus"></i></a>
+              ><i class="fa fa-plus"></i></a>
     </span>
-  </div>
-  
-  <div class="panel-body">
-    {% if not view.list_services %}
-    <div class="alert warning">No services defined yet!</div>
-    {% endif %}
-    
-    <ul id="services" class="list-unstyled">
-      {% for service in view.list_services %}
-      {% include "snippets/service.html" with object=service %}
-      {% endfor %}
-    </ul>
-  </div>
+    </div>
+
+    <div class="panel-body">
+        {% if not view.list_services %}
+        <div class="alert warning">No services defined yet!</div>
+        {% endif %}
+
+        <ul id="services" class="list-unstyled">
+            {% for service in view.list_services %}
+            {% include "snippets/service.html" with object=service %}
+            {% endfor %}
+        </ul>
+    </div>
 </div>
 
 <div class="panel panel-default">
-  <div class="panel-heading"><i class="fa fa-magic"></i> Rules
+    <div class="panel-heading"><i class="fa fa-magic"></i> Rules
     <span class="controls pull-right">
       <a class="btn btn-success btn-xs"
          href="{% url 'create_rule' sla.pk %}"
-         ><i class="fa fa-plus"></i></a>
+              ><i class="fa fa-plus"></i></a>
     </span>
-  </div>
+    </div>
 
-  <div class="panel-body">
-    <p class="text-info">
-      Add matching rules for incoming mail. If a rule matches, the issue will
-      be created for this SLA.
-    </p>
-    
-    {% if not view.list_rules %}
-    <div class="alert warning">No rules defined yet!</div>
-    {% endif %}
-    
-    <ul id="rules" class="list-unstyled">
-      {% for rule in view.list_rules %}
-      {% include "snippets/rule.html" with object=rule %}
-      {% endfor %}
-    </ul>
-  </div>
+    <div class="panel-body">
+        <p class="text-info">
+            Add matching rules for incoming mail. If a rule matches, the issue will
+            be created for this SLA.
+        </p>
+
+        {% if not view.list_rules %}
+        <div class="alert warning">No rules defined yet!</div>
+        {% endif %}
+
+        <ul id="rules" class="list-unstyled">
+            {% for rule in view.list_rules %}
+            {% include "snippets/rule.html" with object=rule %}
+            {% endfor %}
+        </ul>
+    </div>
 </div>
 
 {% endblock %}

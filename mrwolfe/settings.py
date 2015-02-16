@@ -1,4 +1,3 @@
-# Django settings for pgintranet project.
 # -*- coding: utf-8 -*-
 import os
 
@@ -146,6 +145,8 @@ INSTALLED_APPS = (
 )
 
 TEST_APPS = ("mrwolfe")
+
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',

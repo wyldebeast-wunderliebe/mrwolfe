@@ -4,7 +4,6 @@ from base import PartialUpdateMixin
 
 
 class IssueForm(forms.ModelForm):
-
     def __init__(self, *args, **kwargs):
 
         super(IssueForm, self).__init__(*args, **kwargs)
@@ -28,7 +27,6 @@ class IssueForm(forms.ModelForm):
 
 
 class IssueAssigneeForm(forms.ModelForm, PartialUpdateMixin):
-
     class Meta:
         model = Issue
         fields = ("assignee", )

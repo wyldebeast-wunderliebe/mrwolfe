@@ -3,10 +3,13 @@ from mrwolfe.models import Issue
 
 
 class IssueIndex(indexes.SearchIndex, indexes.Indexable):
+    text = indexes.CharField(
+        document=True,
+        use_template=True,
+        template_name="search/indexes/issue_index.txt",
+        model_attr="text")
 
-    text = indexes.CharField(document=True, use_template=True,
-                             template_name="search/indexes/issue_index.txt")
-    issue_id = indexes.CharField()
+    issue_id = indexes.CharField(model_attr="issue_id")
 
     def get_model(self):
         return Issue

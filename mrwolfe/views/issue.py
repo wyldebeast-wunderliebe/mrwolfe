@@ -18,7 +18,6 @@ from mrwolfe import utils
 
 
 class IssueView(BaseView):
-
     model = Issue
 
     def combined_history(self):
@@ -32,19 +31,16 @@ class IssueView(BaseView):
         history = self.status_history()
 
         return sorted(chain(comments, history),
-            key=lambda instance: instance.date, reverse=True)
+                      key=lambda instance: instance.date, reverse=True)
 
     def status_history(self):
-
         return Status.objects.filter(issue=self.object)
 
     def list_status_options(self):
-
         return (opt for opt in settings.ISSUE_STATUS_CHOICES
                 if opt[0] != self.object.status)
 
     def list_users(self):
-
         users = Operator.objects.all()
 
         if self.object.assignee:
@@ -54,35 +50,20 @@ class IssueView(BaseView):
 
     @property
     def text(self):
-
         return mark_safe(markdown(self.object.text))
 
     @property
     def status_screen_name(self):
-
         return utils.status_screen_name(self.object.status)
 
     def list_itc_options(self):
-
         return ITConnector.objects.all()
 
     def is_scheduled(self):
-
         return self.object.status == settings.ISSUE_STATUS_SCHEDULED
 
 
-# class IssueHistoryView(BaseView):
-#
-#     model = Issue
-#     template_name = "snippets/history.html"
-#
-#     def status_history(self):
-#
-#         return Status.objects.filter(issue=self.object)
-
-
 class IssueCreate(CreateView):
-
     model = Issue
     form_class = IssueForm
     template_name = "create_issue.html"
@@ -108,7 +89,6 @@ class IssueCreate(CreateView):
         form = super(IssueCreate, self).get_form(form_class)
 
         if "sla" in self.request.GET:
-
             form.fields["service"].queryset = SLA.objects.get(
                 pk=self.request.GET["sla"]).service_set.all()
 
@@ -120,7 +100,6 @@ class IssueCreate(CreateView):
 
 
 class UpdateIssueAssignee(UpdateView):
-
     model = Issue
     form_class = IssueAssigneeForm
     template_name = "controls/assignee_control.html"
@@ -152,7 +131,6 @@ class UpdateIssueAssignee(UpdateView):
 
 
 class IssueClone(DetailView):
-
     model = Issue
 
     def post(self, request, *args, **kwargs):
@@ -164,7 +142,7 @@ class IssueClone(DetailView):
 
             context = {"status": 0,
                        "message": "Your issue has been cloned to %s" %
-                       clone.issue_id}
+                                  clone.issue_id}
         else:
             context = {"status": -1,
                        "message": "Not cloned!"}
@@ -174,27 +152,22 @@ class IssueClone(DetailView):
 
 
 class IssueEdit(UpdateView):
-
     model = Issue
     form_class = IssueForm
     template_name = "edit_issue.html"
 
     def get_success_url(self):
-
         return "/?message=Issue+updated&status=0"
 
     def post(self, request, *args, **kwargs):
-
         return super(IssueEdit, self).post(request, *args, **kwargs)
 
     @property
     def cancel_url(self):
-
         return "/"
 
 
 class DeleteIssue(DeleteView):
-
     model = Issue
     template_name = "snippets/confirm_delete_issue.html"
     success_url = "/"

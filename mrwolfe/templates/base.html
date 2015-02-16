@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 
 <html lang="nl">
-  <head>
+<head>
 
     <meta charset="utf-8">
 
@@ -12,136 +12,146 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" 
-          href="{{STATIC_URL}}bootstrap/dist/css/bootstrap.min.css" 
+    <link rel="stylesheet"
+          href="{{STATIC_URL}}bootstrap/dist/css/bootstrap.min.css"
           type="text/css">
-    <link rel="stylesheet" 
-          href="{{STATIC_URL}}jqueryui/themes/base/minified/jquery-ui.min.css" 
+    <link rel="stylesheet"
+          href="{{STATIC_URL}}jqueryui/themes/base/minified/jquery-ui.min.css"
           type="text/css">
 
     <link rel="stylesheet" href="{{STATIC_URL}}css/mrwolfe.css" type="text/css">
-    <link rel="stylesheet" 
-          href="{{STATIC_URL}}fontawesome/css/font-awesome.css" 
+    <link rel="stylesheet"
+          href="{{STATIC_URL}}fontawesome/css/font-awesome.css"
           type="text/css">
-    <link rel="stylesheet" 
-          href="{{STATIC_URL}}jquery-file-upload/css/jquery.fileupload-ui.css" 
+    <link rel="stylesheet"
+          href="{{STATIC_URL}}jquery-file-upload/css/jquery.fileupload-ui.css"
           type="text/css">
 
     {% list_plugin_css %}
 
     <script src="{{ STATIC_URL }}jquery/dist/jquery.min.js"></script>
     <script src="{{STATIC_URL}}jqueryui/ui/minified/jquery-ui.min.js"></script>
-    <script src="{{STATIC_URL}}bootstrap/dist/js/bootstrap.min.js"></script> 
+    <script src="{{STATIC_URL}}bootstrap/dist/js/bootstrap.min.js"></script>
 
-    <script type="text/javascript" 
+    <script type="text/javascript"
             src="{{STATIC_URL}}jquery-file-upload/js/jquery.fileupload.js">
-    </script>     
-    <script type="text/javascript" 
+    </script>
+    <script type="text/javascript"
             src="{{STATIC_URL}}jquery-file-upload/js/jquery.iframe-transport.js">
-    </script>     
-    <script src="{{STATIC_URL}}js/mrwolfe.js"></script>    
+    </script>
+    <script src="{{STATIC_URL}}js/mrwolfe.js"></script>
 
-  </head>
+</head>
 
-  <body>
+<body>
 
-    {% csrf_token %}
+{% csrf_token %}
 
-    {% block container %}
-    <div class="container-fluid col-xs-12 col-md-10 col-md-offset-1">
+{% block container %}
+<div class="container-fluid col-xs-12 col-md-10 col-md-offset-1">
 
-      <nav class="navbar navbar-inverse" role="navigation">
+    <nav class="navbar navbar-inverse" role="navigation">
         <div class="container-fluid">
 
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse"
-                    data-target="#navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Mr.Wolfe</a>
-          </div>
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                        data-target="#navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Mr.Wolfe</a>
+            </div>
 
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
 
-              <li><a href="/"><i class="fa fa-tachometer">
-                  </i> {% username request.user %}</a>
-              </li>
-              <li><a href="/config"><i class="fa fa-wrench"></i> 
-                  Settings</a>
-              </li>
-              
-              {% if "wiki" in "INSTALLED_APPS"|get_django_setting %}
-              <li><a href="/wiki"><i class="fa fa-info"></i> Wiki</a></li>
-              {% endif %}
-              
-              <li><a href="/help"><i class="fa fa-support"></i> Help</a></li>
-            </ul>
+                    <li><a href="/"><i class="fa fa-tachometer">
+                    </i> {% username request.user %}</a>
+                    </li>
+                    <li><a href="/config"><i class="fa fa-wrench"></i>
+                        Settings</a>
+                    </li>
 
-            <form class="navbar-form navbar-right" action="/search/"
-                  method="GET" role="search">
-              {% csrf_token %}
-              <div class="form-group">
-                <input type="text" name="q"
-                       class="form-control"
-                       placeholder="Search issues">
-                <input type="hidden" name="models" value="mrwolfe.issue"/>
-              </div>
-              <button type="submit" class="btn">
-                <i class="fa fa-search"></i>
-              </button>
-            </form>
+                    {% if "wiki" in "INSTALLED_APPS"|get_django_setting %}
+                    <li><a href="/wiki"><i class="fa fa-info"></i> Wiki</a></li>
+                    {% endif %}
 
-          </div>
+                    <li><a href="/help"><i class="fa fa-support"></i> Help</a></li>
+                </ul>
+
+                <form class="navbar-form navbar-right" action="/search/"
+                      method="GET" role="search">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" name="q"
+                               class="form-control"
+                               placeholder="Search issues">
+                        <input type="hidden" name="models" value="mrwolfe.issue"/>
+                    </div>
+                    <button type="submit" class="btn">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </form>
+
+            </div>
         </div>
-      </nav>
+    </nav>
 
-      <div class="alert 
-                  {% if request.GET.status == "0" %}alert-success{% endif %}
-                  {% if request.GET.status == "-1" %}alert-error{% endif %}
-                  {% if not request.GET.message %}hide{% endif %}
-                  " id="alerts">
-        <button class="close" data-dismiss="alert">×</button>
-        <span class="alert-body">{{ request.GET.message }}</span>
-      </div>
-
-      <div class="btn-toolbar well" role="toolbar">
+    <div class="btn-toolbar well well-sm" role="toolbar">
         {% block toolbar %}
-        <a class="btn btn-success" 
+        <a class="btn btn-success"
            href="{% url 'create_issue' %}">
-          <i class="fa fa-plus"></i> New issue
+            <i class="fa fa-plus"></i> New issue
         </a>
 
         {% if "notification"|get_setting == "on" %}
-        <a class="btn btn-warning inline" 
+        <a class="btn btn-warning inline"
            href="{% url 'set_notification' %}?name=notification&value=off">
-          <i class="fa fa-volume-off"></i> Disable notification
+            <i class="fa fa-volume-off"></i> Disable notification
         </a>
         {% else %}
-        <a class="btn btn-warning inline" 
+        <a class="btn btn-warning inline"
            href="{% url 'set_notification' %}?name=notification&value=on">
-          <i class="fa fa-volume-up"></i> Enable notification
+            <i class="fa fa-volume-up"></i> Enable notification
         </a>
         {% endif %}
         {% endblock %}
-      </div>
+    </div>
 
-      <div id="main">
+    <div class="alert
+          {% if request.GET.status == "0" %}alert-success{% endif %}
+          {% if request.GET.status == "-1" %}alert-error{% endif %}
+          {% if not request.GET.message %}hide{% endif %}" id="alerts">
+        <button class="close" data-dismiss="alert">×</button>
+        <span class="alert-body">{{ request.GET.message }}</span>
+    </div>
+
+    <main id="main">
         {% block content %}
         {% endblock %}
-      </div>
-      
-      <div id="footer">
-      </div>
-      
-    </div>
-    {% endblock %}
+    </main>
 
-    <div id="modalcontainer"></div>
-    
-  </body>
+    <footer class="well well-sm col-xs-12">
+        <blockquote class="col-xs-8">
+            <h6>
+                "I'm Mr. Wolfe. I solve problems."
+                <small>Mr. Wolfe</small>
+            </h6>
+        </blockquote>
+        <div class="externals col-xs-4 pull-right">
+            <a href="https://github.com/wyldebeast-wunderliebe/mrwolfe">
+                <i class="fa fa-github fa-2x"></i> GitHub
+            </a>
+        </div>
+    </footer>
+
+</div>
+{% endblock %}
+
+<div id="modalcontainer"></div>
+
+</body>
 
 </html>

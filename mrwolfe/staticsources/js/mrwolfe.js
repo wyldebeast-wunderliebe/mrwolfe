@@ -12,7 +12,7 @@ mrwolfe.hideMessage = function() {
 
 mrwolfe.showMessage = function(mesg, type) {
 
-  $("body").append('<div id="message" class="alert alert-' + type + '"><a class="close" data-dismiss="alert">&times;</a>' + mesg + '</div>');
+  $("main").prepend('<div id="message" class="alert alert-' + type + '"><a class="close" data-dismiss="alert">&times;</a>' + mesg + '</div>');
 
   setTimeout(mrwolfe.hideMessage, 5000);
 

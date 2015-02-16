@@ -11,10 +11,10 @@ the from field is specified as 'voodoo', any email from
 
 
 class RuleForm(forms.ModelForm):
-
     class Meta:
         model = Rule
         widgets = {'sla': forms.HiddenInput()}
+        field = ("sla", "field", "regexp")
 
     def __init__(self, *args, **kwargs):
         super(RuleForm, self).__init__(*args, **kwargs)

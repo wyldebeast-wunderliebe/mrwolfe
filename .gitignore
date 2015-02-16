@@ -1,6 +1,7 @@
 .gitignore
 *.pyc
 *.egg-info
+*.log
 mrwolfe/media/
 mrwolfe/statics/
 mrwolfe/whoosh_index/

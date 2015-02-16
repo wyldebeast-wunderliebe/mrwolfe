@@ -99,8 +99,9 @@
         </div>
     </nav>
 
+    {% block toolbar %}
     <div class="btn-toolbar well well-sm" role="toolbar">
-        {% block toolbar %}
+
         <a class="btn btn-success"
            href="{% url 'create_issue' %}">
             <i class="fa fa-plus"></i> New issue
@@ -117,8 +118,8 @@
             <i class="fa fa-volume-up"></i> Enable notification
         </a>
         {% endif %}
-        {% endblock %}
     </div>
+    {% endblock %}
 
     <div class="alert
           {% if request.GET.status == "0" %}alert-success{% endif %}

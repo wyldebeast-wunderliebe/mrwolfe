@@ -116,15 +116,6 @@ time {
     color: #3A87AD;
 }
 
-div.descr {
-    margin-bottom: 20px;
-    border-bottom: 1px solid #cecece;
-}
-
-#comments {
-    margin-top: 20px;
-}
-
 .history-item div.comment,
 pre.comment {
     max-height: 300px;

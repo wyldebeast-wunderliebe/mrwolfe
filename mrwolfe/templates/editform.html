@@ -6,40 +6,46 @@
 
 {% block content %}
 
-<h1>
-{% block title %}
-Edit {{ view.ctype }}
-{% endblock %}
-</h1>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h1>
+            {% block title %}
+            Edit {{ view.ctype }}
+            {% endblock %}
+        </h1>
 
-{% if form.errors %}
-<div class="alert alert-error">
-  {{ form.errors }}
+        {% if form.errors %}
+        <div class="alert alert-error">
+            {{ form.errors }}
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="panel-body">
+        <form action="" method="POST">
+
+            {% if form.help %}
+            <div class="alert alert-info">
+                {{ form.help|safe }}
+            </div>
+            {% endif %}
+
+            {% csrf_token %}
+
+            {% block form %}
+            {% bootstrap_form form %}
+            {% endblock %}
+
+            <div class="btn-group submission">
+                <input name="submit" class="btn btn-primary" type="submit" value="Save"/>
+                {% if view.cancel_url %}
+                <a href="{{ view.cancel_url }}" class="btn btn-default">Cancel</a>
+                {% else %}
+                <a href="{% url 'config' %}" class="btn btn-default">Cancel</a>
+                {% endif %}
+            </div>
+        </form>
+    </div>
 </div>
-{% endif %}
-
-<form action="" method="POST">
-
-  {% if form.help %}
-  <div class="alert alert-info">
-    {{ form.help|safe }}
-  </div>
-  {% endif %}
-
-  {% csrf_token %}
-
-  {% block form %}
-  {% bootstrap_form form %}
-  {% endblock %}
-
-  <div class="btn-group submission">
-    <input name="submit" class="btn btn-primary" type="submit" value="Save" />
-    {% if view.cancel_url %}
-    <a href="{{ view.cancel_url }}" class="btn btn-default">Cancel</a>
-    {% else %}
-    <a href="{% url 'config' %}" class="btn btn-default">Cancel</a>
-    {% endif %}
-  </div>
-</form>
 
 {% endblock %}

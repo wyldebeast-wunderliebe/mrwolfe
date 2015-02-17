@@ -1,5 +1,11 @@
+.container-top,
+.container-bottom {
+    padding: 0;
+}
+
 .navbar {
-    margin-top: 10px;
+    border-radius: 0;
+    margin-bottom: 0;
 }
 
 .issue.high {
@@ -134,10 +140,22 @@ pre.comment,
     margin-left: 0;
 }
 
+.btn-toolbar .inner-toolbar {
+    padding-left: 0;
+}
+
+.btn-toolbar .inner-toolbar .btn-group {
+    margin-right: 5px;
+}
+
 .row.history-item {
     padding: 15px 0;
     border-bottom: 1px solid #cecece;
     margin: 0;
+}
+
+footer.well {
+    margin-bottom: 0;
 }
 
 footer blockquote {

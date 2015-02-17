@@ -2,35 +2,38 @@
 
 {% block toolbar %}
 
-<div class="btn-toolbar well well-sm" role="toolbar">
-    {% include "controls/status_control.html" %}
+<div class="btn-toolbar well" role="toolbar">
 
-    {% if not issue.is_closed %}
-    {% include "controls/assignee_control.html" %}
+    <div class="inner-toolbar col-md-10 col-md-offset-1">
+        {% include "controls/status_control.html" %}
 
-    <a href="{% url 'edit_issue' object.pk %}"
-       class="btn btn-default">
-        <i class="fa fa-edit"></i> Edit
-    </a>
+        {% if not issue.is_closed %}
+        {% include "controls/assignee_control.html" %}
 
-    {% if issue.can_clone %}
-    <a href="{% url 'clone_issue' object.pk %}"
-       class="btn btn-default inline"
-       data-method="POST">
-        <i class="fa fa-copy"></i> Clone
-    </a>
-    {% endif %}
+        <a href="{% url 'edit_issue' object.pk %}"
+           class="btn btn-default">
+            <i class="fa fa-edit"></i> Edit
+        </a>
 
-    <a href="{% url 'delete_issue' object.pk %}"
-       class="btn btn-danger">
-        <i class="fa fa-minus"></i> Delete
-    </a>
+        {% if issue.can_clone %}
+        <a href="{% url 'clone_issue' object.pk %}"
+           class="btn btn-default inline"
+           data-method="POST">
+            <i class="fa fa-copy"></i> Clone
+        </a>
+        {% endif %}
 
-    {% if not view.is_scheduled %}
-    {% include "controls/itc_control.html" %}
-    {% endif %}
+        <a href="{% url 'delete_issue' object.pk %}"
+           class="btn btn-danger">
+            <i class="fa fa-minus"></i> Delete
+        </a>
 
-    {% endif %}
+        {% if not view.is_scheduled %}
+        {% include "controls/itc_control.html" %}
+        {% endif %}
+
+        {% endif %}
+    </div>
 </div>
 {% endblock toolbar %}
 

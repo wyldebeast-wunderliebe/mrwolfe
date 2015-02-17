@@ -48,10 +48,10 @@
 {% csrf_token %}
 
 {% block container %}
-<div class="container-fluid col-xs-12 col-md-10 col-md-offset-1">
+<div class="container-top container-fluid col-xs-12">
 
     <nav class="navbar navbar-inverse" role="navigation">
-        <div class="container-fluid">
+        <div class="col-md-10 col-md-offset-1 container-fluid">
 
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -100,24 +100,26 @@
     </nav>
 
     {% block toolbar %}
-    <div class="btn-toolbar well well-sm" role="toolbar">
+    <div class="btn-toolbar well" role="toolbar">
 
-        <a class="btn btn-success"
-           href="{% url 'create_issue' %}">
-            <i class="fa fa-plus"></i> New issue
-        </a>
+        <div class="inner-toolbar col-md-10 col-md-offset-1">
+            <a class="btn btn-success"
+               href="{% url 'create_issue' %}">
+                <i class="fa fa-plus"></i> New issue
+            </a>
 
-        {% if "notification"|get_setting == "on" %}
-        <a class="btn btn-warning inline"
-           href="{% url 'set_notification' %}?name=notification&value=off">
-            <i class="fa fa-volume-off"></i> Disable notification
-        </a>
-        {% else %}
-        <a class="btn btn-warning inline"
-           href="{% url 'set_notification' %}?name=notification&value=on">
-            <i class="fa fa-volume-up"></i> Enable notification
-        </a>
-        {% endif %}
+            {% if "notification"|get_setting == "on" %}
+            <a class="btn btn-warning inline"
+               href="{% url 'set_notification' %}?name=notification&value=off">
+                <i class="fa fa-volume-off"></i> Disable notification
+            </a>
+            {% else %}
+            <a class="btn btn-warning inline"
+               href="{% url 'set_notification' %}?name=notification&value=on">
+                <i class="fa fa-volume-up"></i> Enable notification
+            </a>
+            {% endif %}
+        </div>
     </div>
     {% endblock %}
 
@@ -129,19 +131,26 @@
         <span class="alert-body">{{ request.GET.message }}</span>
     </div>
 
+</div>
+
+<div class="container-fluid col-xs-12 col-md-10 col-md-offset-1">
+
     <main id="main">
         {% block content %}
         {% endblock %}
     </main>
+</div>
 
-    <footer class="well well-sm col-xs-12">
-        <blockquote class="col-xs-8">
+<div class="container-bottom container-fluid col-xs-12">
+
+    <footer class="well col-xs-12">
+        <blockquote class="col-xs-7 col-md-offset-1">
             <h6>
                 <i>"I'm Mr. Wolfe. I solve problems."</i>
                 <small>Mr. Wolfe</small>
             </h6>
         </blockquote>
-        <div class="externals col-xs-4 pull-right">
+        <div class="externals col-xs-3">
             <a href="https://github.com/wyldebeast-wunderliebe/mrwolfe">
                 <i class="fa fa-github fa-2x"></i> GitHub
             </a>

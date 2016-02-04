@@ -7,4 +7,4 @@ def create_settings(**kwargs):
                                          defaults={'value': 'on'})
 
 
-signals.post_syncdb.connect(create_settings, sender=models)
+signals.post_migrate.connect(create_settings, sender=models)

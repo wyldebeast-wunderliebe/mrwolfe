@@ -54,7 +54,7 @@ class CreateSLA(CreateView):
     form_class = SLAForm
     template_name = "create_sla.html"
 
-    def get_form(self, form_class):
+    def get_form(self, form_class=SLAForm):
 
         form = super(CreateSLA, self).get_form(form_class)
 
@@ -69,7 +69,7 @@ class UpdateSLA(UpdateView):
     form_class = SLAForm
     template_name = "edit_sla.html"
 
-    def get_form(self, form_class):
+    def get_form(self, form_class=SLAForm):
 
         form = super(UpdateSLA, self).get_form(form_class)
 

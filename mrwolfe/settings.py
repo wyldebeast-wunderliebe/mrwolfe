@@ -2,7 +2,6 @@
 import os
 
 DEBUG = False
-TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     ('Bob Dobalina', 'bob@evilempire.com'),
@@ -59,7 +58,7 @@ USE_L10N = True
 # Example: "/home/media/media.lawrence.com/media/"
 MEDIA_ROOT = PROJECT_ROOT + '/media/'
 
-SERVE_MEDIA = not DEBUG
+#SERVE_MEDIA = not DEBUG
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -100,12 +99,6 @@ STATICFILES_FINDERS = (
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '4dd4c93f-cf29-4f51-924c-ae29e70af14c'
 
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-    )
-
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -115,16 +108,29 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.RemoteUserMiddleware',
     )
 
-TEMPLATE_CONTEXT_PROCESSORS =(
-    "django.contrib.auth.context_processors.auth",
-    "django.core.context_processors.debug",
-    "django.core.context_processors.i18n",
-    "django.core.context_processors.static",
-    "django.core.context_processors.media",
-    "django.core.context_processors.request",
-    "django.core.context_processors.tz",
-    "django.contrib.messages.context_processors.messages",
-)
+TEMPLATES = [{
+    'BACKEND': 'django.template.backends.django.DjangoTemplates',
+    'APP_DIRS': True,
+    'OPTIONS': {
+        'context_processors': (
+            'django.contrib.auth.context_processors.auth',
+            'django.template.context_processors.debug',
+            'django.template.context_processors.i18n',
+            'django.template.context_processors.media',
+            'django.template.context_processors.static',
+            'django.template.context_processors.tz',
+            'django.template.context_processors.csrf',
+            'django.template.context_processors.request',
+            'django.contrib.messages.context_processors.messages',
+            ),
+        'debug': DEBUG,
+    },
+    'DIRS': (
+        os.path.join(PROJECT_ROOT, "templates"),
+    ),
+},
+]
+
 
 ROOT_URLCONF = 'mrwolfe.urls'
 
@@ -269,7 +275,8 @@ DEFAULT_FROM_ADDR = "support@evilempire.com"
 # read here, so as to never send to the mailbox that you also read
 # mail off...
 #
-NOTIFICATION_BLACKLIST = [DEFAULT_FROM_ADDR]
+NOTIFICATION_BLACKLIST = [
+    DEFAULT_FROM_ADDR, 'Mailer-Daemon', 'no-reply', 'noreply', ]
 
 #
 # END Mr.Wolfe settings

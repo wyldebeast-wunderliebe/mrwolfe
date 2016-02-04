@@ -11,7 +11,7 @@ class Contact(User):
     a valid user for Django """
 
     user = models.OneToOneField(BaseUser, null=True, blank=True)
-    sla = models.ManyToManyField(SLA, null=True, blank=True)
+    sla = models.ManyToManyField(SLA, blank=True)
 
     class Meta:
         app_label = "mrwolfe"

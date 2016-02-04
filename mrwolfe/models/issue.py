@@ -71,7 +71,7 @@ class Issue(models.Model):
         _time = 0
         _on_hold = 0
 
-        for status in self.status_history.all():
+        for status in self.status_history.all().reverse():
             if status.name == settings.ISSUE_STATUS_HOLD:
                 _on_hold = status.date
             elif _on_hold:
@@ -120,7 +120,7 @@ class Issue(models.Model):
 
         if self.status == settings.ISSUE_STATUS_CLOSED:
             return self.status_history.filter(
-                name=settings.ISSUE_STATUS_CLOSED)[0].date
+                name=settings.ISSUE_STATUS_CLOSED).reverse()[0].date
         else:
             return None
 

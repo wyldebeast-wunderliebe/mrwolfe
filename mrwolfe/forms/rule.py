@@ -14,7 +14,7 @@ class RuleForm(forms.ModelForm):
     class Meta:
         model = Rule
         widgets = {'sla': forms.HiddenInput()}
-        field = ("sla", "field", "regexp")
+        fields = ("sla", "field", "regexp")
 
     def __init__(self, *args, **kwargs):
         super(RuleForm, self).__init__(*args, **kwargs)

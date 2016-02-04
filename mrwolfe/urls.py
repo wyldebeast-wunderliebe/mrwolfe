@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
 from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
@@ -26,29 +26,38 @@ from views.schedule import ScheduleIssue
 from haystack.views import SearchView
 from forms.search import SearchForm
 from models import Attachment
+from django.conf.urls.static import static
+from django.views.static import serve
 
 
 admin.autodiscover()
 
-urlpatterns = patterns(
-    '',
+
+urlpatterns = [
+
+    url('^', include('django.contrib.auth.urls')),
+
     url(r"^login/*",
         LoginView.as_view(),
         name="login"),
 
-    (r'^logout/$', 'django.contrib.auth.views.logout'),
+    # url(r'^logout/$', 'django.contrib.auth.views.logout'),
 
-    (r'^$', login_required(IndexView.as_view())),
+    url(r'^$', login_required(IndexView.as_view())),
     url(r'^config$', login_required(AdminView.as_view()), name="config"),
 
-    (r'^help$', login_required(HelpView.as_view())),
-    (r'^[a-zA-Z0-9]*\.md$', login_required(HelpView.as_view())),
+    url(r'^help$', login_required(HelpView.as_view())),
+    url(r'^[a-zA-Z0-9]*\.md$', login_required(HelpView.as_view())),
 
-    (r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', include(admin.site.urls)),
 
-    url(r'^media/(?P<path>.*)$',
-        'django.views.static.serve',
-        {'document_root': settings.MEDIA_ROOT}),
+    # Pattern for serving media while developing
+    #url(r'^static/(?P<path>.*)$', serve,
+    # {'document_root': settings.STATIC_ROOT}),
+
+    #url(r'^media/(?P<path>.*)$',
+    #    serve,
+    #    {'document_root': settings.MEDIA_ROOT}),
 
     url(r'^search/',
         SearchView(
@@ -199,20 +208,26 @@ urlpatterns = patterns(
         login_required(UpdateSetting.as_view(
             template_name='snippets/set_notification.html')),
         name="set_notification"),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
-    # Pattern for serving media while developing
-    (r'^static/(?P<path>.*)$', 'django.views.static.serve',
-     {'document_root': settings.STATIC_ROOT}),
-)
+#urlpatterns += static(
+#    r'^media/(?P<path>.*)$', document_root=settings.MEDIA_ROOT)
 
+# Pattern for serving media while developing:
+#urlpatterns += static(
+#    r'^static/(?P<path>.*)$', document_root=settings.STATIC_ROOT)
+
+#url(r'^static/(?P<path>.*)$', 'django.views.static.serve',
+#     {'document_root': settings.STATIC_ROOT}),
+
+# urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 # Use Open ID if available
 #
 if ("django_openid_auth" in settings.INSTALLED_APPS):
-    urlpatterns += patterns(
-        "",
-        (r'^openid/', include('django_openid_auth.urls'))
-    )
+    urlpatterns += [
+        url(r'^openid/', include('django_openid_auth.urls'))
+    ]
 
 
 # Use Wiki if it's there
@@ -221,9 +236,8 @@ if ("wiki" in settings.INSTALLED_APPS):
     from wiki.urls import get_pattern as get_wiki_pattern
     from django_nyt.urls import get_pattern as get_notify_pattern
 
-    urlpatterns += patterns(
-        '',
-        (r'^notification/', get_notify_pattern()),
-        (r'^wiki/', get_wiki_pattern()),
-        (r'^wiki', get_wiki_pattern())
-    )
+    urlpatterns += [
+        url(r'^notification/', get_notify_pattern()),
+        url(r'^wiki/', get_wiki_pattern()),
+        url(r'^wiki', get_wiki_pattern())
+    ]

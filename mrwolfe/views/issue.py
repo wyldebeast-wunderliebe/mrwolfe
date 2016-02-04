@@ -84,7 +84,7 @@ class IssueCreate(CreateView):
         else:
             return super(IssueCreate, self).post(request, *args, **kwargs)
 
-    def get_form(self, form_class):
+    def get_form(self, form_class=IssueForm):
 
         form = super(IssueCreate, self).get_form(form_class)
 

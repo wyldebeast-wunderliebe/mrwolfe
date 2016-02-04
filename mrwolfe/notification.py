@@ -27,9 +27,20 @@ def notify(notification_id, context, from_addr, to_addr):
                        "Not sending notification..!")
         return
 
-    to_addr = ", ".join(filter(
-        lambda x: x not in settings.NOTIFICATION_BLACKLIST,
-        to_addr.split(", ")))
+    # to_addr = ", ".join(filter(
+    #     lambda x: x not in settings.NOTIFICATION_BLACKLIST,
+    #     to_addr.split(", ")))
+
+    to_list = to_addr.split(", ")
+    to_addr = []
+    for addr in to_list:
+        blacklisted = False
+        for mofo in settings.NOTIFICATION_BLACKLIST:
+            if mofo in addr:
+                blacklisted = True
+        if not blacklisted:
+            to_addr.append(addr)
+    to_addr = ", ".join(to_addr)
 
     if not to_addr:
         LOGGER.error("No 'to' address set; bye now")

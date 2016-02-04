@@ -27,7 +27,6 @@ from haystack.views import SearchView
 from forms.search import SearchForm
 from models import Attachment
 from django.conf.urls.static import static
-from django.views.static import serve
 
 
 admin.autodiscover()
@@ -50,14 +49,6 @@ urlpatterns = [
     url(r'^[a-zA-Z0-9]*\.md$', login_required(HelpView.as_view())),
 
     url(r'^admin/', include(admin.site.urls)),
-
-    # Pattern for serving media while developing
-    #url(r'^static/(?P<path>.*)$', serve,
-    # {'document_root': settings.STATIC_ROOT}),
-
-    #url(r'^media/(?P<path>.*)$',
-    #    serve,
-    #    {'document_root': settings.MEDIA_ROOT}),
 
     url(r'^search/',
         SearchView(
@@ -208,19 +199,10 @@ urlpatterns = [
         login_required(UpdateSetting.as_view(
             template_name='snippets/set_notification.html')),
         name="set_notification"),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]
 
-#urlpatterns += static(
-#    r'^media/(?P<path>.*)$', document_root=settings.MEDIA_ROOT)
-
-# Pattern for serving media while developing:
-#urlpatterns += static(
-#    r'^static/(?P<path>.*)$', document_root=settings.STATIC_ROOT)
-
-#url(r'^static/(?P<path>.*)$', 'django.views.static.serve',
-#     {'document_root': settings.STATIC_ROOT}),
-
-# urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # Use Open ID if available
 #

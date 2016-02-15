@@ -64,4 +64,5 @@ class POPService(object):
         # too bad we can't undelete 1 message. poplib only allows us
         # to reset ALL deletion marks.
         # this might be a bad idea! 1 bad email could lead to a loop??
-        self.service.rset()
+        if msg_ids:
+            self.service.rset()

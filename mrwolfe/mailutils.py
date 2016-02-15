@@ -52,6 +52,7 @@ class POPService(object):
 
         for i in range(nr_of_messages):
             msgstr = "\n".join(self.service.retr(i+1)[1])
+            self.service.dele(i+1)  # flag for deletion
             yield (i, email.message_from_string(msgstr))
 
     def quit(self):
@@ -60,4 +61,7 @@ class POPService(object):
 
     def mark_unread(self, msg_ids):
 
-        pass
+        # too bad we can't undelete 1 message. poplib only allows us
+        # to reset ALL deletion marks.
+        # this might be a bad idea! 1 bad email could lead to a loop??
+        self.service.rset()

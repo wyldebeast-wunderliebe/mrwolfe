@@ -41,11 +41,15 @@ def list_plugin_css():
 @register.simple_tag
 def username(user):
 
-    _name = user.username
+    try:
+        _name = user.username
 
-    if user.first_name or user.last_name:
-        _name = "%s %s" % (user.first_name, user.last_name)
-    elif user.email:
-        _name = user.email
+        if user.first_name or user.last_name:
+            _name = "%s %s" % (user.first_name, user.last_name)
+        elif user.email:
+            _name = user.email
 
-    return _name
+        return _name
+    except:
+        pass
+    return str(user)

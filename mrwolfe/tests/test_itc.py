@@ -26,4 +26,5 @@ class ITCTest(TestCase):
 
         jira_connector = JiraConnector()
 
-        jira_connector.create_issue(issue, connector)
+        # HUUB: don't create issue in jira, too much jira spam
+        # jira_connector.create_issue(issue, connector)

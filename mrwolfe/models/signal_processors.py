@@ -13,7 +13,7 @@ def issue_post_save(sender, instance, created=False, **kwargs):
 
     if created:
 
-        operators = [op.email for op in Operator.objects.all()]
+        operators = [op.user.email for op in Operator.objects.all()]
 
         if operators:
 

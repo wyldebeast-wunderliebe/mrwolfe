@@ -146,7 +146,7 @@ def handle_message(message):
             pass
 
     if not issue:
-        issue = Issue(title=message['subject'],
+        issue = Issue(title=message['subject'][:99],  # max 100 in model
                       contact=sender,
                       text=body,
                       sla=sla)

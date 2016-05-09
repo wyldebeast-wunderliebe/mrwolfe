@@ -5,5 +5,4 @@
 #from sla import SLATest
 #from notification import NotificationTest
 #from status import StatusTest
-
-from itc import ITCTest
+#from itc import ITCTest

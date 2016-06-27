@@ -51,7 +51,7 @@
 <div class="container-top container-fluid col-xs-12">
 
     <nav class="navbar navbar-inverse" role="navigation">
-        <div class="col-md-10 col-md-offset-1 container-fluid">
+        <div class="col-xs-12 container-fluid">
 
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -102,7 +102,7 @@
     {% block toolbar %}
     <div class="btn-toolbar well" role="toolbar">
 
-        <div class="inner-toolbar col-md-10 col-md-offset-1">
+        <div class="inner-toolbar">
             <a class="btn btn-success"
                href="{% url 'create_issue' %}">
                 <i class="fa fa-plus"></i> New issue
@@ -133,7 +133,7 @@
 
 </div>
 
-<div class="container-fluid col-xs-12 col-md-10 col-md-offset-1">
+<div class="container-fluid col-xs-12">
 
     <main id="main">
         {% block content %}
@@ -141,23 +141,6 @@
     </main>
 </div>
 
-<div class="container-bottom container-fluid col-xs-12">
-
-    <footer class="well col-xs-12">
-        <blockquote class="col-xs-7 col-md-offset-1">
-            <h6>
-                <i>"I'm Mr. Wolfe. I solve problems."</i>
-                <small>Mr. Wolfe</small>
-            </h6>
-        </blockquote>
-        <div class="externals col-xs-3">
-            <a href="https://github.com/wyldebeast-wunderliebe/mrwolfe">
-                <i class="fa fa-github fa-2x"></i> GitHub
-            </a>
-        </div>
-    </footer>
-
-</div>
 {% endblock %}
 
 <div id="modalcontainer"></div>

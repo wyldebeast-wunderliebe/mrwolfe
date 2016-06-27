@@ -4,147 +4,155 @@
 
 <div class="btn-toolbar well" role="toolbar">
 
-    <div class="inner-toolbar col-md-10 col-md-offset-1">
-        {% include "controls/status_control.html" %}
+  <div class="inner-toolbar col-xs-12">
+    {% include "controls/status_control.html" %}
 
-        {% if not issue.is_closed %}
-        {% include "controls/assignee_control.html" %}
+    {% if not issue.is_closed %}
+    {% include "controls/assignee_control.html" %}
 
-        <a href="{% url 'edit_issue' object.pk %}"
-           class="btn btn-default">
-            <i class="fa fa-edit"></i> Edit
-        </a>
+    <a href="{% url 'edit_issue' object.pk %}"
+       class="btn btn-default">
+      <i class="fa fa-edit"></i> Edit
+    </a>
 
-        {% if issue.can_clone %}
-        <a href="{% url 'clone_issue' object.pk %}"
-           class="btn btn-default inline"
-           data-method="POST">
-            <i class="fa fa-copy"></i> Clone
-        </a>
-        {% endif %}
+    {% if issue.can_clone %}
+    <a href="{% url 'clone_issue' object.pk %}"
+       class="btn btn-default inline"
+       data-method="POST">
+      <i class="fa fa-copy"></i> Clone
+    </a>
+    {% endif %}
 
-        <a href="{% url 'delete_issue' object.pk %}"
-           class="btn btn-danger">
-            <i class="fa fa-minus"></i> Delete
-        </a>
+    <a href="{% url 'delete_issue' object.pk %}"
+       class="btn btn-danger">
+      <i class="fa fa-minus"></i> Delete
+    </a>
 
-        {% if not view.is_scheduled %}
-        {% include "controls/itc_control.html" %}
-        {% endif %}
+    {% if not view.is_scheduled %}
+    {% include "controls/itc_control.html" %}
+    {% endif %}
 
-        {% endif %}
-    </div>
+    {% endif %}
+  </div>
 </div>
 {% endblock toolbar %}
 
 
 {% block content %}
 
-<div class="panel panel-default">
+<div class="col-xs-12 col-sm-7 issue-info">
+  <div class="panel panel-default">
 
     <div class="panel-heading">
-        <h1>{{ object }}</h1>
-        {% if not object.sla %}
-        <div class="alert alert-error">
+      <h1>{{ object }}</h1>
+      {% if not object.sla %}
+      <div class="alert alert-error">
           <span class="alert-body">
             This issue has not been assigned to a Service Level Agreement!
             Please fix this before doing anything else...
           </span>
-        </div>
-        {% endif %}
+      </div>
+      {% endif %}
     </div>
 
     <div class="panel-body">
-        <dl class="dl-horizontal details">
-            <dt>Priority</dt>
-            <dd>
-                <span class="label label-{{ issue.urgency }}">{{ issue.urgency }}</span>
-            </dd>
-            {% if object.sla %}
-            <dt>SLA</dt>
-            <dd><a href="{% url 'view_sla' object.sla.pk %}">{{ object.sla }}</a></dd>
-            {% endif %}
-            <dt>Service</dt>
-            <dd>{{ object.service }}</dd>
-            <dt>Created</dt>
-            <dd>{{ object.created }}</dd>
-            {% if not object.dateclosed %}
-            <dt>Deadline</dt>
-            <dd>{{ object.deadline|default:"-" }}</dd>
-            <dt>Time to resolve</dt>
-            <dd>{{ object.time_to_resolve|default:"-" }}</dd>
-            {% else %}
-            <dt>Closed</dt>
-            <dd>{{ object.dateclosed|default:"-" }}</dd>
-            {% endif %}
-            <dt>Contact</dt>
-            <dd>{{ object.contact }}</dd>
-        </dl>
+      <dl class="dl-horizontal details">
+        <dt>Priority</dt>
+        <dd>
+          <span
+              class="label label-{{ issue.urgency }}">{{ issue.urgency }}</span>
+        </dd>
+        {% if object.sla %}
+        <dt>SLA</dt>
+        <dd><a href="{% url 'view_sla' object.sla.pk %}">{{ object.sla }}</a>
+        </dd>
+        {% endif %}
+        <dt>Service</dt>
+        <dd>{{ object.service }}</dd>
+        <dt>Created</dt>
+        <dd>{{ object.created }}</dd>
+        {% if not object.dateclosed %}
+        <dt>Deadline</dt>
+        <dd>{{ object.deadline|default:"-" }}</dd>
+        <dt>Time to resolve</dt>
+        <dd>{{ object.time_to_resolve|default:"-" }}</dd>
+        {% else %}
+        <dt>Closed</dt>
+        <dd>{{ object.dateclosed|default:"-" }}</dd>
+        {% endif %}
+        <dt>Contact</dt>
+        <dd>{{ object.contact }}</dd>
+      </dl>
 
-        <div class="descr">
-            <pre>{{ view.text|safe }}</pre>
-        </div>
+      <div class="descr">
+        {{ view.text|safe }}
+      </div>
     </div>
+  </div>
 </div>
 
 {% if not issue.is_closed %}
-<div class="panel panel-default">
+<div class="col-xs-12 col-sm-5 issue-comments">
+  <div class="panel panel-info">
     <div class="panel-heading">
-        <i class="fa fa-comment"></i>
-        Comments
+      <i class="fa fa-comment"></i>
+      Comments
     </div>
     <div class="panel-body">
-        <form role="form" class="inline" target="#comments"
-              data-targetbehavior="append"
-              action="{% url 'create_comment' %}" method="POST">
-            <div class="form-group">
-                <textarea class="form-control" name="comment"></textarea>
-            </div>
-            <input type="hidden" name="issue" value="{{ object.id }}"/>
+      <form role="form" class="inline" target="#comments"
+            data-targetbehavior="append"
+            action="{% url 'create_comment' %}" method="POST">
+        <div class="form-group">
+          <textarea class="form-control" name="comment"></textarea>
+        </div>
+        <input type="hidden" name="issue" value="{{ object.id }}"/>
 
-            <div class="btn-group submission">
-                <button type="submit" class="btn btn-success">
-                    <i class="fa fa-plus"></i> Add comment
-                </button>
-            </div>
-        </form>
+        <div class="btn-group submission">
+          <button type="submit" class="btn btn-success">
+            <i class="fa fa-plus"></i> Add comment
+          </button>
+        </div>
+      </form>
 
     </div>
+  </div>
 </div>
 {% endif %}
 
-<div class="panel panel-default">
+<div class="col-xs-12 col-sm-5 issue-attachments">
+  <div class="panel panel-info">
     <div class="panel-heading">
-        <i class="fa fa-paperclip"></i>
-        Attachments
+      <i class="fa fa-paperclip"></i>
+      Attachments
     </div>
 
     {% if not issue.is_closed %}
     <div class="controls controls-attachments">
-        <div class="btn btn-xs btn-success fileinput-button">
-            <i class="fa fa-plus"></i>
-            <input type="file"
-                   multiple="true"
-                   name="attachment_upload"
-                   data-progress="#progress_attachment"
-                   data-issueid="{{ object.id }}"
-                   data-target="#attachments"/>
-        </div>
+      <div class="btn btn-xs btn-success fileinput-button">
+        <i class="fa fa-plus"></i>
+        <input type="file"
+               multiple="true"
+               name="attachment_upload"
+               data-progress="#progress_attachment"
+               data-issueid="{{ object.id }}"
+               data-target="#attachments"/>
+      </div>
     </div>
     {% endif %}
 
     <div id="progress_attachment"
          class="progress progress-info hide">
-        <div class="bar"></div>
+      <div class="bar"></div>
     </div>
 
     <div class="panel-body">
-        <ul id="attachments" class="list-unstyled">
-            {% for attachment in object.attachment_set.all %}
-            {% include "snippets/attachment.html" with object=attachment %}
-            {% endfor %}
-        </ul>
+      <ul id="attachments" class="list-unstyled">
+        {% for attachment in object.attachment_set.all %}
+        {% include "snippets/attachment.html" with object=attachment %}
+        {% endfor %}
+      </ul>
     </div>
+  </div>
 </div>
 
 {% include "snippets/history.html" %}

@@ -166,3 +166,25 @@ footer .externals {
     text-align: right;
     padding-right: 0;
 }
+
+.no-padding {
+    padding: 0;
+}
+
+@media (max-width: 768px) {
+    .issue-info,
+    .issue-comments,
+    .issue-attachments {
+        padding: 0;
+    }
+}
+
+@media (min-width: 768px) {
+    .issue-info {
+        padding: 0;
+    }
+    .issue-comments,
+    .issue-attachments {
+        padding: 0 0 0 15px;
+    }
+}

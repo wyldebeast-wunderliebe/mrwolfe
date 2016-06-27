@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 
-DEBUG = False
+DEBUG = True
 
 ADMINS = (
     ('Bob Dobalina', 'bob@evilempire.com'),

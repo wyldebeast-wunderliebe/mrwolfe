@@ -1,3 +1,6 @@
+from django.core.urlresolvers import reverse
+from django.shortcuts import redirect, render_to_response
+from django.template import RequestContext
 from django.views.generic.edit import CreateView
 from mrwolfe.models.comment import Comment
 from mrwolfe.forms.comment import CommentForm
@@ -9,6 +12,9 @@ class CreateComment(CreateView):
     form_class = CommentForm
     template_name = "snippets/comment.html"
 
+    def get_success_url(self):
+        return reverse("view_issue", kwargs={'pk':self.object.issue.id})
+
     def form_valid(self, form):
 
         if self.request.user.operator:
@@ -18,4 +24,4 @@ class CreateComment(CreateView):
 
         form.instance.save()
 
-        return self.render_to_response({'object': form.instance})
+        return super(CreateComment, self).form_valid(form)

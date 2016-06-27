@@ -1,20 +1,25 @@
 {% if view.combined_history %}
-<div class="panel panel-warning" id="history-viewlet">
+<div class="col-xs-12 issue-history no-padding">
+  <div class="panel panel-info" id="history-viewlet">
     <div class="panel-heading"><i class="fa fa-history"></i> History</div>
     <div class="panel-body">
 
-        {% for status in view.combined_history %}
-        <div class="row history-item">
+      {% for status in view.combined_history %}
 
-            <div class="col-xs-6 col-md-2">
-                <span class="label label-normal">{{ status.screen_name }}</span>
-            </div>
-            <div class="col-xs-6 col-md-3">
-                {{ status.date }}
-            </div>
-            <div class="col-xs-12 col-md-7 comment">{{ status.comment|linebreaks|safe }}</div>
+      <div class="row history-item">
+
+        <div class="col-xs-6 col-md-2">
+          <span class="label label-normal">{{ status.screen_name }}</span>
         </div>
-        {% endfor %}
+        <div class="col-xs-6 col-md-3">
+          {{ status.date }}
+        </div>
+        <div class="col-xs-12 col-md-7 comment">
+          {{ status.comment | linebreaks }}
+        </div>
+      </div>
+      {% endfor %}
     </div>
+  </div>
 </div>
 {% endif %}

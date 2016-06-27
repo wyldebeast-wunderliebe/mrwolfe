@@ -15,7 +15,7 @@
           {{ status.date }}
         </div>
         <div class="col-xs-12 col-md-7 comment">
-          {{ status.comment | linebreaks }}
+          {{ status.comment | linebreaks | safe }}
         </div>
       </div>
       {% endfor %}

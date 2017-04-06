@@ -2,7 +2,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
 from mrwolfe.models.mailqueue import MailQueue
 from mrwolfe.forms.mailqueue import MailQueueForm
-from base import CTypeMixin
+from .base import CTypeMixin
 
 
 class CreateMailQueue(CreateView, CTypeMixin):

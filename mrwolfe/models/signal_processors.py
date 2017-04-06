@@ -1,10 +1,10 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.conf import settings
-from issue import Issue
-from comment import Comment
-from status import Status
-from operator import Operator
+from .issue import Issue
+from .comment import Comment
+from .status import Status
+from .operator import Operator
 from mrwolfe.notification import notify
 
 

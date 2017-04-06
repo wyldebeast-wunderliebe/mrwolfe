@@ -2,7 +2,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
 from mrwolfe.models.itconnector import ITConnector
 from mrwolfe.forms.itconnector import ITConnectorForm
-from base import CTypeMixin
+from .base import CTypeMixin
 
 
 class CreateITConnector(CreateView, CTypeMixin):

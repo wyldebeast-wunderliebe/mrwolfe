@@ -2,7 +2,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
 from mrwolfe.models.contact import Contact
 from mrwolfe.forms.contact import ContactForm
-from base import CTypeMixin
+from .base import CTypeMixin
 
 
 class CreateContact(CreateView, CTypeMixin):

@@ -12,7 +12,7 @@ from mrwolfe.models.sla import SLA
 from mrwolfe.models.operator import Operator
 from mrwolfe.models.itconnector import ITConnector
 from mrwolfe.forms.issue import IssueForm, IssueAssigneeForm
-from base import BaseView
+from .base import BaseView
 from itertools import chain
 from mrwolfe import utils
 

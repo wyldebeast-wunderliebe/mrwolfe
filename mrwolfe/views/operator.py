@@ -2,7 +2,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
 from mrwolfe.models.operator import Operator
 from mrwolfe.forms.operator import OperatorForm
-from base import CTypeMixin
+from .base import CTypeMixin
 
 
 class CreateOperator(CreateView, CTypeMixin):

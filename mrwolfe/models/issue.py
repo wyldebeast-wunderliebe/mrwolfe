@@ -3,11 +3,11 @@ import time
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.utils import timezone
-from user import User
+from .user import User
 from django.conf import settings
-from sla import SLA
-from service import Service
-from contact import Contact
+from .sla import SLA
+from .service import Service
+from .contact import Contact
 
 
 class Issue(models.Model):

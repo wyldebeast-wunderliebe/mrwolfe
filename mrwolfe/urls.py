@@ -4,28 +4,28 @@ from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from django.views.generic.detail import DetailView
 from django.views.decorators.csrf import csrf_exempt
-from views.index import IndexView, AdminView
-from views.issue import IssueCreate, IssueEdit, IssueView, \
+from .views.index import IndexView, AdminView
+from .views.issue import IssueCreate, IssueEdit, IssueView, \
     UpdateIssueAssignee, IssueClone, DeleteIssue
-from views.service import CreateService, UpdateService, DeleteService, \
+from .views.service import CreateService, UpdateService, DeleteService, \
     ServiceSetDefault
-from views.rule import CreateRule, UpdateRule, DeleteRule
-from views.sla import SLAView, CreateSLA, UpdateSLA, DeleteSLA
-from views.operator import CreateOperator, UpdateOperator, DeleteOperator
-from views.contact import CreateContact, UpdateContact, DeleteContact
-from views.comment import CreateComment
-from views.mailqueue import CreateMailQueue, UpdateMailQueue, DeleteMailQueue
-from views.itconnector import CreateITConnector, UpdateITConnector, \
+from .views.rule import CreateRule, UpdateRule, DeleteRule
+from .views.sla import SLAView, CreateSLA, UpdateSLA, DeleteSLA
+from .views.operator import CreateOperator, UpdateOperator, DeleteOperator
+from .views.contact import CreateContact, UpdateContact, DeleteContact
+from .views.comment import CreateComment
+from .views.mailqueue import CreateMailQueue, UpdateMailQueue, DeleteMailQueue
+from .views.itconnector import CreateITConnector, UpdateITConnector, \
     DeleteITConnector
-from views.status import CreateStatus
-from views.login import LoginView
-from views.help import HelpView
-from views.setting import UpdateSetting
-from views.fileupload import UploadView
-from views.schedule import ScheduleIssue
+from .views.status import CreateStatus
+from .views.login import LoginView
+from .views.help import HelpView
+from .views.setting import UpdateSetting
+from .views.fileupload import UploadView
+from .views.schedule import ScheduleIssue
 from haystack.views import SearchView
-from forms.search import SearchForm
-from models import Attachment
+from .forms.search import SearchForm
+from .models import Attachment
 from django.conf.urls.static import static
 
 

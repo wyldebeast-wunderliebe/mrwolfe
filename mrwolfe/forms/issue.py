@@ -1,6 +1,6 @@
 from django import forms
 from mrwolfe.models.issue import Issue
-from base import PartialUpdateMixin
+from .base import PartialUpdateMixin
 
 
 class IssueForm(forms.ModelForm):

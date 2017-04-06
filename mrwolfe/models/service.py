@@ -1,5 +1,5 @@
 from django.db import models
-from sla import SLA
+from .sla import SLA
 from django.core.urlresolvers import reverse
 
 

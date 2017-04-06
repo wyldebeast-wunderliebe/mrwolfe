@@ -2,7 +2,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
 from mrwolfe.models.service import Service
 from mrwolfe.forms.service import ServiceForm
-from base import CTypeMixin
+from .base import CTypeMixin
 
 
 class CreateService(CreateView, CTypeMixin):

@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User as BaseUser
 from django.core.urlresolvers import reverse
-from user import User
+from .user import User
 
 
 class Operator(User):

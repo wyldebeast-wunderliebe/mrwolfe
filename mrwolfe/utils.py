@@ -11,7 +11,7 @@ from mrwolfe.models.sla import SLA
 from mrwolfe.models.issue import Issue
 from mrwolfe import settings as mrwolfe_settings
 from mrwolfe.models.operator import Operator
-from notification import notify
+from .notification import notify
 
 
 ISSUE_SUBJECT_MATCH = re.compile('#([0-9]{8})')

@@ -1,6 +1,6 @@
 from django.contrib import admin
-from models.issue import Issue
-from models.sla import SLA
+from .models.issue import Issue
+from .models.sla import SLA
 
 
 class IssueAdmin(admin.ModelAdmin):
@@ -15,4 +15,3 @@ class SLAAdmin(admin.ModelAdmin):
 
 admin.site.register(Issue, IssueAdmin)
 admin.site.register(SLA, SLAAdmin)
-

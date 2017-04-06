@@ -1,5 +1,5 @@
 from django.db import models
-from issue import Issue
+from .issue import Issue
 from mrwolfe.models.user import User
 
 

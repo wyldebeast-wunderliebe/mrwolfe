@@ -2,7 +2,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
 from mrwolfe.models.rule import Rule
 from mrwolfe.forms.rule import RuleForm
-from base import CTypeMixin
+from .base import CTypeMixin
 
 
 class CreateRule(CreateView, CTypeMixin):

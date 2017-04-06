@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-from issue import Issue
+from .issue import Issue
 
 from mrwolfe import utils
 

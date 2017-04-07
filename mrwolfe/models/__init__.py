@@ -10,5 +10,6 @@ from .attachment import Attachment
 from .mailqueue import MailQueue
 from .itconnector import ITConnector
 from .setting import Setting
+from .user import User
 
 from .signal_processors import *

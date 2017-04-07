@@ -6,11 +6,21 @@ here = os.path.abspath(os.path.dirname(__file__))
 README = open(os.path.join(here, 'README.md')).read()
 CHANGES = open(os.path.join(here, 'CHANGES.txt')).read()
 VERSION = "1.3.1"
-REQUIRES = ['django>=1.9', 'django-compressor',
-            'django-attachments', 'django-haystack>=2.0', 'whoosh',
-            'markdown', 'html2text', 'chardet',
-            'jira', 'imapclient', 'tnefparse', 'django-bootstrap3',
-            ]
+REQUIRES = [
+    'django>=1.9',
+    'django-bootstrap3',
+    'django-compressor',
+    'django-attachments',
+    'django-haystack>=2.0',
+    'django-filter',
+    'djangorestframework',
+    'whoosh',
+    'markdown',
+    'html2text',
+    'chardet',
+    'imapclient',
+    'tnefparse',
+]
 
 setup(name='mrwolfe',
       version=VERSION,

@@ -58,7 +58,7 @@ USE_L10N = True
 # Example: "/home/media/media.lawrence.com/media/"
 MEDIA_ROOT = PROJECT_ROOT + '/media/'
 
-#SERVE_MEDIA = not DEBUG
+# SERVE_MEDIA = not DEBUG
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -147,7 +147,8 @@ INSTALLED_APPS = (
     'compressor',
     'haystack',
     'mrwolfe',
-    'bootstrap3'
+    'bootstrap3',
+    'rest_framework'
 )
 
 TEST_APPS = ("mrwolfe")
@@ -158,7 +159,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     )
 
-LOGIN_REDIRECT_URL = "/login/"
+# LOGIN_REDIRECT_URL = "/login/"
 LOGIN_URL = "/login"
 
 APPEND_SLASH = False
@@ -223,7 +224,7 @@ LOGGING = {
 
 # compressor
 #
-#COMPRESS_ENABLED = not DEBUG
+# COMPRESS_ENABLED = not DEBUG
 
 
 # BEGIN Mr.Wolfe settings
@@ -308,7 +309,7 @@ HAYSTACK_SEARCH_RESULTS_PER_PAGE = 27
 # END search
 
 
-## BEGIN OpenID settings
+# BEGIN OpenID settings
 #
 
 # Should users be created when new OpenIDs are used to log in?
@@ -326,7 +327,7 @@ OPENID_SSO_SERVER_URL = 'https://www.google.com/accounts/o8/id'
 
 # Tell django.contrib.auth to use the OpenID signin URLs.
 #
-#LOGIN_URL = '/openid/login/'
+# LOGIN_URL = '/openid/login/'
 LOGIN_REDIRECT_URL = 'http://support.evilempire.org/'
 
 ALLOWED_EXTERNAL_OPENID_REDIRECT_DOMAINS = ['support.evilempire.org']
@@ -340,4 +341,17 @@ OPENID_USE_AS_ADMIN_LOGIN = False
 # SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
 #
-## END OpenID settings
+# END OpenID settings
+
+
+# BEGIN Django Rest Framework
+#
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
+#
+# END Django Rest Framework

@@ -27,20 +27,22 @@ from haystack.views import SearchView
 from .forms.search import SearchForm
 from .models import Attachment
 from django.conf.urls.static import static
-
+from .serializers import router
 
 admin.autodiscover()
 
+# PATTERNS
 
 urlpatterns = [
+
+    url(r'^api/', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
     url('^', include('django.contrib.auth.urls')),
 
     url(r"^login/*",
         LoginView.as_view(),
         name="login"),
-
-    # url(r'^logout/$', 'django.contrib.auth.views.logout'),
 
     url(r'^$', login_required(IndexView.as_view())),
     url(r'^config$', login_required(AdminView.as_view()), name="config"),

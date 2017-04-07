@@ -23,7 +23,6 @@ class SLA(models.Model):
         return u"%s / %s" % (self.start_date.strftime("%d-%m-%Y"),
                                  self.end_date.strftime("%d-%m-%Y"))
 
-
     def is_contact(self, contact):
 
         """ Is the given contact a valid contact for this sla? """
